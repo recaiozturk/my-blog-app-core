@@ -19,15 +19,8 @@ namespace MyBlog.WebUI.ViewComponents
             else if (portfolioType == ((int)PorfolioType.Prototypes))
                 porfolioTitle = "Demo ve Prototiplerim";
 
-            //singlePage de header linkleri sorunu için 
-            //if (pageType == ((int)PageType.SinglePage))
-            //    porfolioIdString = "portfolio";
-            //else if (pageType == ((int)PageType.NormalPage))
-            //    porfolioIdString = "portfolioDetailed";
-
             viewModel.PortfolioType = portfolioType;
             viewModel.PorfolioTitle = porfolioTitle;
-            //viewModel.PageTypeStringForId = porfolioIdString;
 
             return View(viewModel);
         }

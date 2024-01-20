@@ -8,10 +8,5 @@
             Prototypes=2
         }
 
-        //public enum PageType
-        //{
-        //    SinglePage=1,
-        //    NormalPage=2
-        //}
     }
 }
