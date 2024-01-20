@@ -1,0 +1,23 @@
+﻿@model PortfolioViewModel
+
+
+@{
+    ViewData["Title"] = "AllPortfolios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Portfolio All-->
+<section class="page-section portfolio mt-5" id="portfolioDetailed" >
+    <!-- Portfolio All-->
+    @await Component.InvokeAsync("Portfolio", new { portfolioType = (int)Enums.PorfolioType.Porfolio})
+
+    <!-- Prototype Section-->
+    @await Component.InvokeAsync("Portfolio", new { portfolioType = (int)Enums.PorfolioType.Prototypes})
+
+</section>
+
+
+
+
+
+ 
