@@ -5,7 +5,7 @@
 namespace MyBlog.WebUI.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class SqlUpdated : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,12 +14,12 @@ namespace MyBlog.WebUI.Migrations
                 name: "Favorites",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    FavMovie = table.Column<string>(type: "TEXT", nullable: true),
-                    FavSerie = table.Column<string>(type: "TEXT", nullable: true),
-                    FavMusic = table.Column<string>(type: "TEXT", nullable: true),
-                    FavBook = table.Column<string>(type: "TEXT", nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FavMovie = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FavSerie = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FavMusic = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FavBook = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

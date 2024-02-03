@@ -9,7 +9,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<TestContext>(options => {
     var config = builder.Configuration;
     var connectionString = config.GetConnectionString("database");
-    options.UseSqlite(connectionString);
+    options.UseSqlServer(connectionString);
 });
 
 var app = builder.Build();
@@ -32,5 +32,9 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+//alýnan hatalarý gösterir(sunucuda)
+app.UseDeveloperExceptionPage();
+
 
 app.Run();
