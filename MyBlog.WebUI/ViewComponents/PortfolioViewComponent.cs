@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyBlog.WebUI.Models;
 using System.Reflection;
-using static MyBlog.WebUI.Enums.Enums;
+using static MyBlog.WebUI.Util.Enums;
 
 namespace MyBlog.WebUI.ViewComponents
 {

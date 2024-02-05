@@ -1,4 +1,4 @@
-﻿namespace MyBlog.WebUI.Enums
+﻿namespace MyBlog.WebUI.Util
 {
     public class Enums
     {

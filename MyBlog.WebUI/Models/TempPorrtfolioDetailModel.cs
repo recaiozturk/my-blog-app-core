@@ -1,4 +1,4 @@
-using MyBlog.WebUI.Enums;
+using MyBlog.WebUI.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +12,7 @@ namespace MyBlog.WebUI.Models
         public int Id { get; set; }
         public string? Name { get; set; }
         public int AppType { get; set; }
-        public string AppTypeStr => ((Enums.Enums.AppType)AppType).ToString();
+        public string AppTypeStr => ((Enums.AppType)AppType).ToString();
 
         public string? TempCreatedDate { get; set; }
         public string? ProjectUrl { get; set; }

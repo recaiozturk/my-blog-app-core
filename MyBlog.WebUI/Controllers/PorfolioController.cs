@@ -4,10 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MyBlog.WebUI.Models;
-using MyBlog.WebUI.Enums;
 using System.Reflection;
 using MyBlog.Data.Entity;
 using Microsoft.EntityFrameworkCore;
+using MyBlog.WebUI.Util;
 
 namespace MyBlog.WebUI.Controllers
 {
@@ -38,7 +38,7 @@ namespace MyBlog.WebUI.Controllers
             {
                 Id=1,
                 Name="Dota 2 Caht Wheel Sounds",
-                AppType=(int)Enums.Enums.AppType.Mobil,
+                AppType=(int)Enums.AppType.Mobil,
                 TempCreatedDate=new DateTime(2011, 6, 10).ToString(),
                 ProjectUrl="https://github.com/recaiozturk/dota2-chatwheel-sounds-mobileapp",
                 ProjectDetail="I developed an application where dota enthusiasts can listen to dota chat wheel sounds.",
