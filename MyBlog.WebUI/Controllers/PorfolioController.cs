@@ -13,17 +13,17 @@ namespace MyBlog.WebUI.Controllers
 {
     public class PorfolioController : Controller
     {
-        private readonly TestContext testContext;
+        //private readonly TestContext testContext;
 
-        public PorfolioController(TestContext testContext)
-        {
-            this.testContext = testContext;
-        }
+        //public PorfolioController(TestContext testContext)
+        //{
+        //    this.testContext = testContext;
+        //}
 
         public async Task<IActionResult> PorfolioDetailAsync(int id)
         {
             //test
-            ViewBag.TestData = await testContext.Favorites.FirstOrDefaultAsync();
+            //ViewBag.TestData = await testContext.Favorites.FirstOrDefaultAsync();
 
             var pd = TempProfolioList.FirstOrDefault(i => i.Id == id);
             if (pd == null)

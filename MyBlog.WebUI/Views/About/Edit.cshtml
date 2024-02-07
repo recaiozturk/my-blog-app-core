@@ -1,0 +1,156 @@
+﻿@model AboutViewModel
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <!-- main title -->
+    <div class="col-12">
+        <div class="main__title">
+            <h2>Hakkımda (Düzenle)</h2>
+        </div>
+    </div>
+    <!-- end main title -->
+    <!-- form -->
+    <div class="col-12">
+        <form action="#" class="form">
+            <div class="row row--form">
+                <div class="col-12 col-md-5 form__cover">
+                    <div class="row row--form">
+                        <div class="col-12 col-sm-6 col-md-12">
+                            <div class="form__img">
+                                <label for="form__img-upload">Upload cover (270 x 400)</label>
+                                <input id="form__img-upload" name="form__img-upload" type="file" accept=".png, .jpg, .jpeg">
+                                <img id="form__img" src="#" alt=" ">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-7 form__content">
+                    <div class="row row--form">
+                        <div class="col-12">
+                            <input type="text" class="form__input" placeholder="Title" value="@(Model.Title ?? "")">
+                        </div>
+
+                        <div class="col-12">
+                            <textarea id="text" name="text" class="form__textarea" placeholder="Description"></textarea>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <input type="text" class="form__input" placeholder="Release year">
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <input type="text" class="form__input" placeholder="Release year">
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <input type="text" class="form__input" placeholder="Release year">
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <input type="text" class="form__input" placeholder="Release year">
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <input type="text" class="form__input" placeholder="Release year">
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <input type="text" class="form__input" placeholder="Release year">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-12 col-md-7 form__content">
+                    <h4 class="form__title">Skils</h4>
+                    <div class="main__table-wrap mCustomScrollbar _mCS_2 mCS_no_scrollbar" style="overflow: visible;">
+                        <div id="mCSB_2" class="mCustomScrollBox mCS-custom-bar2 mCSB_horizontal mCSB_outside" tabindex="0" style="max-height: none;">
+                            <div id="mCSB_2_container" class="mCSB_container mCS_x_hidden mCS_no_scrollbar_x" style="position: relative; top: 0px; left: 0px; width: 1051px; min-width: 100%; overflow-x: inherit;" dir="ltr">
+                                <table class="main__table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Yetenek</th>
+                                            <th>Yüzde</th>
+                                            <th>Sıralama</th>
+                                            <th>ACTIONS</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="main__table-text">23</div>
+                                            </td>
+
+                                            <td>
+                                                <div class="main__table-text">CSS</div>
+                                            </td>
+                                            <td>
+                                                <div class="main__table-text">%75</div>
+                                            </td>
+                                            <td>
+                                                <div class="main__table-text">1</div>
+                                            </td>
+
+                                            <td>
+                                                <div class="main__table-btns">
+                                                    <a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
+                                                        <i class="icon ion-ios-lock"></i>
+                                                    </a>
+                                                    <a href="edit-user.html" class="main__table-btn main__table-btn--edit">
+                                                        <i class="icon ion-ios-create"></i>
+                                                    </a>
+                                                    <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
+                                                        <i class="icon ion-ios-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div><div id="mCSB_2_scrollbar_horizontal" class="mCSB_scrollTools mCSB_2_scrollbar mCS-custom-bar2 mCSB_scrollTools_horizontal" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_2_dragger_horizontal" class="mCSB_dragger" style="position: absolute; min-width: 30px; width: 0px; left: 0px;"><div class="mCSB_dragger_bar"></div><div class="mCSB_draggerRail"></div></div></div></div>
+                    </div>
+                </div>
+
+                <div class="row row--form mt-5">
+                    <div class="col-12">
+                        <h4 class="form__title">Favoriler</h4>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                        <div class="form__group">
+                            <label class="form__label" for="username">Favori Kitap</label>
+                            <input id="username" type="text" name="username" class="form__input" placeholder="User 123">
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                        <div class="form__group">
+                            <label class="form__label" for="email">Favori Müzik</label>
+                            <input id="email" type="text" name="email" class="form__input" placeholder="email@email.com">
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                        <div class="form__group">
+                            <label class="form__label" for="firstname">Favori Film</label>
+                            <input id="firstname" type="text" name="firstname" class="form__input" placeholder="John">
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                        <div class="form__group">
+                            <label class="form__label" for="lastname">Favori Dizi</label>
+                            <input id="lastname" type="text" name="lastname" class="form__input" placeholder="Doe">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <button type="button" class="form__btn">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- end form -->
+</div>
