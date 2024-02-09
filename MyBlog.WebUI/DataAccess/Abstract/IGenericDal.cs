@@ -5,5 +5,7 @@
         Task<TEntity> GetById(int id);
 
         IQueryable<TEntity> GetAll();
+
+        Task Update(TEntity entity);
     }
 }

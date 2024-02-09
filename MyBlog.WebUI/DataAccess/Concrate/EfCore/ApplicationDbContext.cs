@@ -11,5 +11,6 @@ namespace MyBlog.WebUI.DataAccess.Concrate.EfCore
         }
 
         public DbSet<About> Abouts { get; set; }
+        public DbSet<Skill> Skills { get; set; }
     }
 }

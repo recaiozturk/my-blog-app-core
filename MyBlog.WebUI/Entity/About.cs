@@ -10,5 +10,13 @@
         public string? Age { get; set; }
         public string? Email { get; set; }
         public string? Adress  { get; set; }
+
+        public string? FavoriteMovie { get; set; }
+        public string? FavoriteSerie { get; set; }
+        public string? FavoriteMusic { get; set; }
+        public string? FavoriteBook { get; set; }
+        public string? Summary { get; set; }
+
+        public List<Skill>? Skills { get; set; }
     }
 }

@@ -14,7 +14,9 @@
     <!-- end main title -->
     <!-- form -->
     <div class="col-12">
-        <form action="#" class="form">
+        <form action="edit" method="post" class="form" novalidate>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="AboutId" />
             <div class="row row--form">
                 <div class="col-12 col-md-5 form__cover">
                     <div class="row row--form">
@@ -31,36 +33,52 @@
                 <div class="col-12 col-md-7 form__content">
                     <div class="row row--form">
                         <div class="col-12">
-                            <input type="text" class="form__input" placeholder="Title" value="@(Model.Title ?? "")">
+                            <label asp-for="Title" class="form__label"></label>
+                            <input asp-for="Title" class="form__input" placeholder="Title Giriniz">
+                            <span asp-validation-for="Title" class="model-danger"></span>
                         </div>
 
                         <div class="col-12">
-                            <textarea id="text" name="text" class="form__textarea" placeholder="Description"></textarea>
+                            <label asp-for="Summary" class="form__label"></label>
+                            <textarea asp-for="Summary" class="form__textarea" placeholder="Özet gir"></textarea>
+                            <span asp-validation-for="Summary" class="model-danger"></span>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <label asp-for="Email" class="form__label"></label>
+                            <input asp-for="Email" class="form__input" placeholder="Email">
+                            <span asp-validation-for="Email" class="model-danger"></span>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <label asp-for="PhoneNumber" class="form__label"></label>
+                            <input asp-for="PhoneNumber" class="form__input" placeholder="Tel No">
+                            <span asp-validation-for="PhoneNumber" class="model-danger"></span>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <label asp-for="Website" class="form__label"></label>
+                            <input asp-for="Website" class="form__input" placeholder="Website">
+                            <span asp-validation-for="Website" class="model-danger"></span>
                         </div>
 
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <input type="text" class="form__input" placeholder="Release year">
+                            <label asp-for="Birthday" class="form__label"></label>
+                            <input asp-for="Birthday" class="form__input" placeholder="Doğum Tarihi Giriniz">
+                            <span asp-validation-for="Birthday" class="model-danger"></span>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <input type="text" class="form__input" placeholder="Release year">
+                            <label asp-for="Age" class="form__label"></label>
+                            <input asp-for="Age" class="form__input" placeholder="Yaş Giriniz">
+                            <span asp-validation-for="Age" class="model-danger"></span>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <input type="text" class="form__input" placeholder="Release year">
+                            <label asp-for="Adress" class="form__label"></label>
+                            <input asp-for="Adress" class="form__input" placeholder="Adres Giriniz">
+                            <span asp-validation-for="Adress" class="model-danger"></span>
                         </div>
-                        <div class="col-12 col-sm-6 col-lg-3">
-                            <input type="text" class="form__input" placeholder="Release year">
-                        </div>
-                        <div class="col-12 col-sm-6 col-lg-3">
-                            <input type="text" class="form__input" placeholder="Release year">
-                        </div>
-                        <div class="col-12 col-sm-6 col-lg-3">
-                            <input type="text" class="form__input" placeholder="Release year">
-                        </div>
-
                     </div>
                 </div>
                 <div class="col-12 col-md-7 form__content">
                     <h4 class="form__title">Skils</h4>
+                    <a href="#modal-add-skill" class="main__title-link open-modal">Add Skill</a>
                     <div class="main__table-wrap mCustomScrollbar _mCS_2 mCS_no_scrollbar" style="overflow: visible;">
                         <div id="mCSB_2" class="mCustomScrollBox mCS-custom-bar2 mCSB_horizontal mCSB_outside" tabindex="0" style="max-height: none;">
                             <div id="mCSB_2_container" class="mCSB_container mCS_x_hidden mCS_no_scrollbar_x" style="position: relative; top: 0px; left: 0px; width: 1051px; min-width: 100%; overflow-x: inherit;" dir="ltr">
@@ -75,36 +93,37 @@
                                         </tr>
                                     </thead>
 
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="main__table-text">23</div>
-                                            </td>
+                                    <tbody id="skillTbody">
+                                        @foreach (var skill in Model.Skills)
+                                        {
+                                            <tr id="tr_@skill.Id">
+                                                <td>
+                                                    <div class="main__table-text">@skill.Id</div>
+                                                </td>
 
-                                            <td>
-                                                <div class="main__table-text">CSS</div>
-                                            </td>
-                                            <td>
-                                                <div class="main__table-text">%75</div>
-                                            </td>
-                                            <td>
-                                                <div class="main__table-text">1</div>
-                                            </td>
+                                                <td>
+                                                    <div id="skilln_@skill.Id" class="main__table-text">@skill.SkillName</div>
+                                                </td>
+                                                <td>
+                                                    <div id="skillv_@skill.Id" class="main__table-text">%@skill.SkillValue</div>
+                                                </td>
+                                                <td>
+                                                    <div class="main__table-text">1</div>
+                                                </td>
 
-                                            <td>
-                                                <div class="main__table-btns">
-                                                    <a href="#modal-status" class="main__table-btn main__table-btn--banned open-modal">
-                                                        <i class="icon ion-ios-lock"></i>
-                                                    </a>
-                                                    <a href="edit-user.html" class="main__table-btn main__table-btn--edit">
-                                                        <i class="icon ion-ios-create"></i>
-                                                    </a>
-                                                    <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
-                                                        <i class="icon ion-ios-trash"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                <td>
+                                                    <div class="main__table-btns">
+                                                        <a href="#modal-edit-skill" onclick="EditSkillClick(this.id)" id="@skill.Id" class="main__table-btn main__table-btn--edit open-modal">
+                                                            <i class="icon ion-ios-create"></i>
+                                                        </a>
+                                                        <a href="#modal-delete" onclick="DeleteSkillClick(this.id)" id="@skill.Id" class="main__table-btn main__table-btn--delete open-modal">
+                                                            <i class="icon ion-ios-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+
                                     </tbody>
                                 </table>
                             </div>
@@ -119,38 +138,265 @@
 
                     <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                         <div class="form__group">
-                            <label class="form__label" for="username">Favori Kitap</label>
-                            <input id="username" type="text" name="username" class="form__input" placeholder="User 123">
+                            <label asp-for="FavoriteBook" class="form__label">Favori Kitap</label>
+                            <input asp-for="FavoriteBook" class="form__input" placeholder="Favori Kitap">
                         </div>
                     </div>
 
                     <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                         <div class="form__group">
-                            <label class="form__label" for="email">Favori Müzik</label>
-                            <input id="email" type="text" name="email" class="form__input" placeholder="email@email.com">
+                            <label asp-for="FavoriteMusic" class="form__label">Favori Müzik</label>
+                            <input asp-for="FavoriteMusic" class="form__input" placeholder="Favori Müzik">
                         </div>
                     </div>
 
                     <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                         <div class="form__group">
-                            <label class="form__label" for="firstname">Favori Film</label>
-                            <input id="firstname" type="text" name="firstname" class="form__input" placeholder="John">
+                            <label asp-for="FavoriteMovie" class="form__label">Favori Film</label>
+                            <input asp-for="FavoriteMovie" class="form__input" placeholder="Favori Film">
                         </div>
                     </div>
 
                     <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                         <div class="form__group">
-                            <label class="form__label" for="lastname">Favori Dizi</label>
-                            <input id="lastname" type="text" name="lastname" class="form__input" placeholder="Doe">
+                            <label asp-for="FavoriteSerie" class="form__label">Favori Dizi</label>
+                            <input asp-for="FavoriteSerie" class="form__input" placeholder="Favori Dizi">
                         </div>
                     </div>
                 </div>
 
                 <div class="col-12">
-                    <button type="button" class="form__btn">Save</button>
+                    <button type="submit" class="form__btn">Kaydet</button>
                 </div>
             </div>
         </form>
     </div>
     <!-- end form -->
+    <!-- end modal view -->
+    <!-- modal add -->
+    <div id="modal-add-skill" class="zoom-anim-dialog mfp-hide modal">
+        <h6 class="modal__title">Add Skill</h6>
+
+        <label class="form__label">Skill Name</label>
+        <input id="SkillName" name="SkillName" class="form__input">
+
+        <label class="form__label">Skill Value</label>
+        <input type="number" id="SkillValue" name="SkillValue" class="form__input">
+        <div id="add-skill-error">
+        </div>
+        <span class="d-none" id="spinner">
+            <img style="width:20px" src="~/loading_gif.webp" />
+        </span>
+        <div class="modal__btns">
+            <button id="skillAdd" class="modal__btn modal__btn--apply" type="button">Add</button>
+            <button id="skillAddDismiss" class="modal__btn modal__btn--dismiss skillDissmisClick" type="button">Dismiss</button>
+        </div>
+    </div>
+    <!-- end modal add -->
+    <!-- modal edit -->
+    <div id="modal-edit-skill" class="zoom-anim-dialog mfp-hide modal">
+        <h6 class="modal__title">Edit Skill</h6>
+
+        <label class="form__label">Skill Name</label>
+        <input id="SkillEditName" name="SkillEditName" class="form__input">
+
+        <label class="form__label">Skill Value</label>
+        <input type="number" id="SkillEditValue" name="SkillEditValue" class="form__input">
+        <div id="edit-skill-error">
+        </div>
+        <span class="d-none" id="spinner">
+            <img style="width:20px" src="~/loading_gif.webp" />
+        </span>
+        <div class="modal__btns">
+            <button id="skillEdit" class="modal__btn modal__btn--apply" type="button">Save</button>
+            <button id="skillAddDismiss" class="modal__btn modal__btn--dismiss skillDissmisClick" type="button">Dismiss</button>
+        </div>
+    </div>
+    <!-- end modal edit -->
+    <!-- modal delete -->
+    <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
+        <h6 class="modal__title">Skill delete</h6>
+
+        <p class="modal__text">Are you sure to permanently delete this skill?</p>
+
+        <div class="modal__btns">
+            <button id="skillDelete"  class="modal__btn modal__btn--apply" type="button">Delete</button>
+            <button class="modal__btn modal__btn--dismiss" type="button">Dismiss</button>
+        </div>
+    </div>
+    <!-- end modal delete -->
 </div>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#skillAdd").click(function () {
+
+            AddSkillProcess();
+        });
+
+    });
+
+    function AddSkillProcess() {
+
+        $("#spinner").removeClass("d-none");
+        $("#spinner").addClass("d-block");
+        let idVal = $('#AboutId').val();
+        let skillNameVal = $('#SkillName').val();
+        let skilValueVal = $('#SkillValue').val();
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("AddSkillToAbout")',
+                dataType:'json',
+                data: {
+                    AboutId: idVal,
+                    SkillName: skillNameVal,
+                    SkillValue: skilValueVal,
+                },
+                success: function (res) {
+                    console.log(res)
+                    $("#spinner").removeClass("d-block");
+                    $("#spinner").addClass("d-none");
+                    if (!res.isValid) {
+                        $('#add-skill-error').empty();
+                        $.each(res.errorMessages, function (key, value) {
+                            $("#add-skill-error").append("<span class='model-danger mt-3'>" + value + '</span><br/>');
+                        });
+                        $('#add-skill-error').text(res.errorMessage);
+                    } else {
+
+                        $(".skillDissmisClick").click();
+                        $('#SkillName').val("");
+                        $('#SkillValue').val("");
+                        $("#skillTbody").append(`
+
+                            <tr id="tr_${res.skill.id}">
+                                <td>
+                                    <div class="main__table-text">${res.skill.id}</div>
+                                </td>
+
+                                <td>
+                                    <div id="skilln_${res.skill.id}" class="main__table-text">${res.skill.skillName}</div>
+                                </td>
+                                <td>
+                                    <div id="skillv_${res.skill.id}" class="main__table-text">%${res.skill.skillValue}</div>
+                                </td>
+                                <td>
+                                    <div class="main__table-text">1</div>
+                                </td>
+
+                                <td>
+                                    <div class="main__table-btns">
+                                        <a href="#modal-edit-skill" onclick="EditSkillClick(this.id)" id="${res.skill.id}" class="main__table-btn main__table-btn--edit delete-skill open-modal">
+                                            <i class="icon ion-ios-create"></i>
+                                        </a>
+                                        <a href="#modal-delete" onclick="DeleteSkillClick(this.id)"  id="${res.skill.id}" class="main__table-btn main__table-btn--delete open-modal">
+                                            <i class="icon ion-ios-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                              </tr>
+
+                        `);
+                    }
+                }
+            });
+            return false;
+    }
+
+    function EditSkillProcess(skillID) {
+
+        $("#spinner").removeClass("d-none");
+        $("#spinner").addClass("d-block");
+        let skillNameVal = $('#SkillEditName').val();
+        let skilValueVal = $('#SkillEditValue').val();
+
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("EditSkillForAbout")',
+                dataType:'json',
+                data: {
+                    skillId: skillID,
+                    skillName: skillNameVal,
+                    skillValue: skilValueVal,
+                },
+                success: function (res) {
+
+                    $("#spinner").removeClass("d-block");
+                    $("#spinner").addClass("d-none");
+                    if (!res.isValid) {
+                        $('#edit-skill-error').empty();
+                        $.each(res.errorMessages, function (key, value) {
+                            $("#edit-skill-error").append("<span class='model-danger mt-3'>" + value + '</span><br/>');
+                        });
+                        $('#edit-skill-error').text(res.errorMessage);
+                    } else {
+                        $(".skillDissmisClick").click();
+                        $("#skillv_" + skillID).text("%" + res.skill.skillValue.toString());
+                        $("#skilln_" + skillID).text(res.skill.skillName);
+                    }
+
+
+                }
+            });
+            return false;
+    }
+
+    function EditSkillClick(id) {
+
+        let sValue = $("#skillv_" + id).text();
+        let sName = $("#skilln_" + id).text();
+
+        $('#SkillEditName').val(sName);
+        $('#SkillEditValue').val(sValue.replace(/%/g, ''));
+
+        $("#skillEdit").click(function () {
+            EditSkillProcess(id);
+        });
+    }
+
+    function DeleteSkillClick(id) {
+
+        $("#skillDelete").click(function () {
+            DeleteSkillProcess(id);
+        });
+    }
+
+    function DeleteSkillProcess(id) {
+        $("#spinner").removeClass("d-none");
+        $("#spinner").addClass("d-block");
+
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("DeleteSkillForAbout")',
+                dataType:'json',
+                data: {
+                    skillId: id
+                },
+                success: function (res) {
+
+                    $("#spinner").removeClass("d-block");
+                    $("#spinner").addClass("d-none");
+                    if (!res.isValid) {
+                        $('#delete-skill-error').empty();
+                        $.each(res.errorMessages, function (key, value) {
+                            $("#delete-skill-error").append("<span class='model-danger mt-3'>" + value + '</span><br/>');
+                        });
+                        $('#delete-skill-error').text(res.errorMessage);
+                    } else {
+                        $(".skillDissmisClick").click();
+                        $("#tr_" + id).remove();
+                    }
+                }
+            });
+            return false;
+
+    }
+
+    //test
+    document.querySelector(".delete-skill").addEventListener('click', function () {       
+        DeleteSkillProcess(id);
+    });
+</script>
