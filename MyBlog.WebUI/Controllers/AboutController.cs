@@ -124,7 +124,7 @@ namespace MyBlog.WebUI.Controllers
         }
 
         [HttpPost]
-        public JsonResult EditSkillForAbout(int skillId,string skillName,int skillValue)
+        public JsonResult EditSkillForAbout(SkillViewModel skill)
         {
             List<string> allErrors = new List<string>();
             Skill skillToUpdate = new Skill();
@@ -136,10 +136,10 @@ namespace MyBlog.WebUI.Controllers
             }
             else
             {
-                var skillToUpdateR = _aboutRepository.GetSkillById(skillId);
+                var skillToUpdateR = _aboutRepository.GetSkillById(skill.SkillId);
 
-                skillToUpdateR.Result.SkillName = skillName;
-                skillToUpdateR.Result.SkillValue= skillValue;
+                skillToUpdateR.Result.SkillName = skill.SkillName;
+                skillToUpdateR.Result.SkillValue= skill.SkillValue;
 
                 _aboutRepository.EditSkillForAbout(skillToUpdateR.Result);
                 skillToUpdate=skillToUpdateR.Result;

@@ -78,7 +78,7 @@
                 </div>
                 <div class="col-12 col-md-7 form__content">
                     <h4 class="form__title">Skils</h4>
-                    <a href="#modal-add-skill" class="main__title-link open-modal">Add Skill</a>
+                    <a href="#modal-add-skill" class="main__title-link opening_modal_add open-modal">Add Skill</a>
                     <div class="main__table-wrap mCustomScrollbar _mCS_2 mCS_no_scrollbar" style="overflow: visible;">
                         <div id="mCSB_2" class="mCustomScrollBox mCS-custom-bar2 mCSB_horizontal mCSB_outside" tabindex="0" style="max-height: none;">
                             <div id="mCSB_2_container" class="mCSB_container mCS_x_hidden mCS_no_scrollbar_x" style="position: relative; top: 0px; left: 0px; width: 1051px; min-width: 100%; overflow-x: inherit;" dir="ltr">
@@ -113,10 +113,10 @@
 
                                                 <td>
                                                     <div class="main__table-btns">
-                                                        <a href="#modal-edit-skill" onclick="EditSkillClick(this.id)" id="@skill.Id" class="main__table-btn main__table-btn--edit open-modal">
-                                                            <i class="icon ion-ios-create"></i>
+                                                        <a href="#modal-edit-skill"  id="@skill.Id" class="main__table-btn main__table-btn--edit opening_modal_edit open-modal">
+                                                            <i class="icon ion-ios-create "></i>
                                                         </a>
-                                                        <a href="#modal-delete" onclick="DeleteSkillClick(this.id)" id="@skill.Id" class="main__table-btn main__table-btn--delete open-modal">
+                                                        <a href="#modal-delete"  id="@skill.Id" class="main__table-btn main__table-btn--delete opening_modal_delete open-modal">
                                                             <i class="icon ion-ios-trash"></i>
                                                         </a>
                                                     </div>
@@ -228,14 +228,38 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script type="text/javascript">
-    $(document).ready(function () {
-        $("#skillAdd").click(function () {
 
-            AddSkillProcess();
+    $('body').on('click', '.opening_modal_add', function () {
+        $("#add-skill-error").empty();
+        $("#skillAdd").on("click", function () {
+            AddSkillProcess()
         });
 
+        
     });
 
+    $('body').on('click', '.opening_modal_edit', function () {
+        let id = this.id;
+        let sValue = $("#skillv_" + id).text();
+        let sName = $("#skilln_" + id).text();
+
+        $('#SkillEditName').val(sName);
+        $('#SkillEditValue').val(sValue.replace(/%/g, ''));
+        $("#edit-skill-error").empty();
+
+        $("#skillEdit").click(function () {
+            EditSkillProcess(id);
+        });
+    });
+
+    $('body').on('click', '.opening_modal_delete', function () {
+        let id = this.id;
+        $("#skillDelete").click(function () {
+            DeleteSkillProcess(id);
+        });
+    });
+
+    
     function AddSkillProcess() {
 
         $("#spinner").removeClass("d-none");
@@ -254,7 +278,7 @@
                     SkillValue: skilValueVal,
                 },
                 success: function (res) {
-                    console.log(res)
+
                     $("#spinner").removeClass("d-block");
                     $("#spinner").addClass("d-none");
                     if (!res.isValid) {
@@ -287,10 +311,10 @@
 
                                 <td>
                                     <div class="main__table-btns">
-                                        <a href="#modal-edit-skill" onclick="EditSkillClick(this.id)" id="${res.skill.id}" class="main__table-btn main__table-btn--edit delete-skill open-modal">
-                                            <i class="icon ion-ios-create"></i>
+                                        <a  href="#modal-edit-skill" id="${res.skill.id}" class="main__table-btn main__table-btn--edit opening_modal_edit open-modal">
+                                            <i class="icon ion-ios-create" id="${res.skill.id}"></i>
                                         </a>
-                                        <a href="#modal-delete" onclick="DeleteSkillClick(this.id)"  id="${res.skill.id}" class="main__table-btn main__table-btn--delete open-modal">
+                                        <a href="#modal-delete"   id="${res.skill.id}" class="main__table-btn main__table-btn--delete opening_modal_delete open-modal">
                                             <i class="icon ion-ios-trash"></i>
                                         </a>
                                     </div>
@@ -298,11 +322,24 @@
                               </tr>
 
                         `);
+
+                        $('.open-modal').magnificPopup({
+                            fixedContentPos: true,
+                            fixedBgPos: true,
+                            overflowY: 'auto',
+                            type: 'inline',
+                            preloader: false,
+                            focus: '#username',
+                            modal: false,
+                            removalDelay: 300,
+                            mainClass: 'my-mfp-zoom-in',
+                        });
                     }
                 }
             });
             return false;
     }
+
 
     function EditSkillProcess(skillID) {
 
@@ -317,9 +354,9 @@
                 url: '@Url.Action("EditSkillForAbout")',
                 dataType:'json',
                 data: {
-                    skillId: skillID,
-                    skillName: skillNameVal,
-                    skillValue: skilValueVal,
+                    SkillId: skillID,
+                    SkillName: skillNameVal,
+                    SkillValue: skilValueVal,
                 },
                 success: function (res) {
 
@@ -343,25 +380,6 @@
             return false;
     }
 
-    function EditSkillClick(id) {
-
-        let sValue = $("#skillv_" + id).text();
-        let sName = $("#skilln_" + id).text();
-
-        $('#SkillEditName').val(sName);
-        $('#SkillEditValue').val(sValue.replace(/%/g, ''));
-
-        $("#skillEdit").click(function () {
-            EditSkillProcess(id);
-        });
-    }
-
-    function DeleteSkillClick(id) {
-
-        $("#skillDelete").click(function () {
-            DeleteSkillProcess(id);
-        });
-    }
 
     function DeleteSkillProcess(id) {
         $("#spinner").removeClass("d-none");
@@ -395,8 +413,4 @@
 
     }
 
-    //test
-    document.querySelector(".delete-skill").addEventListener('click', function () {       
-        DeleteSkillProcess(id);
-    });
 </script>

@@ -6,6 +6,8 @@ namespace MyBlog.WebUI.Models
     {
         public int AboutId { get; set; }
 
+        public int SkillId { get; set; }
+
         [Required]
         public string? SkillName { get; set; }
 
