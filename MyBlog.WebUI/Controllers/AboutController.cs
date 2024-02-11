@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.DotNet.Scaffolding.Shared.CodeModifier.CodeChange;
 using MyBlog.WebUI.DataAccess.Abstract;
 using MyBlog.WebUI.Entity;
 using MyBlog.WebUI.Models;
@@ -35,14 +36,24 @@ namespace MyBlog.WebUI.Controllers
                 FavoriteBook=model.FavoriteBook,
                 FavoriteMovie=model.FavoriteMovie,
                 FavoriteMusic=model.FavoriteMusic,
+                Image=model.Image,
                 
             });
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(AboutViewModel model)
+        public async Task<IActionResult> Edit(AboutViewModel model, IFormFile imageFile)
         {
-            if(ModelState.IsValid)
+            Methods _methods = new();
+            var imageFileModel=_methods.CreateImageFileAsync(imageFile);
+            if(!imageFileModel.Result.IsValid)
+                ModelState.AddModelError("", imageFileModel.Result.ErrorString);
+            else
+            {
+                model.Image = imageFileModel.Result.ImageCreatedName;
+            }
+
+            if (ModelState.IsValid)
             {
                 if (model.AboutId == null)
                     return NotFound();
@@ -61,6 +72,7 @@ namespace MyBlog.WebUI.Controllers
                     FavoriteMusic = model.FavoriteMusic,
                     FavoriteSerie = model.FavoriteSerie,
                     PhoneNumber=model.PhoneNumber,
+                    Image=imageFileModel.Result.ImageCreatedName,
                     Summary=model.Summary,
                     Website=model.Website
                 };
@@ -85,6 +97,7 @@ namespace MyBlog.WebUI.Controllers
                     FavoriteBook = aboutToUpdate.FavoriteBook,
                     FavoriteMovie = aboutToUpdate.FavoriteMovie,
                     FavoriteMusic = aboutToUpdate.FavoriteMusic,
+                    Image=aboutToUpdate.Image
 
                 });
             }

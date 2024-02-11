@@ -37,6 +37,7 @@ namespace MyBlog.WebUI.ViewComponents
                 FavoriteMusic=entity.Result.FavoriteMusic,
                 FavoriteSerie=entity.Result.FavoriteSerie,
                 FavoriteMovie=entity.Result.FavoriteMovie,
+                Image=entity.Result.Image,
             });
         }
     }

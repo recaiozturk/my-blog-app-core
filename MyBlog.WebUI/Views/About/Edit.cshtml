@@ -14,17 +14,17 @@
     <!-- end main title -->
     <!-- form -->
     <div class="col-12">
-        <form action="edit" method="post" class="form" novalidate>
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form action="edit" method="post" class="form" enctype="multipart/form-data" novalidate>
+            <div asp-validation-summary="ModelOnly" class="model-danger"></div>
             <input type="hidden" asp-for="AboutId" />
             <div class="row row--form">
                 <div class="col-12 col-md-5 form__cover">
                     <div class="row row--form">
                         <div class="col-12 col-sm-6 col-md-12">
                             <div class="form__img">
-                                <label for="form__img-upload">Upload cover (270 x 400)</label>
-                                <input id="form__img-upload" name="form__img-upload" type="file" accept=".png, .jpg, .jpeg">
-                                <img id="form__img" src="#" alt=" ">
+                                <label  for="imageFile"><i style="scale:3" class="icon ion-ios-image"></i></label>
+                                <input id="imageFile" name="imageFile" type="file" onchange="showImagePreview(this)">
+                                <img id="form__img" src="~/img/@Model.Image" alt=" ">
                             </div>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                 </div>
                 <div class="col-12 col-md-7 form__content">
                     <h4 class="form__title">Skils</h4>
-                    <a href="#modal-add-skill" class="main__title-link opening_modal_add open-modal">Add Skill</a>
+                    <a href="#modal-add-skill" class="main__title-link opening_modal_add open-modal ml-0 mb-3">Add Skill</a>
                     <div class="main__table-wrap mCustomScrollbar _mCS_2 mCS_no_scrollbar" style="overflow: visible;">
                         <div id="mCSB_2" class="mCustomScrollBox mCS-custom-bar2 mCSB_horizontal mCSB_outside" tabindex="0" style="max-height: none;">
                             <div id="mCSB_2_container" class="mCSB_container mCS_x_hidden mCS_no_scrollbar_x" style="position: relative; top: 0px; left: 0px; width: 1051px; min-width: 100%; overflow-x: inherit;" dir="ltr">
@@ -113,10 +113,10 @@
 
                                                 <td>
                                                     <div class="main__table-btns">
-                                                        <a href="#modal-edit-skill"  id="@skill.Id" class="main__table-btn main__table-btn--edit opening_modal_edit open-modal">
+                                                        <a href="#modal-edit-skill" id="@skill.Id" class="main__table-btn main__table-btn--edit opening_modal_edit open-modal">
                                                             <i class="icon ion-ios-create "></i>
                                                         </a>
-                                                        <a href="#modal-delete"  id="@skill.Id" class="main__table-btn main__table-btn--delete opening_modal_delete open-modal">
+                                                        <a href="#modal-delete" id="@skill.Id" class="main__table-btn main__table-btn--delete opening_modal_delete open-modal">
                                                             <i class="icon ion-ios-trash"></i>
                                                         </a>
                                                     </div>
@@ -220,197 +220,12 @@
         <p class="modal__text">Are you sure to permanently delete this skill?</p>
 
         <div class="modal__btns">
-            <button id="skillDelete"  class="modal__btn modal__btn--apply" type="button">Delete</button>
+            <button id="skillDelete" class="modal__btn modal__btn--apply" type="button">Delete</button>
             <button class="modal__btn modal__btn--dismiss" type="button">Dismiss</button>
         </div>
     </div>
     <!-- end modal delete -->
 </div>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-<script type="text/javascript">
+<script src="~/js/About/Edit/Edit.js"></script>
 
-    $('body').on('click', '.opening_modal_add', function () {
-        $("#add-skill-error").empty();
-        $("#skillAdd").on("click", function () {
-            AddSkillProcess()
-        });
-
-        
-    });
-
-    $('body').on('click', '.opening_modal_edit', function () {
-        let id = this.id;
-        let sValue = $("#skillv_" + id).text();
-        let sName = $("#skilln_" + id).text();
-
-        $('#SkillEditName').val(sName);
-        $('#SkillEditValue').val(sValue.replace(/%/g, ''));
-        $("#edit-skill-error").empty();
-
-        $("#skillEdit").click(function () {
-            EditSkillProcess(id);
-        });
-    });
-
-    $('body').on('click', '.opening_modal_delete', function () {
-        let id = this.id;
-        $("#skillDelete").click(function () {
-            DeleteSkillProcess(id);
-        });
-    });
-
-    
-    function AddSkillProcess() {
-
-        $("#spinner").removeClass("d-none");
-        $("#spinner").addClass("d-block");
-        let idVal = $('#AboutId').val();
-        let skillNameVal = $('#SkillName').val();
-        let skilValueVal = $('#SkillValue').val();
-
-            $.ajax({
-                type: 'POST',
-                url: '@Url.Action("AddSkillToAbout")',
-                dataType:'json',
-                data: {
-                    AboutId: idVal,
-                    SkillName: skillNameVal,
-                    SkillValue: skilValueVal,
-                },
-                success: function (res) {
-
-                    $("#spinner").removeClass("d-block");
-                    $("#spinner").addClass("d-none");
-                    if (!res.isValid) {
-                        $('#add-skill-error').empty();
-                        $.each(res.errorMessages, function (key, value) {
-                            $("#add-skill-error").append("<span class='model-danger mt-3'>" + value + '</span><br/>');
-                        });
-                        $('#add-skill-error').text(res.errorMessage);
-                    } else {
-
-                        $(".skillDissmisClick").click();
-                        $('#SkillName').val("");
-                        $('#SkillValue').val("");
-                        $("#skillTbody").append(`
-
-                            <tr id="tr_${res.skill.id}">
-                                <td>
-                                    <div class="main__table-text">${res.skill.id}</div>
-                                </td>
-
-                                <td>
-                                    <div id="skilln_${res.skill.id}" class="main__table-text">${res.skill.skillName}</div>
-                                </td>
-                                <td>
-                                    <div id="skillv_${res.skill.id}" class="main__table-text">%${res.skill.skillValue}</div>
-                                </td>
-                                <td>
-                                    <div class="main__table-text">1</div>
-                                </td>
-
-                                <td>
-                                    <div class="main__table-btns">
-                                        <a  href="#modal-edit-skill" id="${res.skill.id}" class="main__table-btn main__table-btn--edit opening_modal_edit open-modal">
-                                            <i class="icon ion-ios-create" id="${res.skill.id}"></i>
-                                        </a>
-                                        <a href="#modal-delete"   id="${res.skill.id}" class="main__table-btn main__table-btn--delete opening_modal_delete open-modal">
-                                            <i class="icon ion-ios-trash"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                              </tr>
-
-                        `);
-
-                        $('.open-modal').magnificPopup({
-                            fixedContentPos: true,
-                            fixedBgPos: true,
-                            overflowY: 'auto',
-                            type: 'inline',
-                            preloader: false,
-                            focus: '#username',
-                            modal: false,
-                            removalDelay: 300,
-                            mainClass: 'my-mfp-zoom-in',
-                        });
-                    }
-                }
-            });
-            return false;
-    }
-
-
-    function EditSkillProcess(skillID) {
-
-        $("#spinner").removeClass("d-none");
-        $("#spinner").addClass("d-block");
-        let skillNameVal = $('#SkillEditName').val();
-        let skilValueVal = $('#SkillEditValue').val();
-
-
-            $.ajax({
-                type: 'POST',
-                url: '@Url.Action("EditSkillForAbout")',
-                dataType:'json',
-                data: {
-                    SkillId: skillID,
-                    SkillName: skillNameVal,
-                    SkillValue: skilValueVal,
-                },
-                success: function (res) {
-
-                    $("#spinner").removeClass("d-block");
-                    $("#spinner").addClass("d-none");
-                    if (!res.isValid) {
-                        $('#edit-skill-error').empty();
-                        $.each(res.errorMessages, function (key, value) {
-                            $("#edit-skill-error").append("<span class='model-danger mt-3'>" + value + '</span><br/>');
-                        });
-                        $('#edit-skill-error').text(res.errorMessage);
-                    } else {
-                        $(".skillDissmisClick").click();
-                        $("#skillv_" + skillID).text("%" + res.skill.skillValue.toString());
-                        $("#skilln_" + skillID).text(res.skill.skillName);
-                    }
-
-
-                }
-            });
-            return false;
-    }
-
-
-    function DeleteSkillProcess(id) {
-        $("#spinner").removeClass("d-none");
-        $("#spinner").addClass("d-block");
-
-
-            $.ajax({
-                type: 'POST',
-                url: '@Url.Action("DeleteSkillForAbout")',
-                dataType:'json',
-                data: {
-                    skillId: id
-                },
-                success: function (res) {
-
-                    $("#spinner").removeClass("d-block");
-                    $("#spinner").addClass("d-none");
-                    if (!res.isValid) {
-                        $('#delete-skill-error').empty();
-                        $.each(res.errorMessages, function (key, value) {
-                            $("#delete-skill-error").append("<span class='model-danger mt-3'>" + value + '</span><br/>');
-                        });
-                        $('#delete-skill-error').text(res.errorMessage);
-                    } else {
-                        $(".skillDissmisClick").click();
-                        $("#tr_" + id).remove();
-                    }
-                }
-            });
-            return false;
-
-    }
-
-</script>

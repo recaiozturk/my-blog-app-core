@@ -68,6 +68,7 @@ namespace MyBlog.WebUI.DataAccess.Concrate.EfCore
                 about.Result.PhoneNumber = entity.PhoneNumber;
                 about.Result.Summary = entity.Summary;
                 about.Result.Website = entity.Website;
+                about.Result.Image=entity.Image;
 
                 _context.SaveChangesAsync();
             }

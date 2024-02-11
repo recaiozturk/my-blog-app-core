@@ -30,6 +30,8 @@ namespace MyBlog.WebUI.Models
         [Required]
         public string? Adress { get; set; }
 
+        public string? Image { get; set; } = string.Empty;
+
         public List<Skill>? Skills{ get; set; }
 
         [Required]

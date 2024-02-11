@@ -16,6 +16,7 @@
         public string? FavoriteMusic { get; set; }
         public string? FavoriteBook { get; set; }
         public string? Summary { get; set; }
+        public string? Image { get; set; }
 
         public List<Skill>? Skills { get; set; }
     }
