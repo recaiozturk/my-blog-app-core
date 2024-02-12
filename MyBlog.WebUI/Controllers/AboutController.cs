@@ -5,15 +5,18 @@ using MyBlog.WebUI.DataAccess.Abstract;
 using MyBlog.WebUI.Entity;
 using MyBlog.WebUI.Models;
 using MyBlog.WebUI.Util;
+using MyBlog.WebUI.Util.Abstract;
 
 namespace MyBlog.WebUI.Controllers
 {
     public class AboutController : Controller
     {
-        private readonly IAboutDal _aboutRepository;       
-        public AboutController(IAboutDal aboutRepository )
+        private readonly IAboutDal _aboutRepository;
+        private readonly IMethods _methods;
+        public AboutController(IAboutDal aboutRepository, IMethods methods)
         {
             _aboutRepository = aboutRepository;
+            _methods = methods;
         }
 
         public async Task<IActionResult>Edit()
@@ -44,7 +47,7 @@ namespace MyBlog.WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(AboutViewModel model, IFormFile imageFile)
         {
-            Methods _methods = new();
+            //Methods _methods = new();
             var imageFileModel=_methods.CreateImageFileAsync(imageFile);
             if(!imageFileModel.Result.IsValid)
                 ModelState.AddModelError("", imageFileModel.Result.ErrorString);
@@ -117,7 +120,6 @@ namespace MyBlog.WebUI.Controllers
             bool valid = false;
             if (!ModelState.IsValid)
             {
-                Methods _methods = new();
                 allErrors= _methods.ModelErrors(ModelState);
             }          
             else
@@ -144,7 +146,6 @@ namespace MyBlog.WebUI.Controllers
             bool valid = false;
             if (!ModelState.IsValid)
             {
-                Methods _methods = new();
                 allErrors = _methods.ModelErrors(ModelState);
             }
             else
@@ -174,7 +175,6 @@ namespace MyBlog.WebUI.Controllers
 
             if (skillId == 0)
             {
-                Methods _methods = new();
                 ModelState.AddModelError("", "Error Happened");
                 allErrors = _methods.ModelErrors(ModelState);
             }

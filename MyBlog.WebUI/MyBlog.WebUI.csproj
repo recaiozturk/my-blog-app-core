@@ -26,7 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\img\" />
+    <Folder Include="Util\Concrate\" />
+    <Folder Include="wwwroot\img\profilepicture\" />
     <Folder Include="wwwroot\NewFolder\" />
   </ItemGroup>
 

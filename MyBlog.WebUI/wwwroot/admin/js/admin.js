@@ -38,6 +38,8 @@ $(document).ready(function () {
 		$('#'+id).find('.profile__mobile-tabs-btn input').val(text);
 	});
 
+
+
 	/*==============================
 	Modal
 	==============================*/
@@ -167,3 +169,9 @@ $(document).ready(function () {
 	});
 
 });
+
+
+/*==============================
+Sweat alert toast
+==============================*/
+

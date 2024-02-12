@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.Extensions.Hosting;
 using MyBlog.WebUI.Models.UtilModels;
+using MyBlog.WebUI.Util.Abstract;
 using NuGet.Packaging.Signing;
 
 namespace MyBlog.WebUI.Util
 {
-    public class Methods
+    public class Methods: IMethods
     {
         public List<String> ModelErrors(ModelStateDictionary modelState)
         {
@@ -39,8 +41,9 @@ namespace MyBlog.WebUI.Util
                 }
                 else
                 {
+                    await DeleteOldImages();
                     var randomFileName = string.Format($"{Guid.NewGuid().ToString()}{tempString}");
-                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", randomFileName);
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/profilepicture", randomFileName);
                     using (var stream = new FileStream(path, FileMode.Create))
                     {
                         await imageFile.CopyToAsync(stream);
@@ -53,5 +56,33 @@ namespace MyBlog.WebUI.Util
             imageFileModel.ErrorString = "Please choose a image file";
             return imageFileModel;
         }
+
+        //delete old images
+        public async Task DeleteOldImages()
+        {
+            // Proje dizini içindeki wwwroot/img/profilepicture dizinini belirle
+            string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img", "profilepicture");
+
+            // Dizin var mı kontrol et
+            if (Directory.Exists(imagePath))
+            {
+                try
+                {
+                    // Dizin içindeki tüm dosyaları al
+                    string[] files = Directory.GetFiles(imagePath);
+
+                    // Tüm dosyaları sil
+                    foreach (string file in files)
+                    {
+                        File.Delete(file);
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+        }
+
     }
 }

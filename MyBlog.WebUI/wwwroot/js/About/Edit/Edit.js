@@ -87,8 +87,13 @@ function AddSkillProcess() {
                                     </div>
                                 </td>
                               </tr>
+                 `);
 
-                        `);
+                Toast.fire({
+                    icon: 'success',
+                    title: "added successufuly",
+
+                })
 
                 $('.open-modal').magnificPopup({
                     fixedContentPos: true,
@@ -193,3 +198,5 @@ function showImagePreview(input) {
         filerdr.readAsDataURL(input.files[0]);
     }
 }
+
+
