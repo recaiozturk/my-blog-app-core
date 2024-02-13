@@ -8,7 +8,7 @@
     <!-- main title -->
     <div class="col-12">
         <div class="main__title">
-            <h2>Hakkımda (Düzenle)</h2>
+            <h2>About (Edit)</h2>
         </div>
     </div>
     <!-- end main title -->
@@ -22,7 +22,7 @@
                     <div class="row row--form">
                         <div class="col-12 col-sm-6 col-md-12">
                             <div class="form__img">
-                                <label  for="imageFile"><i style="scale:3" class="icon ion-ios-image"></i></label>
+                                <label for="imageFile"><i style="scale:3" class="icon ion-ios-image"></i></label>
                                 <input id="imageFile" name="imageFile" type="file" onchange="showImagePreview(this)">
                                 <img id="form__img" src="~/img/profilepicture/@Model.Image" alt=" ">
                             </div>
@@ -133,40 +133,40 @@
 
                 <div class="row row--form mt-5">
                     <div class="col-12">
-                        <h4 class="form__title">Favoriler</h4>
+                        <h4 class="form__title">Favorites</h4>
                     </div>
 
                     <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                         <div class="form__group">
-                            <label asp-for="FavoriteBook" class="form__label">Favori Kitap</label>
+                            <label asp-for="FavoriteBook" class="form__label">Favorite Book</label>
                             <input asp-for="FavoriteBook" class="form__input" placeholder="Favori Kitap">
                         </div>
                     </div>
 
                     <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                         <div class="form__group">
-                            <label asp-for="FavoriteMusic" class="form__label">Favori Müzik</label>
+                            <label asp-for="FavoriteMusic" class="form__label">Favorite Music</label>
                             <input asp-for="FavoriteMusic" class="form__input" placeholder="Favori Müzik">
                         </div>
                     </div>
 
                     <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                         <div class="form__group">
-                            <label asp-for="FavoriteMovie" class="form__label">Favori Film</label>
+                            <label asp-for="FavoriteMovie" class="form__label">Favorite Movie</label>
                             <input asp-for="FavoriteMovie" class="form__input" placeholder="Favori Film">
                         </div>
                     </div>
 
                     <div class="col-12 col-md-6 col-lg-12 col-xl-6">
                         <div class="form__group">
-                            <label asp-for="FavoriteSerie" class="form__label">Favori Dizi</label>
+                            <label asp-for="FavoriteSerie" class="form__label">Favorite Serie</label>
                             <input asp-for="FavoriteSerie" class="form__input" placeholder="Favori Dizi">
                         </div>
                     </div>
                 </div>
 
                 <div class="col-12">
-                    <button type="submit" class="form__btn">Kaydet</button>
+                    <button type="submit" class="form__btn">Save</button>
                 </div>
             </div>
         </form>
@@ -226,6 +226,9 @@
     </div>
     <!-- end modal delete -->
 </div>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-<script src="~/js/About/Edit/Edit.js"></script>
+
+@section Scripts {
+    <script src="~/js/About/Edit/Edit.js"></script>
+}
+
 

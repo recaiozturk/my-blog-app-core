@@ -1,4 +1,4 @@
-﻿const MyToast = Swal.mixin({
+﻿var MyToast = Swal.mixin({
     toast: true,
     position: 'top-right',
     iconColor: 'white',

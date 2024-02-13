@@ -7,14 +7,14 @@ namespace MyBlog.WebUI.DataAccess.Abstract
         Task<About> GetAboutAsync();
         Task<List<Skill>> GetSkillsForAboutAsync();
 
-        Task UpdateAbout(About entity);
+        Task UpdateAboutAsync(About entity);
 
-        Task<Skill> AddSkillToAbout(Skill entity);
+        Task<Skill> AddSkillToAboutAsync(Skill entity);
 
-        Task EditSkillForAbout(Skill skill);
+        Task EditSkillForAboutAsync(Skill skill);
 
-        Task<Skill> GetSkillById(int id);
+        Task<Skill> GetSkillByIdAsync(int id);
 
-        Task DeleteSkillForAbout(int id);
+        Task DeleteSkillForAboutAsync(int id);
     }
 }

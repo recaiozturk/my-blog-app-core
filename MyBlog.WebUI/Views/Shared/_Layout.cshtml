@@ -82,15 +82,15 @@
     </header><!-- End Header -->
     <!-- @RenderBody() -->
     <!-- ======= About Section ======= -->
-<section id="about" class="about">
+    <section id="about" class="about">
 
-    <!-- ======= About Me ======= -->
-    @await Component.InvokeAsync("About")
+        <!-- ======= About Me ======= -->
+        @await Component.InvokeAsync("About")
 
-    <!-- ======= Interests ======= --><!-- End Interests -->
-    <!-- ======= Testimonials ======= --><!-- End Testimonials  -->
+        <!-- ======= Interests ======= --><!-- End Interests -->
+        <!-- ======= Testimonials ======= --><!-- End Testimonials  -->
 
-</section><!-- End About Section -->
+    </section><!-- End About Section -->
     <!-- ======= Resume Section ======= -->
     <section id="resume" class="resume">
         <div class="container">
@@ -430,9 +430,9 @@
     <script src="~/Personal/assets/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="~/Personal/assets/vendor/waypoints/noframework.waypoints.js"></script>
     <script src="~/Personal/assets/vendor/php-email-form/validate.js"></script>
-
     <!-- Template Main JS File -->
     <script src="~/Personal/assets/js/main.js"></script>
+    @RenderSection("Scripts", required: false)
 
 </body>
 

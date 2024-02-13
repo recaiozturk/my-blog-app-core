@@ -12,24 +12,24 @@ namespace MyBlog.WebUI.DataAccess.Concrate.EfCore
             _context = context;
         }
 
-        public async Task<Skill> AddSkillToAbout(Skill entity)
+        public async Task<Skill> AddSkillToAboutAsync(Skill entity)
         {
             await _context.Skills.AddAsync(entity);
             await _context.SaveChangesAsync();
             return entity;
         }
 
-        public async Task DeleteSkillForAbout(int id)
+        public async Task DeleteSkillForAboutAsync(int id)
         {
             var skill = _context.Skills.FirstOrDefault(s => s.Id == id);
             _context.Skills.Remove(skill);
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
 
-        public async Task EditSkillForAbout(Skill skill)
+        public async Task EditSkillForAboutAsync(Skill skill)
         {
             _context.Entry(skill).State = EntityState.Modified; 
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
 
         public async Task<About> GetAboutAsync()
@@ -40,7 +40,7 @@ namespace MyBlog.WebUI.DataAccess.Concrate.EfCore
 
         }
 
-        public async Task<Skill> GetSkillById(int id)
+        public async Task<Skill> GetSkillByIdAsync(int id)
         {
             return await _context.Skills.FindAsync(id);
         }
@@ -50,7 +50,7 @@ namespace MyBlog.WebUI.DataAccess.Concrate.EfCore
             return await _context.Skills.ToListAsync();
         }
 
-        public async Task UpdateAbout(About entity)
+        public async Task UpdateAboutAsync(About entity)
         {
             var about = _context.Abouts.FirstOrDefaultAsync(x => x.Id == entity.Id);
 
@@ -70,7 +70,7 @@ namespace MyBlog.WebUI.DataAccess.Concrate.EfCore
                 about.Result.Website = entity.Website;
                 about.Result.Image=entity.Image;
 
-                _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
             }
         }
 

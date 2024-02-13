@@ -82,7 +82,7 @@ namespace MyBlog.WebUI.Controllers
 
                 var testModel = await _aboutRepository.GetAboutAsync();
                 aboutToUpdate.Skills = testModel.Skills;
-                await _aboutRepository.UpdateAbout(aboutToUpdate);
+                await _aboutRepository.UpdateAboutAsync(aboutToUpdate);
 
                 return View(new AboutViewModel
                 {
@@ -126,7 +126,7 @@ namespace MyBlog.WebUI.Controllers
             {
                 skillToAdd.SkillName= skill.SkillName;
                 skillToAdd.SkillValue = skill.SkillValue;
-                skillToAdd= await _aboutRepository.AddSkillToAbout(skillToAdd);
+                skillToAdd= await _aboutRepository.AddSkillToAboutAsync(skillToAdd);
                 valid = true;
             }
                 
@@ -150,12 +150,12 @@ namespace MyBlog.WebUI.Controllers
             }
             else
             {
-                var skillToUpdateR = _aboutRepository.GetSkillById(skill.SkillId);
+                var skillToUpdateR = _aboutRepository.GetSkillByIdAsync(skill.SkillId);
 
                 skillToUpdateR.Result.SkillName = skill.SkillName;
                 skillToUpdateR.Result.SkillValue= skill.SkillValue;
 
-                _aboutRepository.EditSkillForAbout(skillToUpdateR.Result);
+                _aboutRepository.EditSkillForAboutAsync(skillToUpdateR.Result);
                 skillToUpdate=skillToUpdateR.Result;
                 valid = true;
             }
@@ -168,7 +168,7 @@ namespace MyBlog.WebUI.Controllers
         }
 
         [HttpPost]
-        public JsonResult DeleteSkillForAbout(int skillId)
+        public async Task<JsonResult> DeleteSkillForAboutAsync(int skillId)
         {
             List<string> allErrors = new List<string>();
             bool valid = false;
@@ -180,7 +180,7 @@ namespace MyBlog.WebUI.Controllers
             }
             else
             {
-                _aboutRepository.DeleteSkillForAbout(skillId);
+                await _aboutRepository.DeleteSkillForAboutAsync(skillId);
                 valid = true;
             }
             return Json(new

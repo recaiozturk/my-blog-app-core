@@ -37,7 +37,8 @@ Primary use:	HotFlix Admin Template
 ==============================*/
 
 .colored-toast.swal2-icon-success {
-    background-color: #a5dc86 !important;
+    /*background-color: #a5dc86 !important;*/
+    background-color: #f9ab00 !important;
 }
 
 .colored-toast.swal2-icon-error {

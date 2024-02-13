@@ -89,10 +89,9 @@ function AddSkillProcess() {
                               </tr>
                  `);
 
-                Toast.fire({
+                MyToast.fire({
                     icon: 'success',
-                    title: "added successufuly",
-
+                    title: "added successufuly2",
                 })
 
                 $('.open-modal').magnificPopup({
@@ -145,6 +144,11 @@ function EditSkillProcess(skillID) {
                 $(".skillDissmisClick").click();
                 $("#skillv_" + skillID).text("%" + res.skill.skillValue.toString());
                 $("#skilln_" + skillID).text(res.skill.skillName);
+
+                MyToast.fire({
+                    icon: 'success',
+                    title: "skill edited"
+                })
             }
 
 
@@ -158,10 +162,8 @@ function DeleteSkillProcess(id) {
     $("#spinner").removeClass("d-none");
     $("#spinner").addClass("d-block");
 
-
     $.ajax({
         type: 'POST',
-        /*url: '@Url.Action("DeleteSkillForAbout")',*/
         url: '/About/DeleteSkillForAbout',
 
         dataType: 'json',
@@ -181,6 +183,11 @@ function DeleteSkillProcess(id) {
             } else {
                 $(".skillDissmisClick").click();
                 $("#tr_" + id).remove();
+
+                MyToast.fire({
+                    icon: 'success',
+                    title: "skill deleted"
+                })
             }
         }
     });
