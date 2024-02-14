@@ -1,0 +1,150 @@
+﻿
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <!-- main title -->
+    <div class="col-12">
+        <div class="main__title">
+            <h2>Education (Edit)</h2>
+        </div>
+    </div>
+    <!-- end main title -->
+    <!-- form -->
+    <div class="col-12">
+        <form action="edit" method="post" class="form" enctype="multipart/form-data" novalidate>
+            <div asp-validation-summary="ModelOnly" class="model-danger"></div>
+            <input type="hidden" />
+            <div class="row row--form">
+                <div class="col-12 col-md-7 form__content">
+                    <h4 class="form__title">Educations</h4>
+                    <a href="#modal-add-education" class="main__title-link opening_modal_add open-modal ml-0 mb-3">Add Education</a>
+                    <div class="main__table-wrap mCustomScrollbar _mCS_2 mCS_no_scrollbar" style="overflow: visible;">
+                        <div id="mCSB_2" class="mCustomScrollBox mCS-custom-bar2 mCSB_horizontal mCSB_outside" tabindex="0" style="max-height: none;">
+                            <div id="mCSB_2_container" class="mCSB_container mCS_x_hidden mCS_no_scrollbar_x" style="position: relative; top: 0px; left: 0px; width: 1051px; min-width: 100%; overflow-x: inherit;" dir="ltr">
+                                <table class="main__table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Title</th>
+                                            <th>University</th>
+                                            <th>Order</th>
+                                            <th>ACTIONS</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody id="skillTbody">
+                                        @*@foreach (var skill in Model.Skills)
+                                            {
+
+                                            }*@
+                                        <tr id="tr_">
+                                            <td>
+                                                <div class="main__table-text">12</div>
+                                            </td>
+                                            <td>
+                                                <div id="" class="main__table-text">Bilgisayar Mühendisliği</div>
+                                            </td>
+                                            <td>
+                                                <div id="" class="main__table-text">SDÜ</div>
+                                            </td>
+                                            <td>
+                                                <div class="main__table-text">1</div>
+                                            </td>
+
+                                            <td>
+                                                <div class="main__table-btns">
+                                                    <a href="#modal-edit-skill" class="main__table-btn main__table-btn--edit opening_modal_edit open-modal">
+                                                        <i class="icon ion-ios-create "></i>
+                                                    </a>
+                                                    <a href="#modal-delete" class="main__table-btn main__table-btn--delete opening_modal_delete open-modal">
+                                                        <i class="icon ion-ios-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div><div id="mCSB_2_scrollbar_horizontal" class="mCSB_scrollTools mCSB_2_scrollbar mCS-custom-bar2 mCSB_scrollTools_horizontal" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_2_dragger_horizontal" class="mCSB_dragger" style="position: absolute; min-width: 30px; width: 0px; left: 0px;"><div class="mCSB_dragger_bar"></div><div class="mCSB_draggerRail"></div></div></div></div>
+                    </div>
+                </div>
+                @*<div class="col-12">
+                        <button type="submit" class="form__btn">Save</button>
+                    </div>*@
+            </div>
+        </form>
+    </div>
+    <!-- end form -->
+    <!-- end modal view -->
+    <!-- modal add -->
+    <div id="modal-add-education" class="zoom-anim-dialog mfp-hide modal">
+        <h6 class="modal__title">Add Education</h6>
+
+        <label class="form__label">Title</label>
+        <input id="Title" name="Title" class="form__input">
+
+        <label class="form__label">DateBetween</label>
+        <input id="DateBetween" name="DateBetween" class="form__input">
+
+        <label class="form__label">University Name</label>
+        <input id="UniversityName" name="UniversityName" class="form__input">
+
+        <label class="form__label">Adress</label>
+        <input id="Adress" name="Adress" class="form__input">
+
+        <label class="form__label">Description</label>
+        <input id="Description" name="Description" class="form__input">
+
+        <div id="add-education-error">
+        </div>
+        <span class="d-none" id="spinner">
+            <img style="width:20px" src="~/loading_gif.webp" />
+        </span>
+        <div class="modal__btns">
+            <button id="educateAdd" class="modal__btn modal__btn--apply" type="button">Add</button>
+            <button id="educateAddAddDismiss" class="modal__btn modal__btn--dismiss skillDissmisClick" type="button">Dismiss</button>
+        </div>
+    </div>
+    <!-- end modal add -->
+    <!-- modal edit -->
+    <div id="modal-edit-educateAdd" class="zoom-anim-dialog mfp-hide modal">
+        <h6 class="modal__title">Edit Skill</h6>
+
+        <label class="form__label">Skill Name</label>
+        <input id="EducateEditName" name="EducateEditName" class="form__input">
+
+        <label class="form__label">Skill Value</label>
+        <input type="number" id="EducateEditValue" name="EducateEditValue" class="form__input">
+        <div id="edit-educate-error">
+        </div>
+        <span class="d-none" id="spinner">
+            <img style="width:20px" src="~/loading_gif.webp" />
+        </span>
+        <div class="modal__btns">
+            <button id="educateEdit" class="modal__btn modal__btn--apply" type="button">Save</button>
+            <button id="educateAddDismiss" class="modal__btn modal__btn--dismiss skillDissmisClick" type="button">Dismiss</button>
+        </div>
+    </div>
+    <!-- end modal edit -->
+    <!-- modal delete -->
+    <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
+        <h6 class="modal__title">Skill delete</h6>
+
+        <p class="modal__text">Are you sure to permanently delete this skill?</p>
+
+        <div class="modal__btns">
+            <button id="skillDelete" class="modal__btn modal__btn--apply" type="button">Delete</button>
+            <button class="modal__btn modal__btn--dismiss" type="button">Dismiss</button>
+        </div>
+    </div>
+    <!-- end modal delete -->
+</div>
+
+@section Scripts {
+    <script src="~/js/Resume/Education/EditEducation.js"></script>
+}
+

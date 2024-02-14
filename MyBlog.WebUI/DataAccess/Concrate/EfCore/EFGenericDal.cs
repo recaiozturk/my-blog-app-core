@@ -13,6 +13,25 @@ namespace MyBlog.WebUI.DataAccess.Concrate.EfCore
             _context = context;
         }
 
+        public async Task<TEntity> CreateAsync(TEntity entity)
+        {
+            await _context.Set<TEntity>().AddAsync(entity);
+            await _context.SaveChangesAsync();
+            return entity;
+        }
+
+        public async Task UpdateAsync(TEntity entity)
+        {
+            _context.Entry(entity).State = EntityState.Modified;
+            await _context.SaveChangesAsync(true);
+        }
+
+        public async Task DeleteAsync(TEntity entity)
+        {
+            _context.Set<TEntity>().Remove(entity);
+            await _context.SaveChangesAsync();
+        }
+
         public IQueryable<TEntity> GetAll()
         {
             return _context.Set<TEntity>().AsNoTracking();
@@ -28,5 +47,7 @@ namespace MyBlog.WebUI.DataAccess.Concrate.EfCore
             _context.Entry(entity).State = EntityState.Modified;
             await _context.SaveChangesAsync(true);
         }
+
+
     }
 }

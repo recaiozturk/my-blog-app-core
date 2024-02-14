@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using MyBlog.Data.Entity;
 using MyBlog.WebUI.DataAccess.Abstract;
 using MyBlog.WebUI.DataAccess.Concrate.EfCore;
 using MyBlog.WebUI.Util;
@@ -18,8 +17,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => {
 
 //scoped  score: her http isteðinde 1 nesne
 builder.Services.AddScoped<IAboutDal, EfAboutDal>();
-
+builder.Services.AddScoped<IEducationDal, EfEducationDal>();
 builder.Services.AddScoped<IMethods, Methods>();
+
 
 var app = builder.Build();
 

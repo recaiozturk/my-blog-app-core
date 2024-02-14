@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MyBlog.WebUI.Models;
 using System.Reflection;
-using MyBlog.Data.Entity;
 using Microsoft.EntityFrameworkCore;
 using MyBlog.WebUI.Util;
 

@@ -78,8 +78,20 @@
         <div class="sidebar__nav-wrap">
             <ul class="sidebar__nav">
                 <li class="sidebar__nav-item">
-                    <a href="index.html" class="sidebar__nav-link sidebar__nav-link--active"><i class="icon ion-ios-keypad"></i> <span>Dashboard</span></a>
+                    <a href="/about/edit" class="sidebar__nav-link"><i class="icon ion-ios-keypad"></i> <span>About</span></a>
                 </li>
+                <!-- resume collapse -->
+                <li class="sidebar__nav-item">
+                    <a class="sidebar__nav-link" data-toggle="collapse" href="#collapseMenu" role="button" aria-expanded="false" aria-controls="collapseMenu"><i class="icon ion-ios-copy"></i> <span>Resume</span> <i class="icon ion-md-arrow-dropdown"></i></a>
+
+                    <ul class="collapse sidebar__menu" id="collapseMenu">
+                        <li><a href="/resume/editeducation">Education</a></li>
+                    </ul>
+                </li>
+                <!-- end resume collapse -->
+                @*<li class="sidebar__nav-item">
+            <a href="index.html" class="sidebar__nav-link sidebar__nav-link--active"><i class="icon ion-ios-keypad"></i> <span>Dashboard</span></a>
+        </li>*@
 
                 <li class="sidebar__nav-item">
                     <a href="catalog.html" class="sidebar__nav-link"><i class="icon ion-ios-film"></i> <span>Catalog</span></a>
