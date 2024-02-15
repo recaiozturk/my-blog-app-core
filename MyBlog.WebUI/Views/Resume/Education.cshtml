@@ -1,4 +1,6 @@
 ﻿
+@model MyBlog.WebUI.Models.Resume.ResumeViewModel
+
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -29,42 +31,42 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Title</th>
-                                            <th>University</th>
+                                            <th>Institution</th>
                                             <th>Order</th>
                                             <th>ACTIONS</th>
                                         </tr>
                                     </thead>
 
-                                    <tbody id="skillTbody">
-                                        @*@foreach (var skill in Model.Skills)
-                                            {
+                                    <tbody id="eduTbody">
+                                        @foreach (var edu in Model.Educations)
+                                        {
+                                            <tr id="tr_@edu.Id">
+                                                <td>
+                                                    <div class="main__table-text">@edu.Id</div>
+                                                </td>
+                                                <td>
+                                                    <div id="" class="main__table-text">@edu.Title</div>
+                                                </td>
+                                                <td>
+                                                    <div id="" class="main__table-text">@edu.UniversityName</div>
+                                                </td>
+                                                <td>
+                                                    <div class="main__table-text">1</div>
+                                                </td>
 
-                                            }*@
-                                        <tr id="tr_">
-                                            <td>
-                                                <div class="main__table-text">12</div>
-                                            </td>
-                                            <td>
-                                                <div id="" class="main__table-text">Bilgisayar Mühendisliği</div>
-                                            </td>
-                                            <td>
-                                                <div id="" class="main__table-text">SDÜ</div>
-                                            </td>
-                                            <td>
-                                                <div class="main__table-text">1</div>
-                                            </td>
+                                                <td>
+                                                    <div class="main__table-btns">
+                                                        <a href="#modal-edit-skill" class="main__table-btn main__table-btn--edit opening_modal_edit open-modal">
+                                                            <i class="icon ion-ios-create "></i>
+                                                        </a>
+                                                        <a href="#modal-delete" id="@edu.Id" class="main__table-btn main__table-btn--delete opening_modal_delete open-modal">
+                                                            <i class="icon ion-ios-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
 
-                                            <td>
-                                                <div class="main__table-btns">
-                                                    <a href="#modal-edit-skill" class="main__table-btn main__table-btn--edit opening_modal_edit open-modal">
-                                                        <i class="icon ion-ios-create "></i>
-                                                    </a>
-                                                    <a href="#modal-delete" class="main__table-btn main__table-btn--delete opening_modal_delete open-modal">
-                                                        <i class="icon ion-ios-trash"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
 
                                     </tbody>
                                 </table>
@@ -132,12 +134,13 @@
     <!-- end modal edit -->
     <!-- modal delete -->
     <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
-        <h6 class="modal__title">Skill delete</h6>
-
-        <p class="modal__text">Are you sure to permanently delete this skill?</p>
+        <h6 class="modal__title">Education delete</h6>
+        <div id="delete-edu-error">
+        </div>
+        <p class="modal__text">Are you sure to permanently delete this education?</p>
 
         <div class="modal__btns">
-            <button id="skillDelete" class="modal__btn modal__btn--apply" type="button">Delete</button>
+            <button id="eduDelete" class="modal__btn modal__btn--apply" type="button">Delete</button>
             <button class="modal__btn modal__btn--dismiss" type="button">Dismiss</button>
         </div>
     </div>
@@ -145,6 +148,8 @@
 </div>
 
 @section Scripts {
-    <script src="~/js/Resume/Education/EditEducation.js"></script>
+  <script src="~/js/Resume/Education/Education.js"></script>
 }
+
+
 

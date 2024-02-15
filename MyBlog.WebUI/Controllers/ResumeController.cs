@@ -16,13 +16,15 @@ namespace MyBlog.WebUI.Controllers
             _methods = methods;
         }
 
-        public async Task<IActionResult> EditEducation()
+        public async Task<IActionResult> Education()
         {
-            return View();
+            ResumeViewModel model= new ResumeViewModel();
+            model.Educations=_educationDal.GetAll().ToList();
+            return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditEducation(EditEducationViewModel model)
+        public async Task<IActionResult> CreateEducation(EditEducationViewModel model)
         {
             Education educationToAdd = new Education();
             List<string> allErrors = new List<string>();
@@ -48,6 +50,29 @@ namespace MyBlog.WebUI.Controllers
                 IsValid = valid,
                 ErrorMessages = allErrors,
                 Education = educationToAdd
+            });
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> DeleteEducation(int EduId)
+        {
+            List<string> allErrors = new List<string>();
+            bool valid = false;
+
+            if (EduId == 0)
+            {
+                ModelState.AddModelError("", "Error");
+                allErrors = _methods.ModelErrors(ModelState);
+            }
+            else
+            {
+                await _educationDal.DeleteAsync(await _educationDal.GetById(EduId));
+                valid = true;
+            }
+            return Json(new
+            {
+                IsValid = valid,
+                ErrorMessages = allErrors
             });
         }
     }
