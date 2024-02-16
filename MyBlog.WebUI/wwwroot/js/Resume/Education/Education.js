@@ -10,6 +10,82 @@ $('body').on('click', '.opening_modal_delete', function () {
     });
 });
 
+$('body').on('click', '.opening_modal_edit', function () {
+    let id = this.id;
+    let eduTitleVal = $("#edu_title_" + id).text();
+    let uniNameVal = $("#edu_uniName_" + id).text();
+    let eduDateVal = $("#edu_date_" + id).val();
+    let eduAdrsVal = $("#edu_adrss_" + id).val();
+    let eduDescVal = $("#edu_desc_" + id).val();
+
+    $('#EduTitle').val(eduTitleVal);
+    $('#EduDateBetween').val(eduDateVal);
+    $('#EduUniversityName').val(uniNameVal);
+    $('#EduAdress').val(eduAdrsVal);
+    $('#EduDescription').val(eduDescVal);
+
+
+    $("#edit-educate-error").empty();
+
+    $("#educateEdit").click(function () {
+        EditEducationProcess(id);
+    });
+});
+
+function EditEducationProcess(eduId) {
+
+    $("#spinner").removeClass("d-none");
+    $("#spinner").addClass("d-block");
+    let skillNameVal = $('#SkillEditName').val();
+    let skilValueVal = $('#SkillEditValue').val();
+
+
+    $.ajax({
+        type: 'POST',
+        url: '/Resume/EditEducation',
+        dataType: 'json',
+        data: {
+            EducationId: eduId,
+            Title: $('#EduTitle').val(),
+            DateBetween: $('#EduDateBetween').val(),
+            Adress: $('#EduAdress').val(),
+            Description: $('#EduDescription').val() ,
+            UniversityName: $('#EduUniversityName').val()
+        },
+        success: function (res) {
+
+            $("#spinner").removeClass("d-block");
+            $("#spinner").addClass("d-none");
+            if (!res.isValid) {
+                $('#edit-skill-error').empty();
+                $.each(res.errorMessages, function (key, value) {
+                    $("#edit-educate-error").append("<span class='model-danger mt-3'>" + value + '</span><br/>');
+                });
+                $('#edit-educate-error').text(res.errorMessage);
+            } else {
+                //simdilik inputlare güncellenen entity yi setliyoruz,append ile de yapabiliriz
+                $("#edu_title_" + res.education.id).text(res.education.title);
+                $("#edu_uniName_"+ res.education.id).text(res.education.universityName);
+                $("#edu_date_" + res.education.id).text(res.education.dateBetween);                
+                $("#edu_adrss_" + res.education.id).text(res.education.adress);
+                $("#edu_desc_" + res.education.id).text(res.education.description);
+
+                $(".eduDissmisClick").click();
+
+                
+
+                MyToast.fire({
+                    icon: 'success',
+                    title: "educate edited"
+                })
+            }
+
+
+        }
+    });
+    return false;
+}
+
 
 
 function AddEducatelProcess() {
@@ -53,14 +129,19 @@ function AddEducatelProcess() {
                 $("#eduTbody").append(`
 
                         <tr id="tr_${res.education.id}">
+
+                            <input type="hidden" id="edu_date_${res.education.id}" value="${res.education.dateBetween}" />
+                            <input type="hidden" id="edu_adrss_${res.education.id}" value="${res.education.adress}" />
+                            <input type="hidden" id="edu_desc_${res.education.id}" value="${res.education.description}" />
+
                             <td>
                                 <div class="main__table-text">${res.education.id}</div>
                             </td>
                             <td>
-                                <div id="" class="main__table-text">${res.education.title}</div>
+                                <div id="edu_title_${res.education.id}" class="main__table-text">${res.education.title}</div>
                             </td>
                             <td>
-                                <div id="" class="main__table-text">${res.education.universityName}</div>
+                                <div id="edu_uniName_${res.education.id}" class="main__table-text">${res.education.universityName}</div>
                             </td>
                             <td>
                                 <div class="main__table-text">1</div>
@@ -68,7 +149,7 @@ function AddEducatelProcess() {
 
                             <td>
                                 <div class="main__table-btns">
-                                    <a href="#modal-edit-skill" class="main__table-btn main__table-btn--edit opening_modal_edit open-modal">
+                                    <a href="#modal-edit-education" id="${res.education.id}"  class="main__table-btn main__table-btn--edit opening_modal_edit open-modal">
                                         <i class="icon ion-ios-create "></i>
                                     </a>
                                     <a href="#modal-delete" id="${res.education.id}" class="main__table-btn main__table-btn--delete opening_modal_delete open-modal">

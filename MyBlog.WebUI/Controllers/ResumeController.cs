@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyBlog.WebUI.DataAccess.Abstract;
 using MyBlog.WebUI.Entity;
+using MyBlog.WebUI.Models;
 using MyBlog.WebUI.Models.Resume;
 using MyBlog.WebUI.Util.Abstract;
 
@@ -54,6 +55,38 @@ namespace MyBlog.WebUI.Controllers
         }
 
         [HttpPost]
+        public async Task<JsonResult> EditEducation(EditEducationViewModel model)
+        {
+            List<string> allErrors = new List<string>();
+            Education eduCallback = new Education();
+            bool valid = false;
+            if (!ModelState.IsValid)
+            {
+                allErrors = _methods.ModelErrors(ModelState);
+            }
+            else
+            {
+                var skillToUpdateR = await _educationDal.GetById(model.EducationId);
+
+                skillToUpdateR.Title = model.Title;
+                skillToUpdateR.Adress = model.Adress;
+                skillToUpdateR.DateBetween = model.DateBetween;
+                skillToUpdateR.UniversityName= model.UniversityName;
+                skillToUpdateR.Description = model.Description;
+
+                eduCallback =await _educationDal.ReturnUpdateAsync(skillToUpdateR);
+                valid = true;
+            }
+            return Json(new
+            {
+                IsValid = valid,
+                ErrorMessages = allErrors,
+                Education = eduCallback
+            });
+
+        }
+
+        [HttpPost]
         public async Task<JsonResult> DeleteEducation(int EduId)
         {
             List<string> allErrors = new List<string>();
@@ -75,5 +108,6 @@ namespace MyBlog.WebUI.Controllers
                 ErrorMessages = allErrors
             });
         }
+
     }
 }

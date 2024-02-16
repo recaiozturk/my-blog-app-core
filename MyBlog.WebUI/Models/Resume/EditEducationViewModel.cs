@@ -4,6 +4,7 @@ namespace MyBlog.WebUI.Models.Resume
 {
     public class EditEducationViewModel
     {
+        public int EducationId { get; set; }
         [Required]
         public string? Title { get; set; }
         [Required]

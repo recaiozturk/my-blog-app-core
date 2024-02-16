@@ -11,6 +11,7 @@ $('body').on('click', '.opening_modal_edit', function () {
 
     $('#SkillEditName').val(sName);
     $('#SkillEditValue').val(sValue.replace(/%/g, ''));
+
     $("#edit-skill-error").empty();
 
     $("#skillEdit").click(function () {

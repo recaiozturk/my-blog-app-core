@@ -1,4 +1,5 @@
-﻿using MyBlog.WebUI.DataAccess.Abstract;
+﻿using Microsoft.EntityFrameworkCore;
+using MyBlog.WebUI.DataAccess.Abstract;
 using MyBlog.WebUI.Entity;
 
 namespace MyBlog.WebUI.DataAccess.Concrate.EfCore
@@ -10,5 +11,6 @@ namespace MyBlog.WebUI.DataAccess.Concrate.EfCore
         {
             _context = context;
         }
+
     }
 }

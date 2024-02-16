@@ -40,15 +40,19 @@
                                     <tbody id="eduTbody">
                                         @foreach (var edu in Model.Educations)
                                         {
+
                                             <tr id="tr_@edu.Id">
+                                                <input type="hidden" id="edu_date_@edu.Id" value="@edu.DateBetween" />
+                                                <input type="hidden" id="edu_adrss_@edu.Id" value="@edu.Adress" />
+                                                <input type="hidden" id="edu_desc_@edu.Id" value="@edu.Description" />
                                                 <td>
                                                     <div class="main__table-text">@edu.Id</div>
                                                 </td>
                                                 <td>
-                                                    <div id="" class="main__table-text">@edu.Title</div>
+                                                    <div id="edu_title_@edu.Id" class="main__table-text">@edu.Title</div>
                                                 </td>
                                                 <td>
-                                                    <div id="" class="main__table-text">@edu.UniversityName</div>
+                                                    <div id="edu_uniName_@edu.Id" class="main__table-text">@edu.UniversityName</div>
                                                 </td>
                                                 <td>
                                                     <div class="main__table-text">1</div>
@@ -56,7 +60,7 @@
 
                                                 <td>
                                                     <div class="main__table-btns">
-                                                        <a href="#modal-edit-skill" class="main__table-btn main__table-btn--edit opening_modal_edit open-modal">
+                                                        <a href="#modal-edit-education" id="@edu.Id" class="main__table-btn main__table-btn--edit opening_modal_edit open-modal">
                                                             <i class="icon ion-ios-create "></i>
                                                         </a>
                                                         <a href="#modal-delete" id="@edu.Id" class="main__table-btn main__table-btn--delete opening_modal_delete open-modal">
@@ -113,14 +117,24 @@
     </div>
     <!-- end modal add -->
     <!-- modal edit -->
-    <div id="modal-edit-educateAdd" class="zoom-anim-dialog mfp-hide modal">
+    <div id="modal-edit-education" class="zoom-anim-dialog mfp-hide modal">
         <h6 class="modal__title">Edit Skill</h6>
 
-        <label class="form__label">Skill Name</label>
-        <input id="EducateEditName" name="EducateEditName" class="form__input">
+        <label class="form__label">Title</label>
+        <input id="EduTitle" class="form__input">
 
-        <label class="form__label">Skill Value</label>
-        <input type="number" id="EducateEditValue" name="EducateEditValue" class="form__input">
+        <label class="form__label">DateBetween</label>
+        <input id="EduDateBetween" class="form__input">
+
+        <label class="form__label">University Name</label>
+        <input id="EduUniversityName" class="form__input">
+
+        <label class="form__label">Adress</label>
+        <input id="EduAdress" class="form__input">
+
+        <label class="form__label">Description</label>
+        <input id="EduDescription" class="form__input">
+
         <div id="edit-educate-error">
         </div>
         <span class="d-none" id="spinner">
@@ -128,7 +142,7 @@
         </span>
         <div class="modal__btns">
             <button id="educateEdit" class="modal__btn modal__btn--apply" type="button">Save</button>
-            <button id="educateAddDismiss" class="modal__btn modal__btn--dismiss skillDissmisClick" type="button">Dismiss</button>
+            <button id="educateAddDismiss" class="modal__btn modal__btn--dismiss eduDissmisClick" type="button">Dismiss</button>
         </div>
     </div>
     <!-- end modal edit -->

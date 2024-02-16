@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyBlog.WebUI.DataAccess.Abstract;
+using MyBlog.WebUI.Entity;
 
 namespace MyBlog.WebUI.DataAccess.Concrate.EfCore
 {
@@ -48,6 +49,11 @@ namespace MyBlog.WebUI.DataAccess.Concrate.EfCore
             await _context.SaveChangesAsync(true);
         }
 
-
+        public async Task<TEntity> ReturnUpdateAsync(TEntity entity)
+        {
+            _context.Entry(entity).State = EntityState.Modified;
+            await _context.SaveChangesAsync(true);
+            return entity;
+        }
     }
 }
