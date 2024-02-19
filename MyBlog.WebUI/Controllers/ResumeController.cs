@@ -109,5 +109,17 @@ namespace MyBlog.WebUI.Controllers
             });
         }
 
+
+        //-------------experience--------
+
+        public IActionResult Experiences()
+        {
+            //test education degiscek
+            ResumeViewModel model = new ResumeViewModel();
+            model.Educations = _educationDal.GetAll().ToList();
+            return View(model);
+
+        }
+
     }
 }

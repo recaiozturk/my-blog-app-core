@@ -27,9 +27,7 @@ $('body').on('click', '.opening_modal_edit', function () {
 
     $("#edit-educate-error").empty();
 
-    $("#educateEdit").click(function () {
-        EditEducationProcess(id);
-    });
+    $("#educateEdit").attr("onclick", `EditEducationProcess(${id})`);
 });
 
 function EditEducationProcess(eduId) {
@@ -63,16 +61,55 @@ function EditEducationProcess(eduId) {
                 });
                 $('#edit-educate-error').text(res.errorMessage);
             } else {
-                //simdilik inputlare güncellenen entity yi setliyoruz,append ile de yapabiliriz
-                $("#edu_title_" + res.education.id).text(res.education.title);
-                $("#edu_uniName_"+ res.education.id).text(res.education.universityName);
-                $("#edu_date_" + res.education.id).text(res.education.dateBetween);                
-                $("#edu_adrss_" + res.education.id).text(res.education.adress);
-                $("#edu_desc_" + res.education.id).text(res.education.description);
+
+                let tr = `
+                    
+                <tr id="tr_${res.education.id}">
+
+                            <input type="hidden" id="edu_date_${res.education.id}" value="${res.education.dateBetween}" />
+                            <input type="hidden" id="edu_adrss_${res.education.id}" value="${res.education.adress}" />
+                            <input type="hidden" id="edu_desc_${res.education.id}" value="${res.education.description}" />
+                            <td>
+                                <div class="main__table-text">${res.education.id}</div>
+                            </td>
+                            <td>
+                                <div id="edu_title_${res.education.id}" class="main__table-text">${res.education.title}</div>
+                            </td>
+                            <td>
+                                <div id="edu_uniName_${res.education.id}" class="main__table-text">${res.education.universityName}</div>
+                            </td>
+                            <td>
+                                <div class="main__table-text">1</div>
+                            </td>
+
+                            <td>
+                                <div class="main__table-btns">
+                                    <a href="#modal-edit-education" id="${res.education.id}"  class="main__table-btn main__table-btn--edit opening_modal_edit open-modal">
+                                        <i class="icon ion-ios-create "></i>
+                                    </a>
+                                    <a href="#modal-delete" id="${res.education.id}" class="main__table-btn main__table-btn--delete opening_modal_delete open-modal">
+                                        <i class="icon ion-ios-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                
+                `;
+                $("#tr_" + res.education.id).replaceWith(tr);
+
+                $('.open-modal').magnificPopup({
+                    fixedContentPos: true,
+                    fixedBgPos: true,
+                    overflowY: 'auto',
+                    type: 'inline',
+                    preloader: false,
+                    focus: '#username',
+                    modal: false,
+                    removalDelay: 300,
+                    mainClass: 'my-mfp-zoom-in',
+                });
 
                 $(".eduDissmisClick").click();
-
-                
 
                 MyToast.fire({
                     icon: 'success',

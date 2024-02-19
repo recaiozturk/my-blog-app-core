@@ -1,8 +1,6 @@
 ﻿
-@model MyBlog.WebUI.Models.Resume.ResumeViewModel
-
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Experiences";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -10,7 +8,7 @@
     <!-- main title -->
     <div class="col-12">
         <div class="main__title">
-            <h2>Education (Edit)</h2>
+            <h2>Experiences (Edit)</h2>
         </div>
     </div>
     <!-- end main title -->
@@ -85,85 +83,6 @@
         </form>
     </div>
     <!-- end form -->
-    <!-- end modal view -->
-    <!-- modal add -->
-    <div id="modal-add-education" class="zoom-anim-dialog mfp-hide modal">
-        <h6 class="modal__title">Add Education</h6>
-
-        <label class="form__label">Title</label>
-        <input id="Title" name="Title" class="form__input">
-
-        <label class="form__label">DateBetween</label>
-        <input id="DateBetween" name="DateBetween" class="form__input">
-
-        <label class="form__label">University Name</label>
-        <input id="UniversityName" name="UniversityName" class="form__input">
-
-        <label class="form__label">Adress</label>
-        <input id="Adress" name="Adress" class="form__input">
-
-        <label class="form__label">Description</label>
-        <input id="Description" name="Description" class="form__input">
-
-        <div id="add-education-error">
-        </div>
-        <span class="d-none" id="spinner">
-            <img style="width:20px" src="~/loading_gif.webp" />
-        </span>
-        <div class="modal__btns">
-            <button id="educateAdd" class="modal__btn modal__btn--apply" type="button">Add</button>
-            <button id="educateAddAddDismiss" class="modal__btn modal__btn--dismiss skillDissmisClick" type="button">Dismiss</button>
-        </div>
-    </div>
-    <!-- end modal add -->
-    <!-- modal edit -->
-    <div id="modal-edit-education" class="zoom-anim-dialog mfp-hide modal">
-        <h6 class="modal__title">Edit Skill</h6>
-
-        <label class="form__label">Title</label>
-        <input id="EduTitle" class="form__input">
-
-        <label class="form__label">DateBetween</label>
-        <input id="EduDateBetween" class="form__input">
-
-        <label class="form__label">University Name</label>
-        <input id="EduUniversityName" class="form__input">
-
-        <label class="form__label">Adress</label>
-        <input id="EduAdress" class="form__input">
-
-        <label class="form__label">Description</label>
-        <input id="EduDescription" class="form__input">
-
-        <div id="edit-educate-error">
-        </div>
-        <span class="d-none" id="spinner">
-            <img style="width:20px" src="~/loading_gif.webp" />
-        </span>
-        <div class="modal__btns">
-            <button id="educateEdit" onclick="EditEducationProcess(id);" class="modal__btn modal__btn--apply" type="button">Save</button>
-            <button id="educateAddDismiss" class="modal__btn modal__btn--dismiss eduDissmisClick" type="button">Dismiss</button>
-        </div>
-    </div>
-    <!-- end modal edit -->
-    <!-- modal delete -->
-    <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
-        <h6 class="modal__title">Education delete</h6>
-        <div id="delete-edu-error">
-        </div>
-        <p class="modal__text">Are you sure to permanently delete this education?</p>
-
-        <div class="modal__btns">
-            <button id="eduDelete" class="modal__btn modal__btn--apply" type="button">Delete</button>
-            <button class="modal__btn modal__btn--dismiss" type="button">Dismiss</button>
-        </div>
-    </div>
-    <!-- end modal delete -->
+ 
 </div>
-
-@section Scripts {
-  <script src="~/js/Resume/Education/Education.js"></script>
-}
-
-
 
