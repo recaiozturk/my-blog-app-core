@@ -1,0 +1,230 @@
+﻿<!-- experience view model olusturulup oana göre düzenlencek-->
+
+@{
+    ViewData["Title"] = "ExperienceEdit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <!-- main title -->
+    <div class="col-12">
+        <div class="main__title">
+            <h2>About (Edit)</h2>
+        </div>
+    </div>
+    <!-- end main title -->
+    <!-- form -->
+    <div class="col-12">
+        <form action="edit" method="post" class="form" enctype="multipart/form-data" novalidate>
+            <div asp-validation-summary="ModelOnly" class="model-danger"></div>
+            <input type="hidden" asp-for="AboutId" />
+            <div class="row row--form">
+                <div class="col-12 col-md-5 form__cover">
+                    <div class="row row--form">
+                        <div class="col-12 col-sm-6 col-md-12">
+                            <div class="form__img">
+                                <label for="imageFile"><i style="scale:3" class="icon ion-ios-image"></i></label>
+                                <input id="imageFile" name="imageFile" type="file" onchange="showImagePreview(this)">
+                                <img id="form__img" src="~/img/profilepicture/@Model.Image" alt=" ">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-7 form__content">
+                    <div class="row row--form">
+                        <div class="col-12">
+                            <label asp-for="Title" class="form__label"></label>
+                            <input asp-for="Title" class="form__input" placeholder="Title Giriniz">
+                            <span asp-validation-for="Title" class="model-danger"></span>
+                        </div>
+
+                        <div class="col-12">
+                            <label asp-for="Summary" class="form__label"></label>
+                            <textarea asp-for="Summary" class="form__textarea" placeholder="Özet gir"></textarea>
+                            <span asp-validation-for="Summary" class="model-danger"></span>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <label asp-for="Email" class="form__label"></label>
+                            <input asp-for="Email" class="form__input" placeholder="Email">
+                            <span asp-validation-for="Email" class="model-danger"></span>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <label asp-for="PhoneNumber" class="form__label"></label>
+                            <input asp-for="PhoneNumber" class="form__input" placeholder="Tel No">
+                            <span asp-validation-for="PhoneNumber" class="model-danger"></span>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <label asp-for="Website" class="form__label"></label>
+                            <input asp-for="Website" class="form__input" placeholder="Website">
+                            <span asp-validation-for="Website" class="model-danger"></span>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <label asp-for="Birthday" class="form__label"></label>
+                            <input asp-for="Birthday" class="form__input" placeholder="Doğum Tarihi Giriniz">
+                            <span asp-validation-for="Birthday" class="model-danger"></span>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <label asp-for="Age" class="form__label"></label>
+                            <input asp-for="Age" class="form__input" placeholder="Yaş Giriniz">
+                            <span asp-validation-for="Age" class="model-danger"></span>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <label asp-for="Adress" class="form__label"></label>
+                            <input asp-for="Adress" class="form__input" placeholder="Adres Giriniz">
+                            <span asp-validation-for="Adress" class="model-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-7 form__content">
+                    <h4 class="form__title">Skils</h4>
+                    <a href="#modal-add-skill" class="main__title-link opening_modal_add open-modal ml-0 mb-3">Add Skill</a>
+                    <div class="main__table-wrap mCustomScrollbar _mCS_2 mCS_no_scrollbar" style="overflow: visible;">
+                        <div id="mCSB_2" class="mCustomScrollBox mCS-custom-bar2 mCSB_horizontal mCSB_outside" tabindex="0" style="max-height: none;">
+                            <div id="mCSB_2_container" class="mCSB_container mCS_x_hidden mCS_no_scrollbar_x" style="position: relative; top: 0px; left: 0px; width: 1051px; min-width: 100%; overflow-x: inherit;" dir="ltr">
+                                <table class="main__table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Yetenek</th>
+                                            <th>Yüzde</th>
+                                            <th>Sıralama</th>
+                                            <th>ACTIONS</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody id="skillTbody">
+                                        @foreach (var skill in Model.Skills)
+                                        {
+                                            <tr id="tr_@skill.Id">
+                                                <td>
+                                                    <div class="main__table-text">@skill.Id</div>
+                                                </td>
+
+                                                <td>
+                                                    <div id="skilln_@skill.Id" class="main__table-text">@skill.SkillName</div>
+                                                </td>
+                                                <td>
+                                                    <div id="skillv_@skill.Id" class="main__table-text">%@skill.SkillValue</div>
+                                                </td>
+                                                <td>
+                                                    <div class="main__table-text">1</div>
+                                                </td>
+
+                                                <td>
+                                                    <div class="main__table-btns">
+                                                        <a href="#modal-edit-skill" id="@skill.Id" class="main__table-btn main__table-btn--edit opening_modal_edit open-modal">
+                                                            <i class="icon ion-ios-create "></i>
+                                                        </a>
+                                                        <a href="#modal-delete" id="@skill.Id" class="main__table-btn main__table-btn--delete opening_modal_delete open-modal">
+                                                            <i class="icon ion-ios-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div><div id="mCSB_2_scrollbar_horizontal" class="mCSB_scrollTools mCSB_2_scrollbar mCS-custom-bar2 mCSB_scrollTools_horizontal" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_2_dragger_horizontal" class="mCSB_dragger" style="position: absolute; min-width: 30px; width: 0px; left: 0px;"><div class="mCSB_dragger_bar"></div><div class="mCSB_draggerRail"></div></div></div></div>
+                    </div>
+                </div>
+
+                <div class="row row--form mt-5">
+                    <div class="col-12">
+                        <h4 class="form__title">Favorites</h4>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                        <div class="form__group">
+                            <label asp-for="FavoriteBook" class="form__label">Favorite Book</label>
+                            <input asp-for="FavoriteBook" class="form__input" placeholder="Favori Kitap">
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                        <div class="form__group">
+                            <label asp-for="FavoriteMusic" class="form__label">Favorite Music</label>
+                            <input asp-for="FavoriteMusic" class="form__input" placeholder="Favori Müzik">
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                        <div class="form__group">
+                            <label asp-for="FavoriteMovie" class="form__label">Favorite Movie</label>
+                            <input asp-for="FavoriteMovie" class="form__input" placeholder="Favori Film">
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                        <div class="form__group">
+                            <label asp-for="FavoriteSerie" class="form__label">Favorite Serie</label>
+                            <input asp-for="FavoriteSerie" class="form__input" placeholder="Favori Dizi">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <button type="submit" class="form__btn">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- end form -->
+    <!-- end modal view -->
+    <!-- modal add -->
+    <div id="modal-add-skill" class="zoom-anim-dialog mfp-hide modal">
+        <h6 class="modal__title">Add Skill</h6>
+
+        <label class="form__label">Skill Name</label>
+        <input id="SkillName" name="SkillName" class="form__input">
+
+        <label class="form__label">Skill Value</label>
+        <input type="number" id="SkillValue" name="SkillValue" class="form__input">
+        <div id="add-skill-error">
+        </div>
+        <span class="d-none" id="spinner">
+            <img style="width:20px" src="~/loading_gif.webp" />
+        </span>
+        <div class="modal__btns">
+            <button id="skillAdd" class="modal__btn modal__btn--apply" type="button">Add</button>
+            <button id="skillAddDismiss" class="modal__btn modal__btn--dismiss skillDissmisClick" type="button">Dismiss</button>
+        </div>
+    </div>
+    <!-- end modal add -->
+    <!-- modal edit -->
+    <div id="modal-edit-skill" class="zoom-anim-dialog mfp-hide modal">
+        <h6 class="modal__title">Edit Skill</h6>
+
+        <label class="form__label">Skill Name</label>
+        <input id="SkillEditName" name="SkillEditName" class="form__input">
+
+        <label class="form__label">Skill Value</label>
+        <input type="number" id="SkillEditValue" name="SkillEditValue" class="form__input">
+        <div id="edit-skill-error">
+        </div>
+        <span class="d-none" id="spinner">
+            <img style="width:20px" src="~/loading_gif.webp" />
+        </span>
+        <div class="modal__btns">
+            <button id="skillEdit" class="modal__btn modal__btn--apply" type="button">Save</button>
+            <button id="skillAddDismiss" class="modal__btn modal__btn--dismiss skillDissmisClick" type="button">Dismiss</button>
+        </div>
+    </div>
+    <!-- end modal edit -->
+    <!-- modal delete -->
+    <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
+        <h6 class="modal__title">Skill delete</h6>
+
+        <p class="modal__text">Are you sure to permanently delete this skill?</p>
+
+        <div class="modal__btns">
+            <button id="skillDelete" class="modal__btn modal__btn--apply" type="button">Delete</button>
+            <button class="modal__btn modal__btn--dismiss" type="button">Dismiss</button>
+        </div>
+    </div>
+    <!-- end modal delete -->
+</div>
+

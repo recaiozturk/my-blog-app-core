@@ -121,5 +121,10 @@ namespace MyBlog.WebUI.Controllers
 
         }
 
+        public IActionResult ExperienceEdit()
+        {
+            return View();
+        }
+
     }
 }
