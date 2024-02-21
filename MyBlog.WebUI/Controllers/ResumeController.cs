@@ -11,16 +11,18 @@ namespace MyBlog.WebUI.Controllers
     {
         private readonly IEducationDal _educationDal;
         private readonly IMethods _methods;
-        public ResumeController(IEducationDal educationDal, IMethods methods)
+        private readonly IExperienceDal _experienceDal;
+        public ResumeController(IEducationDal educationDal, IMethods methods, IExperienceDal experienceDal)
         {
             _educationDal = educationDal;
             _methods = methods;
+            _experienceDal = experienceDal;
         }
 
         public async Task<IActionResult> Education()
         {
-            ResumeViewModel model= new ResumeViewModel();
-            model.Educations=_educationDal.GetAll().ToList();
+            ResumeViewModel model = new ResumeViewModel();
+            model.Educations = _educationDal.GetAll().ToList();
             return View(model);
         }
 
@@ -71,10 +73,10 @@ namespace MyBlog.WebUI.Controllers
                 skillToUpdateR.Title = model.Title;
                 skillToUpdateR.Adress = model.Adress;
                 skillToUpdateR.DateBetween = model.DateBetween;
-                skillToUpdateR.UniversityName= model.UniversityName;
+                skillToUpdateR.UniversityName = model.UniversityName;
                 skillToUpdateR.Description = model.Description;
 
-                eduCallback =await _educationDal.ReturnUpdateAsync(skillToUpdateR);
+                eduCallback = await _educationDal.ReturnUpdateAsync(skillToUpdateR);
                 valid = true;
             }
             return Json(new
@@ -112,17 +114,110 @@ namespace MyBlog.WebUI.Controllers
 
         //-------------experience--------
 
-        public IActionResult Experiences()
+        public async Task<IActionResult> Experiences()
         {
-            //test education degiscek
-            ResumeViewModel model = new ResumeViewModel();
-            model.Educations = _educationDal.GetAll().ToList();
+
+            var experiences = _experienceDal.GetAll().OrderBy(x=>x.DisplayOrder).Select(e =>
+                new ExperienceViewModel
+                {
+                    Id = e.Id,
+                    Title = e.Title,
+                    DateBetween = e.DateBetween,
+                    CompanyName = e.CompanyName,
+                    Adress = e.Adress,
+                    ExperienceSteps = e.ExperienceSteps,
+                    DisplayOrder= e.DisplayOrder,
+                    
+
+                }).ToList();
+
+            return View(experiences);
+        }
+
+        public async Task<IActionResult> CreateExperience()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateExperience(ExperienceViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Experience experience = new Experience
+                {
+                    Title = model.Title,
+                    DateBetween = model.DateBetween,
+                    CompanyName = model.CompanyName,
+                    Adress = model.Adress,
+                    ExperienceSteps = model.ExperienceSteps,
+                    DisplayOrder=model.DisplayOrder
+                };
+                await _experienceDal.CreateAsync(experience);
+
+                return RedirectToAction("Experiences");
+            }
+
             return View(model);
 
         }
 
-        public IActionResult ExperienceEdit()
+        public async Task<IActionResult> ExperienceEdit(int id)
         {
+            if (id == 0)
+                ModelState.AddModelError("", "Error ! Try Again");
+
+            var experience = await _experienceDal.GetById(id);
+
+            if (experience == null)
+                ModelState.AddModelError("", "Error ! Try Again");
+            else
+            {
+                return View(new ExperienceViewModel
+                {
+                    Id = experience.Id,
+                    Title = experience.Title,
+                    DateBetween = experience.DateBetween,
+                    CompanyName = experience.CompanyName,
+                    Adress = experience.Adress,
+                    ExperienceSteps=experience.ExperienceSteps,
+                    DisplayOrder= experience.DisplayOrder
+                    
+                });
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ExperienceEdit(ExperienceViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var experience = await _experienceDal.GetById(model.Id);
+
+                if (experience == null)
+                {
+                    ModelState.AddModelError("", "Error ! Try Again");
+                    return View(experience);
+                }
+                else
+                {
+                    experience.Title = model.Title;
+                    experience.DateBetween = model.DateBetween;
+                    experience.Adress = model.Adress;
+                    experience.CompanyName = model.CompanyName;
+                    experience.Description = model.Description;
+                    experience.ExperienceSteps=model.ExperienceSteps;
+                    experience.DisplayOrder= model.DisplayOrder;
+
+                    await _experienceDal.UpdateAsync(experience);
+
+                    return RedirectToAction("Experiences");
+                }
+
+
+            }
             return View();
         }
 

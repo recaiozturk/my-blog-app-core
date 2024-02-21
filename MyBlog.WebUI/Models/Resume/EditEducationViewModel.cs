@@ -13,7 +13,6 @@ namespace MyBlog.WebUI.Models.Resume
         public string? Adress { get; set; }
         [Required]
         public string? UniversityName { get; set; }
-        [Required]
         public string? Description { get; set; }
     }
 }

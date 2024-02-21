@@ -1,0 +1,70 @@
+﻿@model MyBlog.WebUI.Models.Resume.ResumeViewModel
+
+<div class="container">
+
+    <div class="section-title">
+        <h2>Resume</h2>
+        <!-- <p>Check My Resume</p> -->
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <h3 class="resume-title">Özet</h3>
+            <div class="resume-item pb-0">
+                <h4>Recai Öztürk</h4>
+                <p>
+                    <em>
+                        @Model.About?.Summary
+                    </em>
+                </p>
+                <p>
+                    <ul>
+                        <li>@Model.About?.Adress</li>
+                        <li>@Model.About?.PhoneNumber</li>
+                        <li>@Model.About?.Email</li>
+                    </ul>
+                </p>
+            </div>
+
+            <h3 class="resume-title">Eğitim <a href="/resume/education" target="_blank" class="btn btn-success btn-sm my-3">Düzenle</a></h3>
+
+            @foreach (var edu in Model.Educations)
+            {
+                <div class="resume-item">
+
+                    <h4>@edu.Title</h4>
+                    <h5>@edu.DateBetween</h5>
+                    <p><em>@edu.UniversityName, @edu.Adress</em></p>
+                    <p>
+                        @edu.Description
+                    </p>
+                </div>
+            }
+
+        </div>
+        <div class="col-lg-6">
+            <h3 class="resume-title">Deneyimler <a href="/resume/experiences" target="_blank" class="btn btn-success btn-sm my-3">Düzenle</a></h3>
+
+            @foreach (var exp in Model.Experiences)
+            {
+                <div class="resume-item">
+                    <h4>@exp.Title</h4>
+                    <h5>@exp.DateBetween</h5>
+                    <p><em>@exp.CompanyName - @exp.Adress </em></p>
+                    <p>
+                        <ul>
+                            @foreach (var item in exp.ExpStepsSentences)
+                            {
+                                <li>
+                                    @item
+                                </li>
+                            }
+                        </ul>
+                    </p>
+                </div>
+            }
+
+        </div>
+    </div>
+
+</div>

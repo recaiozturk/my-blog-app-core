@@ -1,4 +1,5 @@
 ﻿using Azure;
+using MyBlog.WebUI.Util;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MyBlog.WebUI.Entity
@@ -12,8 +13,12 @@ namespace MyBlog.WebUI.Entity
         public string? UniversityName { get; set; }
         public string? Description { get; set; }
         public string? CompanyName { get; set; }
+        public string? ExperienceSteps { get; set; }
+        public int DisplayOrder { get; set; }
+
 
         [NotMapped]
-        public List<string> CompanyDetails { get; set; } = new List<string>();
+        public List<string> ExpStepsSentences => StaticMethods.SplitSentences(ExperienceSteps ?? "");
+
     }
 }

@@ -18,6 +18,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => {
 //scoped  score: her http isteðinde 1 nesne
 builder.Services.AddScoped<IAboutDal, EfAboutDal>();
 builder.Services.AddScoped<IEducationDal, EfEducationDal>();
+builder.Services.AddScoped<IExperienceDal, EfExperienceDal>();
 builder.Services.AddScoped<IMethods, Methods>();
 
 

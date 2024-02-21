@@ -81,128 +81,20 @@
         </div>
     </header><!-- End Header -->
     <!-- @RenderBody() -->
+
     <!-- ======= About Section ======= -->
     <section id="about" class="about">
-
-        <!-- ======= About Me ======= -->
         @await Component.InvokeAsync("About")
+    </section>
+    <!-- End About Section -->
 
-        <!-- ======= Interests ======= --><!-- End Interests -->
-        <!-- ======= Testimonials ======= --><!-- End Testimonials  -->
-
-    </section><!-- End About Section -->
     <!-- ======= Resume Section ======= -->
     <section id="resume" class="resume">
-        <div class="container">
+        @await Component.InvokeAsync("Resume")
+    </section>
+    <!-- End Resume Section -->
 
-            <div class="section-title">
-                <h2>Resume</h2>
-                <!-- <p>Check My Resume</p> -->
-            </div>
 
-            <div class="row">
-                <div class="col-lg-6">
-                    <h3 class="resume-title">Özet</h3>
-                    <div class="resume-item pb-0">
-                        <h4>Recai Öztürk</h4>
-                        <p>
-                            <em>
-                                Bilgisayar Mühendisliği bölümü mezunuyum.Üniversite yıllarımda kendimi Web Programlama(
-                                Asp.NET-MVC-EntityFramework) alanında geliştirdim.Bunun yanında boş vakitlerimde Unity
-                                üzerinde C# ile oyun prototipleri geliştiriyorum..
-                            </em>
-                        </p>
-                        <p>
-                            <ul>
-                                <li>Kartepe -Kocaeli</li>
-                                <li>(0 531) 740-41-48</li>
-                                <li>recaiozturk54@gmail.com</li>
-                            </ul>
-                        </p>
-                    </div>
-
-                    <h3 class="resume-title">Eğitim <a href="/resume/education" target="_blank" class="btn btn-success btn-sm my-3">Düzenle</a></h3>
-                    <div class="resume-item">
-                        <h4>Bilgisayar Mühendisliği</h4>
-                        <h5>2013 - 2019</h5>
-                        <p><em>Süleyman Demirel Üniversitesi, Isparta, Türkiye</em></p>
-                        <p>
-                            Üniversite yıllarımda kendimi Web Programlama(
-                            Asp.NET-MVC-EntityFramework) alanında geliştirdim
-                        </p>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <h3 class="resume-title">Deneyimler <a href="/resume/experiences" target="_blank" class="btn btn-success btn-sm my-3">Düzenle</a></h3>
-                    <div class="resume-item">
-                        <h4>Jr. Full Stack Yazılım Geliştirici</h4>
-                        <h5>10/2022 - 11/2023</h5>
-                        <p><em>Tepro Makine - Gebze,GOSB,Kocaeli </em></p>
-                        <p>
-                            <ul>
-                                <li>
-                                    Online Pazar yeri platformu machinetotal.com web
-                                    yazılımının geliştirilmesinde full stack olarak görev aldım.
-                                    .
-                                </li>
-                                <li>
-                                    Internal-External Restful API web servislerinin
-                                    geliştirilmesinde katkı sağlandı.
-                                </li>
-                                <li>
-                                    Hangfire ile web yazılımı için gerekli background processing
-                                    işlemlerinin geliştirilmesi ve yürütülmesi sağlandı.
-                                </li>
-                            </ul>
-                        </p>
-                    </div>
-                    <div class="resume-item">
-                        <h4>Yazılım Geliştirici</h4>
-                        <h5>11/2021 - 05/2022</h5>
-                        <p>
-                            <em>Çap Teknoloji Danışmanlık ve Yazılım Hizmetleri - Marmara Teknokent,Gebze,Kocaeli</em>
-                        </p>
-                        <p>
-                            <ul>
-                                <li>
-                                    .Net Core ile müşterilerin ihtiyaçlarına göre mevcut Satış
-                                    Otomasyon Web uygulamasının geliştirilmesine katkı
-                                    sağlandı.
-                                </li>
-                                <li>Managed up to 5 projects or tasks at a given time while under pressure</li>
-                                <li>
-                                    JavaScript ile mevcut internet uygulamalarının performansı
-                                    ve işlevselliği artırıldı
-                                </li>
-                                <li>
-                                    Xamarin .Net Core ile müşterilerin ihtiyaçlarına göre
-                                    mevcut mobil uygulamaların geliştirilmesine katkı sağlandı.
-                                </li>
-                            </ul>
-                        </p>
-                    </div>
-
-                    <div class="resume-item">
-                        <h4>Web Programcısı</h4>
-                        <h5>02/2020 - 07/2020</h5>
-                        <p>
-                            <em>ISUBU Öğrenci İşleri Daire Başkanlığı - Isparta</em>
-                        </p>
-                        <p>
-                            <ul>
-                                <li>
-                                    Staj dönemim boyunca, HtmlAgilityPack ve Google
-                                    Selenium kullanarak,Asp.Net-MVC ile bir Üniversite Tercih
-                                    Robotu geliştirdim.
-                                </li>
-                            </ul>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section><!-- End Resume Section -->
     <!-- ======= Services Section - Bog ======= -->
     <!-- <section id="services" class="services">
         <div class="container">
