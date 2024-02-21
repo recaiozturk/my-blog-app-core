@@ -221,5 +221,28 @@ namespace MyBlog.WebUI.Controllers
             return View();
         }
 
+        [HttpPost]
+        public async Task<JsonResult> DeleteExperience(int ExpId)
+        {
+            List<string> allErrors = new List<string>();
+            bool valid = false;
+
+            if (ExpId == 0)
+            {
+                ModelState.AddModelError("", "Error");
+                allErrors = _methods.ModelErrors(ModelState);
+            }
+            else
+            {
+                await _experienceDal.DeleteAsync(await _experienceDal.GetById(ExpId));
+                valid = true;
+            }
+            return Json(new
+            {
+                IsValid = valid,
+                ErrorMessages = allErrors
+            });
+        }
+
     }
 }

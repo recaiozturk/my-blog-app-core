@@ -23,8 +23,6 @@ namespace MyBlog.WebUI.ViewComponents
         {
             ResumeViewModel model = new ResumeViewModel();
 
-            var testString = "Online Pazar yeri platformu machinetotal.com web yazılımının geliştirilmesinde full stack olarak görev aldım.Internal-External Restful API web servislerinin geliştirilmesinde katkı sağlandı.Hangfire ile web yazılımı için gerekli background processing işlemlerinin geliştirilmesi ve yürütülmesi sağlandı.";
-            var testSentences =StaticMethods.SplitSentences(testString);
             try
             {
                 var about = await _aboutDal.GetAboutAsync();

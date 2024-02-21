@@ -41,7 +41,7 @@
                                         @foreach (var exp in Model)
                                         {
 
-                                            <tr @*id="tr_@edu.Id"*@>
+                                            <tr id="tr_@exp.Id">
 
                                                 <td>
                                                     <div class="main__table-text">@exp.Id</div>
@@ -58,7 +58,7 @@
 
                                                 <td>
                                                     <div class="main__table-btns">
-                                                        <a asp-controller="Resume" asp-action="ExperienceEdit" asp-route-id="@exp.Id"  class="main__table-btn main__table-btn--edit ">
+                                                        <a asp-controller="Resume" asp-action="ExperienceEdit" asp-route-id="@exp.Id" class="main__table-btn main__table-btn--edit ">
                                                             <i class="icon ion-ios-create "></i>
                                                         </a>
                                                         <a href="#modal-delete" id="@exp.Id" class="main__table-btn main__table-btn--delete opening_modal_delete open-modal">
@@ -81,6 +81,25 @@
         </form>
     </div>
     <!-- end form -->
- 
+    <!-- modal delete -->
+    <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
+        <h6 class="modal__title">Experience delete</h6>
+        <div id="delete-exp-error">
+        </div>
+        <p class="modal__text">Are you sure to permanently delete this experience?</p>
+
+        <div class="modal__btns">
+            <button id="expDelete" class="modal__btn modal__btn--apply" type="button">Delete</button>
+            <button class="modal__btn modal__btn--dismiss skillDissmisClick" type="button">Dismiss</button>
+        </div>
+    </div>
+    <!-- end modal delete -->
+
 </div>
+
+
+@section Scripts {
+    <script src="~/js/Resume/Experience/Experiences.js"></script>
+}
+
 

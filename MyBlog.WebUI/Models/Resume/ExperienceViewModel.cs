@@ -26,13 +26,5 @@ namespace MyBlog.WebUI.Models.Resume
 
         public string? ExperienceSteps { get; set; }
 
-        //public List<string> ExpStepsSentences
-        //{
-        //    set
-        //    {
-        //        StaticMethods.SplitSentences(ExperienceSteps ?? "");
-        //    }
-        //}
-
     }
 }
