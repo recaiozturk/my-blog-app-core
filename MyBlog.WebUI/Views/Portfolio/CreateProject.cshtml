@@ -1,0 +1,91 @@
+﻿
+@model MyBlog.WebUI.Models.Portfolio.PortfolioViewModel
+
+@{
+    ViewData["Title"] = "ExperienceEdit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <!-- main title -->
+    <div class="col-12">
+        <div class="main__title">
+            <h2>Create Exp (Edit)</h2>
+        </div>
+    </div>
+    <!-- end main title -->
+    <!-- form -->
+    <div class="col-12">
+        <form asp-controller="Portfolio" asp-action="CreateProject" method="post" class="form" novalidate>
+            <div asp-validation-summary="ModelOnly" class="model-danger"></div>
+            <div class="row row--form">
+                <div class="col-12 col-md-7 form__content">
+                    <div class="row row--form">
+                        <div class="col-12">
+                            <label asp-for="Title" class="form__label"></label>
+                            <input asp-for="Title" class="form__input" placeholder="Title Giriniz">
+                            <span asp-validation-for="Title" class="model-danger"></span>
+                        </div>
+
+                        <div class="col-12">
+                            <label asp-for="ProjectDate" class="form__label"></label>
+                            <input asp-for="ProjectDate" class="form__input">
+                            <span asp-validation-for="ProjectDate" class="model-danger"></span>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <label asp-for="ProjectUrl" class="form__label"></label>
+                            <input asp-for="ProjectUrl" class="form__input">
+                            <span asp-validation-for="ProjectUrl" class="model-danger"></span>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <label asp-for="UsedTechnologies" class="form__label"></label>
+                            <input asp-for="UsedTechnologies" class="form__input">
+                            <span asp-validation-for="UsedTechnologies" class="model-danger"></span>
+                        </div>
+
+                        <div class="col-12">
+                            <label asp-for="Description" class="form__label"></label>
+                            <textarea asp-for="Description" class="form__textarea" placeholder=""></textarea>
+                            <span asp-validation-for="Description" class="model-danger"></span>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <label asp-for="PortfolioType" class="form__label"></label>
+                            <input asp-for="PortfolioType" number min="1" class="form__input">
+                            <span asp-validation-for="PortfolioType" class="model-danger"></span>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <label asp-for="ProjectImages" class="form__label"></label>
+                            <input asp-for="ProjectImages" class="form__input">
+                            <span asp-validation-for="ProjectImages" class="model-danger"></span>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form__label fw-bold">App Type</label>
+
+                            @foreach (var appType in Model.enumAppTypeList)
+                            {
+                                <div class="sign__group sign__group--checkbox">
+                                    <input  name="appTypeIds" value="@appType" id="appType_@appType" type="checkbox" >
+                                    <label for="appType_@appType">@Enum.GetName(typeof(Enums.AppType), appType)</label>
+                                </div>
+                            }
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <button type="submit" class="form__btn">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+

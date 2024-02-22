@@ -1,12 +1,66 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyBlog.WebUI.DataAccess.Abstract;
+using MyBlog.WebUI.DataAccess.Concrate.EfCore;
+using MyBlog.WebUI.Entity;
+using MyBlog.WebUI.Models;
+using MyBlog.WebUI.Models.Portfolio;
+using MyBlog.WebUI.Util;
+using System;
 
 namespace MyBlog.WebUI.Controllers
 {
     public class PortfolioController : Controller
     {
-        public IActionResult Index()
+        private readonly IPortfolioDal _portfolioDal;
+
+        public PortfolioController(IPortfolioDal portfolioDal)
         {
-            return View();
+            _portfolioDal = portfolioDal;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var portfolios = await _portfolioDal.GetPortfolios();
+
+            if(portfolios==null)
+                return NotFound();
+
+            return View(portfolios);
+        }
+
+        public async Task<IActionResult> CreateProject()
+        {
+            return View(new PortfolioViewModel { });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateProject(PortfolioViewModel model, int[] appTypeIds)
+        {
+            List<ProjectImage> images = new List<ProjectImage>();
+
+            //List<int> enumValuesList = Enum.GetValues(typeof(Enums.AppType))
+            //                           .Cast<int>()
+            //                           .ToList();
+
+
+            if (ModelState.IsValid)
+            {
+                Portfolio portfolio= new Portfolio
+                {
+                    Title = model.Title,
+                    ProjectDate = model.ProjectDate,
+                    PortfolioType = model.PortfolioType,
+                    Description = model.Description,
+                    ProjectUrl = model.ProjectUrl,
+                    UsedTechnologies = model.UsedTechnologies,
+                };
+
+                await _portfolioDal.CreateAsync(portfolio);
+
+                return RedirectToAction("Index");
+            }
+
+            return View(model);
         }
 
         public IActionResult Detail()

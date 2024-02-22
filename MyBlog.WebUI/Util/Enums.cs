@@ -10,7 +10,9 @@
 
         public enum AppType
         {
-            Mobil = 1
+            Mobil = 1,
+            Web=2,
+            Game=3
         }
 
     }
