@@ -66,8 +66,8 @@ $(document).ready(function () {
 	/*==============================
 	Select2
 	==============================*/
-	$('#quality').select2({
-		placeholder: "Choose quality",
+	$('#PortfolioType').select2({
+		placeholder: "Choose Project Type",
 		allowClear: true
 	});
 

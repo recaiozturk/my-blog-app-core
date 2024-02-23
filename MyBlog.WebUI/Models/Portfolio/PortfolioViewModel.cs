@@ -20,6 +20,7 @@ namespace MyBlog.WebUI.Models.Portfolio
         public string UsedTechnologies { get; set; } = null!;
         public string? Description { get; set; }
 
+
         public List<int> enumAppTypeList=> Enum.GetValues(typeof(Enums.AppType))
                                        .Cast<int>()
                                        .ToList();

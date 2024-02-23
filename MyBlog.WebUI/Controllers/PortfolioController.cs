@@ -34,7 +34,7 @@ namespace MyBlog.WebUI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateProject(PortfolioViewModel model, int[] appTypeIds)
+        public async Task<IActionResult> CreateProject(PortfolioViewModel model /*int[] appTypeIds*/)
         {
             List<ProjectImage> images = new List<ProjectImage>();
 
@@ -57,11 +57,38 @@ namespace MyBlog.WebUI.Controllers
 
                 await _portfolioDal.CreateAsync(portfolio);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("EditProject", new { id = portfolio.Id });
             }
 
             return View(model);
         }
+
+        [HttpPost]
+        public async Task<JsonResult> AddImageForPortfolio(IFormFile ImageFile,int PortfolioId,bool IsDefault)
+        {
+            //parametreler düzgün geliyor ,resim ekleme işlemi yapılcak
+            return Json("");
+        }
+        public async Task<IActionResult> EditProject(int id)
+        {
+            if(id == 0) return NotFound();
+
+            var portfolio= await _portfolioDal.GetById(id);
+
+
+            return View(new PortfolioViewModel {
+                
+                Id = portfolio.Id,
+                Title = portfolio.Title,
+                ProjectDate = portfolio.ProjectDate,
+                Description = portfolio.Description,
+                ProjectUrl= portfolio.ProjectUrl,
+                PortfolioType= portfolio.PortfolioType,
+                UsedTechnologies= portfolio.UsedTechnologies
+            
+            });
+        }
+
 
         public IActionResult Detail()
         {
