@@ -48,7 +48,7 @@ namespace MyBlog.WebUI.Controllers
         public async Task<IActionResult> Edit(AboutViewModel model, IFormFile imageFile)
         {
             //Methods _methods = new();
-            var imageFileModel=_methods.CreateImageFileAsync(imageFile);
+            var imageFileModel=_methods.CreateImageFileAsync(imageFile,(int)Enums.ImageType.Profile);
             if(!imageFileModel.Result.IsValid)
                 ModelState.AddModelError("", imageFileModel.Result.ErrorString);
             else

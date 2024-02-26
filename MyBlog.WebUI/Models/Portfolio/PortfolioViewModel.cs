@@ -1,4 +1,5 @@
-﻿using MyBlog.WebUI.Util;
+﻿using MyBlog.WebUI.Entity;
+using MyBlog.WebUI.Util;
 using System.ComponentModel.DataAnnotations;
 
 namespace MyBlog.WebUI.Models.Portfolio
@@ -25,6 +26,6 @@ namespace MyBlog.WebUI.Models.Portfolio
                                        .Cast<int>()
                                        .ToList();
 
-        public List<string>? ProjectImages { get; set; }
+        public List<ProjectImage>? ProjectImages { get; set; }
     }
 }

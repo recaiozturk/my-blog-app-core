@@ -20,6 +20,7 @@ builder.Services.AddScoped<IAboutDal, EfAboutDal>();
 builder.Services.AddScoped<IEducationDal, EfEducationDal>();
 builder.Services.AddScoped<IExperienceDal, EfExperienceDal>();
 builder.Services.AddScoped<IPortfolioDal, EfPortfolioDal>();
+builder.Services.AddScoped<IProjectImageDal, EfProjectImageDal>();
 builder.Services.AddScoped<IMethods, Methods>();
 
 

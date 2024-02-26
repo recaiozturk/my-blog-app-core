@@ -17,5 +17,6 @@ namespace MyBlog.WebUI.DataAccess.Concrate.EfCore
 
         public DbSet<Experience> Experiences { get; set; }
         public DbSet<Portfolio> Portfolios{ get; set; }
+        public DbSet<ProjectImage> ProjectImages { get; set; }
     }
 }

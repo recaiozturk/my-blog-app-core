@@ -22,7 +22,7 @@ namespace MyBlog.WebUI.Util
         }
 
         //image file creator
-        public async Task<ImageFileModel> CreateImageFileAsync(IFormFile imageFile)
+        public async Task<ImageFileModel> CreateImageFileAsync(IFormFile imageFile,int imageType)
         {
             ImageFileModel imageFileModel = new ImageFileModel();
             string tempString = "";
@@ -41,9 +41,22 @@ namespace MyBlog.WebUI.Util
                 }
                 else
                 {
-                    await DeleteOldImages();
+                    
+
                     var randomFileName = string.Format($"{Guid.NewGuid().ToString()}{tempString}");
-                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/profilepicture", randomFileName);
+
+                    string path = "";
+
+                    if (imageType == (int)Enums.ImageType.Profile)
+                    {
+                        await DeleteOldImages();
+                        path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/profilepicture", randomFileName);
+                    }
+                    else
+                    {
+                        path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/portfoliopicture", randomFileName);
+                    }
+                        
                     using (var stream = new FileStream(path, FileMode.Create))
                     {
                         await imageFile.CopyToAsync(stream);
@@ -57,21 +70,34 @@ namespace MyBlog.WebUI.Util
             return imageFileModel;
         }
 
-        //delete old images
-        public async Task DeleteOldImages()
+        public async Task DeletePortfolioImage(string fileName)
         {
-            // Proje dizini içindeki wwwroot/img/profilepicture dizinini belirle
+            try
+            {
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img", "portfoliopicture");
+                string filePath = Path.Combine(imagePath, fileName);
+
+
+                if (File.Exists(filePath))
+                {
+                    File.Delete(filePath);
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        private async Task DeleteOldImages()
+        {
             string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img", "profilepicture");
 
-            // Dizin var mı kontrol et
             if (Directory.Exists(imagePath))
             {
                 try
                 {
-                    // Dizin içindeki tüm dosyaları al
                     string[] files = Directory.GetFiles(imagePath);
 
-                    // Tüm dosyaları sil
                     foreach (string file in files)
                     {
                         File.Delete(file);

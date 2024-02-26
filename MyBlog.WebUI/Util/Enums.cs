@@ -8,6 +8,12 @@
             Prototypes = 2
         }
 
+        public enum ImageType
+        {
+            Profile = 1,
+            Portfolio = 2
+        }
+
         public enum AppType
         {
             Mobil = 1,

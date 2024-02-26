@@ -18,7 +18,7 @@
     <div class="col-12">
         <form asp-controller="Portfolio" asp-action="CreateProject" method="post" class="form" novalidate>
             <div asp-validation-summary="ModelOnly" class="model-danger"></div>
-            <input type="hidden" id="portfId" value="@Model.Id"/>
+            <input type="hidden" id="portfId" value="@Model.Id" />
             <div class="row row--form">
                 <div class="col-12 col-md-7 form__content">
                     <div class="row row--form">
@@ -54,42 +54,32 @@
                         <div class="col-12">
                             @if (Model.Id > 0)
                             {
-                                <label asp-for="ProjectImages" class="form__label"></label>
-                                <a href="#modal-add-image" class="main__title-link opening_modal_add open-modal ml-0 mb-3">Add Image</a>
+                                <label asp-for="ProjectImages" class="form__label"></label><a href="#modal-add-image" class="main__title-link opening_modal_add open-modal ml-0 mb-3">Add Image</a>
 
-                                <div class="profile__content">
-                                    <!-- profile user -->
-                                    <div class="profile__user">
-                                        <div class="profile__avatar">
-                                            <img src="img/user.svg" alt="">
+                                if (Model.ProjectImages?.Count > 0)
+                                {
+                                    foreach (var item in Model.ProjectImages)
+                                    {
+                                        <div class="profile__content">
+                                            <!-- profile user -->
+                                            <div class="profile__user">
+                                                <div class="profile__avatar">
+                                                    <img src="~/img/portfoliopicture/@item.ImageUrl" alt="">
+                                                </div>
+                                                <div class="profile__meta profile__meta--green">
+
+                                                    <span>Image Name:@item.ImageUrl</span>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="profile__actions">
+                                                <button onclick="DeleteImageFromPortfolio(@item.Id)" class="profile__action profile__action--delete open-modal"><i class="icon ion-ios-trash"></i></button>
+                                            </div>
                                         </div>
-                                        <div class="profile__meta profile__meta--green">
+                                    }
+                                }
 
-                                            <span>HotFlix ID: 23562</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="profile__mobile-tabs" id="profile__mobile-tabs">
-                                        <div class="profile__mobile-tabs-btn dropdown-toggle" role="navigation" id="mobile-tabs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <input type="button" value="Profile">
-                                            <span></span>
-                                        </div>
-
-                                        <div class="profile__mobile-tabs-menu dropdown-menu" aria-labelledby="mobile-tabs">
-                                            <ul class="nav nav-tabs" role="tablist">
-                                                <li class="nav-item" data-value="profile"><a class="nav-link active" id="1-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">Profile</a></li>
-
-                                                <li class="nav-item" data-value="comments"><a class="nav-link" id="2-tab" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">Comments</a></li>
-
-                                                <li class="nav-item" data-value="reviews"><a class="nav-link" id="3-tab" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">Reviews</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="profile__actions">
-                                        <a href="#modal-status3" class="profile__action profile__action--banned open-modal"><i class="icon ion-ios-lock"></i></a>
-                                        <a href="#modal-delete3" class="profile__action profile__action--delete open-modal"><i class="icon ion-ios-trash"></i></a>
-                                    </div>
-                                </div>
                             }
                             else
                             {
@@ -170,12 +160,34 @@
     <script>
         $(document).ready(function () {
             $("#imageAdd").click(function () {
-                AddEducatelProcess();
+                AddPortfolioImageProcess();
             });
         });
 
+        function DeleteImageFromPortfolio(imageId) {
 
-        function AddEducatelProcess() {
+            $.ajax({
+                type: 'POST',
+                url: '/Portfolio/DeleteImageFromPortfolio',
+                dataType: 'json',
+                data: { ImageId: imageId },
+                success: function (res) {
+                    if (!res.isValid) {
+                        alert(res.errorMessage)
+                    }
+                    else {
+                        MyToast.fire({
+                            icon: 'success',
+                            title: "deleted successufuly",
+                        })
+                        location.reload();
+                    }
+                }
+            });
+        }
+
+
+        function AddPortfolioImageProcess() {
 
             $("#spinner").removeClass("d-none");
             $("#spinner").addClass("d-block");
@@ -218,18 +230,7 @@
                                 icon: 'success',
                                 title: "added successufuly2",
                             })
-
-                            $('.open-modal').magnificPopup({
-                                fixedContentPos: true,
-                                fixedBgPos: true,
-                                overflowY: 'auto',
-                                type: 'inline',
-                                preloader: false,
-                                focus: '#username',
-                                modal: false,
-                                removalDelay: 300,
-                                mainClass: 'my-mfp-zoom-in',
-                            });
+                            location.reload();
                         }
                     }
                 });

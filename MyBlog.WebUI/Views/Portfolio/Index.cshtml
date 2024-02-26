@@ -53,17 +53,17 @@
                                                     <div class="main__table-text">@project.ProjectDate</div>
                                                 </td>
                                                 @*<td>
-                                                    <div class="main__table-text">@exp.DisplayOrder</div>
-                                                </td>*@
+                                                        <div class="main__table-text">@exp.DisplayOrder</div>
+                                                    </td>*@
 
                                                 <td>
                                                     <div class="main__table-btns">
-                                                        <a asp-controller="Resume" asp-action="ExperienceEdit" asp-route-id="@project.Id" class="main__table-btn main__table-btn--edit ">
+                                                        <a asp-controller="Portfolio" asp-action="EditProject" asp-route-id="@project.Id" class="main__table-btn main__table-btn--edit ">
                                                             <i class="icon ion-ios-create "></i>
                                                         </a>
-                                                        <a href="#modal-delete" id="@project.Id" class="main__table-btn main__table-btn--delete opening_modal_delete open-modal">
+                                                        <button onclick="DeletePortfolio(@project.Id)" id="@project.Id" class="main__table-btn main__table-btn--delete opening_modal_delete open-modal">
                                                             <i class="icon ion-ios-trash"></i>
-                                                        </a>
+                                                        </button>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -86,10 +86,10 @@
         <h6 class="modal__title">Experience delete</h6>
         <div id="delete-exp-error">
         </div>
-        <p class="modal__text">Are you sure to permanently delete this experience?</p>
+        <p class="modal__text">Are you sure to permanently delete this portfolio?</p>
 
         <div class="modal__btns">
-            <button id="expDelete" class="modal__btn modal__btn--apply" type="button">Delete</button>
+            <button onclick="DeletePortfolio" class="modal__btn modal__btn--apply" type="button">Delete</button>
             <button class="modal__btn modal__btn--dismiss skillDissmisClick" type="button">Dismiss</button>
         </div>
     </div>
@@ -97,5 +97,29 @@
 
 </div>
 
+@section Scripts{ 
+    <script>
+        function DeletePortfolio(PortfolioId) {
 
+            $.ajax({
+                type: 'POST',
+                url: '/Portfolio/DeletePortfolio',
+                dataType: 'json',
+                data: { PortfolioId: PortfolioId },
+                success: function (res) {
+                    if (!res.isValid) {
+                        alert(res.errorMessage)
+                    }
+                    else {
+                        MyToast.fire({
+                            icon: 'success',
+                            title: "deleted successufuly",
+                        })
+                        location.reload();
+                    }
+                }
+            });
+        }
+    </script>
+}
 

@@ -6,6 +6,7 @@ namespace MyBlog.WebUI.Util.Abstract
     public interface IMethods
     {
         List<string> ModelErrors(ModelStateDictionary modelState);
-        Task<ImageFileModel> CreateImageFileAsync(IFormFile imageFile);
+        Task<ImageFileModel> CreateImageFileAsync(IFormFile imageFile, int imageType);
+        Task DeletePortfolioImage(string fileName);
     }
 }
