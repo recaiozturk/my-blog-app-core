@@ -70,18 +70,23 @@ namespace MyBlog.WebUI.Util
             return imageFileModel;
         }
 
-        public async Task DeletePortfolioImage(string fileName)
+        public async Task DeletePortfolioImage(string[] fileNames)
         {
             try
             {
                 string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img", "portfoliopicture");
-                string filePath = Path.Combine(imagePath, fileName);
 
-
-                if (File.Exists(filePath))
+                foreach (var fileName in fileNames)
                 {
-                    File.Delete(filePath);
+                    string filePath = Path.Combine(imagePath, fileName);
+
+
+                    if (File.Exists(filePath))
+                    {
+                        File.Delete(filePath);
+                    }
                 }
+                
             }
             catch (Exception ex)
             {

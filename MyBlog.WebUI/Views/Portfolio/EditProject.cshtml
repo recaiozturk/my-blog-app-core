@@ -2,7 +2,7 @@
 @model MyBlog.WebUI.Models.Portfolio.PortfolioViewModel
 
 @{
-    ViewData["Title"] = "ExperienceEdit";
+    ViewData["Title"] = "PortfolioEdit";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -10,7 +10,7 @@
     <!-- main title -->
     <div class="col-12">
         <div class="main__title">
-            <h2>Create Exp (Edit)</h2>
+            <h2>Create Portfolio (Edit)</h2>
         </div>
     </div>
     <!-- end main title -->
@@ -24,7 +24,7 @@
                     <div class="row row--form">
                         <div class="col-12">
                             <label asp-for="Title" class="form__label"></label>
-                            <input asp-for="Title" class="form__input" placeholder="Title Giriniz">
+                            <input asp-for="Title" class="form__input">
                             <span asp-validation-for="Title" class="model-danger"></span>
                         </div>
 
@@ -72,9 +72,8 @@
                                                 </div>
                                             </div>
 
-
                                             <div class="profile__actions">
-                                                <button onclick="DeleteImageFromPortfolio(@item.Id)" class="profile__action profile__action--delete open-modal"><i class="icon ion-ios-trash"></i></button>
+                                                <a href="#modal-delete" id="@item.Id" class="profile__action profile__action--delete open-modal opening_modal_delete"><i class="icon ion-ios-trash"></i></a>
                                             </div>
                                         </div>
                                     }
@@ -130,7 +129,7 @@
 <div id="modal-add-image" class="zoom-anim-dialog mfp-hide modal">
     <h6 class="modal__title">Add Image</h6>
     <form action="/" method="post">
-
+        <div id="add-image-error" class="model-danger"></div>
         <label asp-for="ProjectImages" class="form__label"></label>
         <div class="form__gallery">
             <label id="gallery1" for="imageInput">Upload photos</label>
@@ -142,8 +141,6 @@
             <label for="checkBoxInput">Varsayılan resim oalrak ayarla(Kapak Resmi)</label>
         </div>
 
-        <div id="add-image-error">
-        </div>
         <span class="d-none" id="spinner">
             <img style="width:20px" src="~/loading_gif.webp" />
         </span>
@@ -155,93 +152,22 @@
 
 </div>
 
+<!-- modal delete -->
+<div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
+    <h6 class="modal__title">Image delete</h6>
+    <div id="delete-exp-error">
+    </div>
+    <p class="modal__text">Are you sure to permanently delete this image?</p>
+
+    <div class="modal__btns">
+        <button id="portfolioImageDelete" class="modal__btn modal__btn--apply" type="button">Delete</button>
+        <button class="modal__btn modal__btn--dismiss skillDissmisClick" type="button">Dismiss</button>
+    </div>
+</div>
+<!-- end modal delete -->
+
 
 @section Scripts {
-    <script>
-        $(document).ready(function () {
-            $("#imageAdd").click(function () {
-                AddPortfolioImageProcess();
-            });
-        });
-
-        function DeleteImageFromPortfolio(imageId) {
-
-            $.ajax({
-                type: 'POST',
-                url: '/Portfolio/DeleteImageFromPortfolio',
-                dataType: 'json',
-                data: { ImageId: imageId },
-                success: function (res) {
-                    if (!res.isValid) {
-                        alert(res.errorMessage)
-                    }
-                    else {
-                        MyToast.fire({
-                            icon: 'success',
-                            title: "deleted successufuly",
-                        })
-                        location.reload();
-                    }
-                }
-            });
-        }
-
-
-        function AddPortfolioImageProcess() {
-
-            $("#spinner").removeClass("d-none");
-            $("#spinner").addClass("d-block");
-
-            var fileInput = $('#imageInput')[0];
-            var checkBoxInput = $('#checkBoxInput')[0];
-            var pId = $('#portfId').val();
-
-            if (fileInput.files.length > 0) {
-
-                var formData = new FormData();
-                formData.append('ImageFile', fileInput.files[0]);
-                formData.append('IsDefault', checkBoxInput.checked);
-                formData.append('PortfolioId', pId);
-
-                $.ajax({
-                    type: 'POST',
-                    url: '/Portfolio/AddImageForPortfolio',
-                    dataType: 'json',
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-
-                    success: function (res) {
-
-                        $("#spinner").removeClass("d-block");
-                        $("#spinner").addClass("d-none");
-                        if (!res.isValid) {
-                            $('#add-image-error').empty();
-                            $.each(res.errorMessages, function (key, value) {
-                                $("#add-image-error").append("<span class='model-danger mt-3'>" + value + '</span><br/>');
-                            });
-                            $('#add-image-error').text(res.errorMessage);
-                        } else {
-
-                            $(".skillDissmisClick").click();
-                            $('#add-image-error').empty();
-
-                            MyToast.fire({
-                                icon: 'success',
-                                title: "added successufuly2",
-                            })
-                            location.reload();
-                        }
-                    }
-                });
-                return false;
-            } else {
-                $('#add-image-error').text("resim seccc");
-            }
-
-
-        }
-
-    </script>
+    <script src="~/js/Portfolio/Edit/EditProject.js"></script>
 }
 

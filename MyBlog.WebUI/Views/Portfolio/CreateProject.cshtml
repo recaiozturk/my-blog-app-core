@@ -92,7 +92,7 @@
                             }
                             else
                             {
-                                <h2>Resim eklemek için ilk önce portfolio olustur</h2>
+                                <h2 style="color: #f9ab00;">To add images, first create a portfolio</h2>
                             }
 
 
@@ -110,8 +110,7 @@
                             </select>
                         </div>
 
-                        @*checkbox ile kullanım*@
-
+                        @*checkbox*@
                         @*<div class="col-12">
                                 <label class="form__label fw-bold">App Type</label>
 
@@ -135,36 +134,3 @@
         </form>
     </div>
 </div>
-<!-- modal add-image -->
-<div id="modal-add-image" class="zoom-anim-dialog mfp-hide modal">
-    <h6 class="modal__title">Add Image</h6>
-    <form action="/" method="post">
-
-        <label asp-for="ProjectImages" class="form__label"></label>
-        <div class="form__gallery">
-            <label id="gallery1" for="imageInput">Upload photos</label>
-            <input data-name="#gallery1" id="imageInput" name="gallery" class="form__gallery-upload" type="file" accept=".png, .jpg, .jpeg" multiple="">
-        </div>
-
-        <div class="sign__group sign__group--checkbox">
-            <input value="" id="checkBoxInput" type="checkbox">
-            <label for="checkBoxInput">Varsayılan resim oalrak ayarla(Kapak Resmi)</label>
-        </div>
-
-        <div id="add-image-error">
-        </div>
-        <span class="d-none" id="spinner">
-            <img style="width:20px" src="~/loading_gif.webp" />
-        </span>
-        <div class="modal__btns">
-            <button id="imageAdd" class="modal__btn modal__btn--apply" type="button">Save</button>
-            <button id="educateAddDismiss" class="modal__btn modal__btn--dismiss eduDissmisClick" type="button">Dismiss</button>
-        </div>
-    </form>
-
-</div>
-<!-- end modal add-image  -->
-
-
-
-

@@ -9,5 +9,7 @@ namespace MyBlog.WebUI.DataAccess.Abstract
         Task<Portfolio> GetPortfolioById(int id);
 
         Task DeletePortfolioWithImages(int id);
+        Task ResetPortfolioImagesIsCover(int id);
+
     }
 }

@@ -7,6 +7,6 @@ namespace MyBlog.WebUI.Util.Abstract
     {
         List<string> ModelErrors(ModelStateDictionary modelState);
         Task<ImageFileModel> CreateImageFileAsync(IFormFile imageFile, int imageType);
-        Task DeletePortfolioImage(string fileName);
+        Task DeletePortfolioImage(string[] fileNames);
     }
 }

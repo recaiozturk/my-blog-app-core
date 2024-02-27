@@ -2,7 +2,7 @@
 @model List<MyBlog.WebUI.Entity.Portfolio>
 
 @{
-    ViewData["Title"] = "Experiences";
+    ViewData["Title"] = "PortfoliosEdit";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -21,7 +21,7 @@
             <input type="hidden" />
             <div class="row row--form">
                 <div class="col-12 col-md-7 form__content">
-                    <h4 class="form__title">Experiences</h4>
+                    <h4 class="form__title">Portfolios</h4>
                     <a asp-controller="Portfolio" asp-action="CreateProject" class="form__btn ml-0 mb-3">Add Project</a>
                     <div class="main__table-wrap mCustomScrollbar _mCS_2 mCS_no_scrollbar" style="overflow: visible;">
                         <div id="mCSB_2" class="mCustomScrollBox mCS-custom-bar2 mCSB_horizontal mCSB_outside" tabindex="0" style="max-height: none;">
@@ -32,7 +32,6 @@
                                             <th>ID</th>
                                             <th>Title</th>
                                             <th>Date</th>
-                                            @*<th>Order</th>*@
                                             <th>ACTIONS</th>
                                         </tr>
                                     </thead>
@@ -52,18 +51,14 @@
                                                 <td>
                                                     <div class="main__table-text">@project.ProjectDate</div>
                                                 </td>
-                                                @*<td>
-                                                        <div class="main__table-text">@exp.DisplayOrder</div>
-                                                    </td>*@
-
                                                 <td>
                                                     <div class="main__table-btns">
                                                         <a asp-controller="Portfolio" asp-action="EditProject" asp-route-id="@project.Id" class="main__table-btn main__table-btn--edit ">
                                                             <i class="icon ion-ios-create "></i>
                                                         </a>
-                                                        <button onclick="DeletePortfolio(@project.Id)" id="@project.Id" class="main__table-btn main__table-btn--delete opening_modal_delete open-modal">
+                                                        <a href="#modal-delete" id="@project.Id" class="main__table-btn main__table-btn--delete opening_modal_delete open-modal">
                                                             <i class="icon ion-ios-trash"></i>
-                                                        </button>
+                                                        </a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -83,13 +78,13 @@
     <!-- end form -->
     <!-- modal delete -->
     <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
-        <h6 class="modal__title">Experience delete</h6>
+        <h6 class="modal__title">Portfolio delete</h6>
         <div id="delete-exp-error">
         </div>
         <p class="modal__text">Are you sure to permanently delete this portfolio?</p>
 
         <div class="modal__btns">
-            <button onclick="DeletePortfolio" class="modal__btn modal__btn--apply" type="button">Delete</button>
+            <button id="portfolioDelete"class="modal__btn modal__btn--apply" type="button">Delete</button>
             <button class="modal__btn modal__btn--dismiss skillDissmisClick" type="button">Dismiss</button>
         </div>
     </div>
@@ -98,28 +93,6 @@
 </div>
 
 @section Scripts{ 
-    <script>
-        function DeletePortfolio(PortfolioId) {
-
-            $.ajax({
-                type: 'POST',
-                url: '/Portfolio/DeletePortfolio',
-                dataType: 'json',
-                data: { PortfolioId: PortfolioId },
-                success: function (res) {
-                    if (!res.isValid) {
-                        alert(res.errorMessage)
-                    }
-                    else {
-                        MyToast.fire({
-                            icon: 'success',
-                            title: "deleted successufuly",
-                        })
-                        location.reload();
-                    }
-                }
-            });
-        }
-    </script>
+    <script src="~/js/Portfolio/Index/index.js"></script>
 }
 

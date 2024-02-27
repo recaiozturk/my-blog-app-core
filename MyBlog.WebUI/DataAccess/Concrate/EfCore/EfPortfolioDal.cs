@@ -32,7 +32,18 @@ namespace MyBlog.WebUI.DataAccess.Concrate.EfCore
 
         public async Task<List<Portfolio>> GetPortfolios()
         {
-            return await _context.Portfolios.ToListAsync();
+            return await _context.Portfolios.Include(x => x.ProjectImages).ToListAsync();
+        }
+
+        public async Task ResetPortfolioImagesIsCover(int id)
+        {
+            var portf = await GetPortfolioById(id);
+            foreach (var image in portf.ProjectImages)
+            {
+                image.IsCoverImage = false;
+            }
+
+            await _context.SaveChangesAsync();
         }
     }
 }

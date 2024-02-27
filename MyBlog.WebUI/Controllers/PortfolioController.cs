@@ -94,7 +94,14 @@ namespace MyBlog.WebUI.Controllers
                 image.PortfolioId = PortfolioId;
                 image.ImageUrl = imageFileModel.ImageCreatedName;
 
+                if (IsDefault)
+                {
+                    await _portfolioDal.ResetPortfolioImagesIsCover(PortfolioId);
+                    image.IsCoverImage = true;
+                }
+
                 await _projectImageDal.CreateAsync(image);
+
                 valid = true;
 
                 return Json(new
@@ -118,9 +125,11 @@ namespace MyBlog.WebUI.Controllers
             bool isValid=false;
             try
             {
+                string[] fileNames = new string[1];
                 var portImage=await _projectImageDal.GetById(ImageId);
                 await _projectImageDal.DeleteAsync(portImage);
-                await _methods.DeletePortfolioImage(portImage.ImageUrl);
+                fileNames[0] = portImage.ImageUrl;
+                await _methods.DeletePortfolioImage(fileNames);
                 isValid = true;
             }
             catch (Exception)
@@ -145,7 +154,9 @@ namespace MyBlog.WebUI.Controllers
             {
                 if (PortfolioId != 0)
                 {
-                    await _portfolioDal.DeletePortfolioWithImages(PortfolioId);
+                    var portf= await _portfolioDal.GetPortfolioById(PortfolioId);
+                    await _portfolioDal.DeletePortfolioWithImages(portf.Id);
+                    await _methods.DeletePortfolioImage(portf.ProjectImages.Select(x=>x.ImageUrl).ToArray());
                     valid = true;
                 }
             }
