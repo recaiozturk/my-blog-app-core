@@ -7,6 +7,7 @@ using MyBlog.WebUI.Models.Portfolio;
 using MyBlog.WebUI.Util;
 using MyBlog.WebUI.Util.Abstract;
 using System;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace MyBlog.WebUI.Controllers
 {
@@ -23,11 +24,11 @@ namespace MyBlog.WebUI.Controllers
             _projectImageDal = projectImageDal;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index()//admin Index
         {
             var portfolios = await _portfolioDal.GetPortfolios();
 
-            if(portfolios==null)
+            if (portfolios == null)
                 return NotFound();
 
             return View(portfolios);
@@ -50,7 +51,7 @@ namespace MyBlog.WebUI.Controllers
 
             if (ModelState.IsValid)
             {
-                Portfolio portfolio= new Portfolio
+                Portfolio portfolio = new Portfolio
                 {
                     Title = model.Title,
                     ProjectDate = model.ProjectDate,
@@ -69,7 +70,7 @@ namespace MyBlog.WebUI.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> AddImageForPortfolio(IFormFile ImageFile,int PortfolioId,bool IsDefault)
+        public async Task<JsonResult> AddImageForPortfolio(IFormFile ImageFile, int PortfolioId, bool IsDefault)
         {
             List<string> allErrors = new List<string>();
             bool valid = false;
@@ -122,11 +123,11 @@ namespace MyBlog.WebUI.Controllers
         [HttpPost]
         public async Task<JsonResult> DeleteImageFromPortfolio(int ImageId)
         {
-            bool isValid=false;
+            bool isValid = false;
             try
             {
                 string[] fileNames = new string[1];
-                var portImage=await _projectImageDal.GetById(ImageId);
+                var portImage = await _projectImageDal.GetById(ImageId);
                 await _projectImageDal.DeleteAsync(portImage);
                 fileNames[0] = portImage.ImageUrl;
                 await _methods.DeletePortfolioImage(fileNames);
@@ -134,7 +135,7 @@ namespace MyBlog.WebUI.Controllers
             }
             catch (Exception)
             {
-                
+
             }
 
             return Json(new
@@ -154,9 +155,9 @@ namespace MyBlog.WebUI.Controllers
             {
                 if (PortfolioId != 0)
                 {
-                    var portf= await _portfolioDal.GetPortfolioById(PortfolioId);
+                    var portf = await _portfolioDal.GetPortfolioById(PortfolioId);
                     await _portfolioDal.DeletePortfolioWithImages(portf.Id);
-                    await _methods.DeletePortfolioImage(portf.ProjectImages.Select(x=>x.ImageUrl).ToArray());
+                    await _methods.DeletePortfolioImage(portf.ProjectImages.Select(x => x.ImageUrl).ToArray());
                     valid = true;
                 }
             }
@@ -169,34 +170,98 @@ namespace MyBlog.WebUI.Controllers
             {
                 IsValid = valid,
                 ErrorMessage = "Error !!",
-        });
+            });
         }
 
         public async Task<IActionResult> EditProject(int id)
         {
-            if(id == 0) return NotFound();
+            if (id == 0) return NotFound();
 
             var portfolio = await _portfolioDal.GetPortfolioById(id);
 
-            return View(new PortfolioViewModel {
-                
+            return View(new PortfolioViewModel
+            {
+
                 Id = portfolio.Id,
                 Title = portfolio.Title,
                 ProjectDate = portfolio.ProjectDate,
                 Description = portfolio.Description,
-                ProjectUrl= portfolio.ProjectUrl,
-                PortfolioType= portfolio.PortfolioType,
-                UsedTechnologies= portfolio.UsedTechnologies,
-                ProjectImages= portfolio.ProjectImages,
+                ProjectUrl = portfolio.ProjectUrl,
+                PortfolioType = portfolio.PortfolioType,
+                UsedTechnologies = portfolio.UsedTechnologies,
+                ProjectImages = portfolio.ProjectImages,
 
-            
+
             });
         }
 
-
-        public IActionResult Detail()
+        [HttpPost]
+        public async Task<IActionResult> EditProject(PortfolioViewModel model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                var portfolio = await _portfolioDal.GetPortfolioById(model.Id);
+
+                if (portfolio == null) return NotFound();
+
+                portfolio.Title= model.Title;
+                portfolio.ProjectUrl= model.ProjectUrl;
+                portfolio.ProjectDate= model.ProjectDate;
+                portfolio.PortfolioType= model.PortfolioType;
+                portfolio.Description= model.Description;
+                portfolio.UsedTechnologies= model.UsedTechnologies;
+                portfolio.PortfolioType=model.PortfolioType;
+
+                await _portfolioDal.UpdateAsync(portfolio);
+
+            }
+            return RedirectToAction("Index");
+        }
+
+        public async Task<JsonResult> SetImageToCover(int ImageId,int PortfolioId)
+        {
+            bool isValid = false;
+            string errorMessage = "";
+
+            if (ImageId == 0 || PortfolioId == 0)
+                errorMessage = "wrong match";
+            try
+            {
+                await _portfolioDal.ResetPortfolioImagesIsCover(PortfolioId);
+                var image = await _projectImageDal.GetById(ImageId);
+                image.IsCoverImage = true;
+                await _projectImageDal.UpdateAsync(image);
+                isValid=true;
+
+                return Json(new
+                {
+                    IsValid = isValid,
+                    ErrorMessage = "",
+                });
+            }
+            catch (Exception)
+            {
+                isValid = false;
+                errorMessage = "Error Happened";
+            }
+
+            return Json(new
+            {
+                IsValid = isValid,
+                ErrorMessage = errorMessage,
+            });
+
+        }
+
+
+        public async Task<IActionResult> Detail(int id)
+        {
+            var portfolio = await _portfolioDal.GetPortfolioById(id);
+
+            if(portfolio == null)
+                return NotFound();
+
+            return View(portfolio);
         }
     }
 }

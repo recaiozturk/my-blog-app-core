@@ -2,6 +2,11 @@
     $("#imageAdd").click(function () {
         AddPortfolioImageProcess();
     });
+
+    $(document).ready(function () {
+        new FroalaEditor('#Description');
+
+    });
 });
 
 $('body').on('click', '.opening_modal_delete', function () {
@@ -33,6 +38,30 @@ function DeleteImageFromPortfolio(imageId) {
     });
 }
 
+function SetCoverImage(e) {
+    let id = e.id;
+    let pId = $(e).data("pid");
+
+    $.ajax({
+        type: 'POST',
+        url: '/Portfolio/SetImageToCover',
+        dataType: 'json',
+        data: { ImageId: id, PortfolioId: pId },
+        success: function (res) {
+            if (!res.isValid) {
+                alert(res.errorMessage)
+            }
+            else {
+                MyToast.fire({
+                    icon: 'success',
+                    title: "image setted cover successufuly",
+                })
+            }
+        }
+    });
+    
+}
+
 function AddPortfolioImageProcess() {
 
     $("#spinner").removeClass("d-none");
@@ -40,7 +69,7 @@ function AddPortfolioImageProcess() {
 
     var fileInput = $('#imageInput')[0];
     var checkBoxInput = $('#checkBoxInput')[0];
-    var pId = $('#portfId').val();
+    var pId = $('.portfId').val();
 
     if (fileInput.files.length > 0) {
 

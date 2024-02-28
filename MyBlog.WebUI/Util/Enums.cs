@@ -13,7 +13,8 @@
         {
             Mobil = 1,
             Web=2,
-            Game=3
+            Game=3,
+            DemoPrototype=4
         }
 
     }

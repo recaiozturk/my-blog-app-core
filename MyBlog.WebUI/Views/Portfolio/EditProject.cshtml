@@ -16,9 +16,9 @@
     <!-- end main title -->
     <!-- form -->
     <div class="col-12">
-        <form asp-controller="Portfolio" asp-action="CreateProject" method="post" class="form" novalidate>
+        <form asp-controller="Portfolio" asp-action="EditProject" method="post" class="form" novalidate>
             <div asp-validation-summary="ModelOnly" class="model-danger"></div>
-            <input type="hidden" id="portfId" value="@Model.Id" />
+            <input asp-for="Id" type="hidden" class="portfId" />
             <div class="row row--form">
                 <div class="col-12 col-md-7 form__content">
                     <div class="row row--form">
@@ -73,6 +73,7 @@
                                             </div>
 
                                             <div class="profile__actions">
+                                                <a href="#" onclick="SetCoverImage(this)" id="@item.Id" data-pid="@item.PortfolioId" class="main__title-link opening_modal_add open-modal btn-sm mr-2" style="border: 2px solid #00f941 !important;">Set Cover Image</a>
                                                 <a href="#modal-delete" id="@item.Id" class="profile__action profile__action--delete open-modal opening_modal_delete"><i class="icon ion-ios-trash"></i></a>
                                             </div>
                                         </div>

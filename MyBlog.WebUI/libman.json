@@ -5,6 +5,14 @@
     {
       "library": "sweetalert2@11.10.5",
       "destination": "wwwroot/lib/sweetalert2/"
+    },
+    {
+      "library": "ckeditor5@41.1.0",
+      "destination": "wwwroot/lib/ckeditor5/"
+    },
+    {
+      "library": "froala-editor@4.1.4",
+      "destination": "wwwroot/froala-editor/"
     }
   ]
 }

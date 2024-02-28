@@ -2,11 +2,8 @@
     Layout = null;
 }
 
-@model TempPorrtfolioDetailModel
+@model MyBlog.WebUI.Entity.Portfolio
 
-@*@{
-  string appType =  ((Enums.AppType)Model.AppType).ToString();
- }*@
 
 <style>
 
@@ -65,19 +62,19 @@
 
                 <div class="row">
 
-                    <h2 class="portfolio-title">Name</h2>
+                    <h2 class="portfolio-title">@Model.Title</h2>
 
                     <div class="col-lg-12 portfolio-info">
                         <h3>Project information</h3>
                         <ul>
-                            <li><strong>Category</strong>: MObil</li>
-                            <li><strong>Proje Tarihi</strong>: 2222</li>
-                            <li><strong>Project URL</strong>: <a href="#">asdsd asdsd asdsd asdsdasdsdasdsdasdsdasdsdasdsd  asdsd asdsd asdsd</a></li>
-                            <li><strong>Kullanılan Teknolojiler</strong>: <a href="#">asdasd</a></li>
+                            <li><strong>Category</strong>: @Enum.GetName(typeof(Enums.AppType),Model.PortfolioType)</li>
+                            <li><strong>Proje Tarihi</strong>: @Model.ProjectDate</li>
+                            <li><strong>Project URL</strong>: <a href="@Model.ProjectUrl">@Model.ProjectUrl</a></li>
+                            <li><strong>Kullanılan Teknolojiler</strong>: <a href="#">@Model.UsedTechnologies</a></li>
                         </ul>
 
                         <p>
-                            proje detayı
+                            @Html.Raw(Model.Description)
                         </p>
                     </div>
 
@@ -124,14 +121,6 @@
         </div><!-- End Portfolio Details -->
 
     </main><!-- End #main -->
-
-    <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/personal-free-resume-bootstrap-template/ -->
-        <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
-    </div>
 
     <!-- Vendor JS Files -->
     <script src="~/Personal/assets/vendor/purecounter/purecounter_vanilla.js"></script>

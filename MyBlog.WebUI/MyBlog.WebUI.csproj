@@ -28,7 +28,6 @@
   <ItemGroup>
     <Folder Include="wwwroot\img\portfoliopicture\" />
     <Folder Include="wwwroot\img\profilepicture\" />
-    <Folder Include="wwwroot\NewFolder\" />
   </ItemGroup>
 
 </Project>

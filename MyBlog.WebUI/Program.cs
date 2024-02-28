@@ -49,4 +49,11 @@ app.MapControllerRoute(
 app.UseDeveloperExceptionPage();
 
 
+//app.Use(async (context, next) =>
+//{
+//    context.Response.Headers.Add("X-Frame-Options", "ALLOW FROM https://www.youtube.com");
+//    await next();
+//});
+
+
 app.Run();

@@ -10,12 +10,11 @@
     <div class="row">
         <div class="col-lg-12 d-flex justify-content-center">
             <ul id="portfolio-flters">
-                <li data-filter="*" class="filter-active">Hepsi</li> 
+                <li data-filter="*" class="filter-active">Hepsi</li>
                 <li data-filter=".filter-Mobil">Mobil</li>
-                <li data-filter=".filter-Web">Web</li>
-
-                <li data-filter=".filter-game">Oyun</li>
-                <li data-filter=".filter-prototype">Demo ve Prototipler</li>
+                <li data-filter=".filter-Web">Web</li>                
+                <li data-filter=".filter-Game">Oyun</li>
+                <li data-filter=".filter-DemoPrototype">Demo ve Prototipler</li>
 
             </ul>
         </div>
@@ -28,14 +27,17 @@
             var portfolioType = Enum.GetName(typeof(Enums.AppType), portfolio.PortfolioType);
             var portfImage = portfolio.ProjectImages.Count > 0 ? portfolio.ProjectImages[0].ImageUrl : "";
 
+            var cover = portfolio.ProjectImages.FirstOrDefault(x => x.IsCoverImage == true);
+            var coverImageUrl = cover == null ? "" : cover.ImageUrl;
+
             <div class="col-lg-4 col-md-6 portfolio-item filter-@portfolioType">
                 <div class="portfolio-wrap">
-                    <img src="~/img/portfoliopicture/@portfImage" class="img-fluid" alt="">
+                    <img src="~/img/portfoliopicture/@coverImageUrl" class="img-fluid" alt="">
                     <div class="portfolio-info">
                         <h4>@portfolio.Title</h4>
-                        <p>Mobil-Uygulama</p>
+                        <p>@portfolioType</p>
                         <div class="portfolio-links">
-                            <a asp-controller="Portfolio" asp-action="Detail" data-gallery="portfolioDetailsGallery"
+                            <a asp-controller="Portfolio" asp-action="Detail" asp-route-id="@portfolio.Id" data-gallery="portfolioDetailsGallery"
                                data-glightbox="type: external" class="portfolio-details-lightbox"
                                title="Portfolio Details"><i class="bx bx-link"></i></a>
                         </div>
