@@ -25,6 +25,7 @@
     <link href="~/Personal/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
     <link href="~/Personal/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="~/Personal/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="~/lib/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
 
     <!-- Template Main CSS File -->
     <link href="~/Personal/assets/css/style.css" rel="stylesheet">
@@ -81,19 +82,16 @@
         </div>
     </header><!-- End Header -->
     <!-- @RenderBody() -->
-
     <!-- ======= About Section ======= -->
     <section id="about" class="about">
         @await Component.InvokeAsync("About")
     </section>
     <!-- End About Section -->
-
     <!-- ======= Resume Section ======= -->
     <section id="resume" class="resume">
         @await Component.InvokeAsync("Resume")
     </section>
     <!-- End Resume Section -->
-
     <!-- ======= Portfolio Section ======= -->
     <section id="portfolio" class="portfolio">
         @await Component.InvokeAsync("Portfolio")
@@ -102,101 +100,26 @@
 
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
-        <div class="container">
+        @await Component.InvokeAsync("Contact")
+    </section>
 
-            <div class="section-title">
-                <h2>Bana ulaşın</h2>
-                <!-- <p>Contact Me</p> -->
-            </div>
-
-            <div class="row mt-2">
-
-                <div class="col-md-6 d-flex align-items-stretch">
-                    <div class="info-box">
-                        <i class="bx bx-map"></i>
-                        <h3>Adres</h3>
-                        <p>Kartepe,KOCAELİ</p>
-                    </div>
-                </div>
-
-                <div class="col-md-6 mt-4 mt-md-0 d-flex align-items-stretch">
-                    <div class="info-box">
-                        <i class="bx bx-share-alt"></i>
-                        <h3>Sosyal Linkler</h3>
-                        <div class="social-links">
-                            <a href="https://github.com/recaiozturk" target="_blank" class="twitter">
-                                <i class="bi bi-github"></i>
-                            </a>
-                            @* <a href="#" class="facebook"><i class="bi bi-facebook"></i></a> *@
-                            <a href="https://www.instagram.com/recaiozturk54/" target="_blank" class="instagram">
-                                <i class="bi bi-instagram"></i>
-                            </a>
-                            <a href="https://www.linkedin.com/in/recaiozturk54/" target="_blank" class="linkedin">
-                                <i class="bi bi-linkedin"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 mt-4 d-flex align-items-stretch">
-                    <div class="info-box">
-                        <i class="bx bx-envelope"></i>
-                        <h3>Email</h3>
-                        <p>recaiozturk54@gmail.com</p>
-                    </div>
-                </div>
-                <div class="col-md-6 mt-4 d-flex align-items-stretch">
-                    <div class="info-box">
-                        <i class="bx bx-phone-call"></i>
-                        <h3>Telefon</h3>
-                        <p>0 531 740 41 48</p>
-                    </div>
-                </div>
-            </div>
-
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form mt-4">
-                <div class="row">
-                    <div class="col-md-6 form-group">
-                        <input type="text" name="name" class="form-control" id="name" placeholder="İsminiz" required>
-                    </div>
-                    <div class="col-md-6 form-group mt-3 mt-md-0">
-                        <input type="email" class="form-control" name="email" id="email" placeholder="Mail Adresiniz"
-                               required>
-                    </div>
-                </div>
-                <div class="form-group mt-3">
-                    <input type="text" class="form-control" name="subject" id="subject" placeholder="Konu" required>
-                </div>
-                <div class="form-group mt-3">
-                    <textarea class="form-control" name="message" rows="5" placeholder="Mesajınız" required></textarea>
-                </div>
-                <div class="my-3">
-                    <div class="loading">Loading</div>
-                    <div class="error-message"></div>
-                    <div class="sent-message">Your message has been sent. Thank you!</div>
-                </div>
-                <div class="text-center"><button type="submit">Gönder</button></div>
-            </form>
-
-        </div>
-    </section><!-- End Contact Section -->
+    <!-- End Contact Section -->
 
     <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/personal-free-resume-bootstrap-template/ -->
         Created by <a href="#">Recai Öztürk</a>
     </div>
 
     <!-- Vendor JS Files -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="~/Personal/assets/vendor/purecounter/purecounter_vanilla.js"></script>
     <script src="~/Personal/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/Personal/assets/vendor/glightbox/js/glightbox.min.js"></script>
     <script src="~/Personal/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
     <script src="~/Personal/assets/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="~/Personal/assets/vendor/waypoints/noframework.waypoints.js"></script>
-    <script src="~/Personal/assets/vendor/php-email-form/validate.js"></script>
+    <script src="~/lib/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/js/sweetAlertCustom.js"></script>
+    @*<script src="~/Personal/assets/vendor/php-email-form/validate.js"></script>*@
     <!-- Template Main JS File -->
     <script src="~/Personal/assets/js/main.js"></script>
     @RenderSection("Scripts", required: false)

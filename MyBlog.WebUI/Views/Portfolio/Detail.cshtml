@@ -60,14 +60,14 @@
         <div id="portfolio-details" class="portfolio-details">
             <div class="container">
 
-                <div class="row">
+                <div class="row text-center">
 
                     <h2 class="portfolio-title">@Model.Title</h2>
 
-                    <div class="col-lg-12 portfolio-info">
+                    <div class="col-lg-12 portfolio-info mb-3">
                         <h3>Project information</h3>
                         <ul>
-                            <li><strong>Category</strong>: @Enum.GetName(typeof(Enums.AppType),Model.PortfolioType)</li>
+                            <li><strong>Category</strong>: @Enum.GetName(typeof(Enums.AppType), Model.PortfolioType)</li>
                             <li><strong>Proje Tarihi</strong>: @Model.ProjectDate</li>
                             <li><strong>Project URL</strong>: <a href="@Model.ProjectUrl">@Model.ProjectUrl</a></li>
                             <li><strong>Kullanılan Teknolojiler</strong>: <a href="#">@Model.UsedTechnologies</a></li>
@@ -81,28 +81,20 @@
                     <div class="col-lg-12">
                         <div id="carouselExampleIndicators" class="carousel slide">
                             <div class="carousel-indicators">
-                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
-                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                                @for (int i = 0; i < Model.ProjectImages.Count; i++)
+                                {
+                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")" aria-current="@(i == 0 ? "true" : "false")" aria-label="Slide @(i+1)"></button>
+                                }
+
                             </div>
                             <div class="carousel-inner">
-                                <div class="carousel-item img-center active">
-                                    <img src="~/Personal/assets/img/portfolio/portfolio-1.jpg" class="d-block" alt="...">
-                                </div>
-                                <div class="carousel-item img-center">
-                                    <img src="~/Personal/assets/img/portfolio/dota1.png" class="d-block " alt="...">
-                                </div>
-                                <div class="carousel-item img-center" >
-                                    <img src="~/Personal/assets/img/portfolio/dota2.png" class="d-block" alt="...">
-                                </div>
-                                <div class="carousel-item img-center">
-                                    <img src="~/Personal/assets/img/portfolio/portfolio-4.jpg" class="d-block" alt="...">
-                                </div>
-                                <div class="carousel-item img-center">
-                                    <img src="~/Personal/assets/img/portfolio/adventurer-v1.5-Sheet.png" class="d-block" alt="...">
-                                </div>
+                                @for (int i = 0; i < Model.ProjectImages.Count; i++)
+                                {
+                                    <div class="carousel-item img-center @(i == 0 ? "active" : "")">
+                                        <img src="~/img/portfoliopicture/@Model.ProjectImages[i].ImageUrl" class="d-block" style="max-width:1200px;" alt="...">
+                                    </div>
+                                }
+
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -114,14 +106,13 @@
                             </button>
                         </div>
                     </div>
-               
+
                 </div>
 
             </div>
         </div><!-- End Portfolio Details -->
 
     </main><!-- End #main -->
-
     <!-- Vendor JS Files -->
     <script src="~/Personal/assets/vendor/purecounter/purecounter_vanilla.js"></script>
     <script src="~/Personal/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

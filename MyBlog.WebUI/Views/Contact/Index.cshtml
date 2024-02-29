@@ -1,0 +1,96 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@model List<MyBlog.WebUI.Entity.Contact>
+
+@{
+    ViewData["Title"] = "PortfoliosEdit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <!-- main title -->
+    <div class="col-12">
+        <div class="main__title">
+            <h2>Messages (Edit)</h2>
+        </div>
+    </div>
+    <!-- end main title -->
+    <!-- form -->
+    <div class="col-12">
+        <form action="edit" method="post" class="form" enctype="multipart/form-data" novalidate>
+            <div asp-validation-summary="ModelOnly" class="model-danger"></div>
+            <input type="hidden" />
+            <div class="row row--form">
+                <div class="col-12 col-md-7 form__content">
+                    <h4 class="form__title">Messages-</h4>
+                    <div class="main__table-wrap mCustomScrollbar _mCS_2 mCS_no_scrollbar" style="overflow: visible;">
+                        <div id="mCSB_2" class="mCustomScrollBox mCS-custom-bar2 mCSB_horizontal mCSB_outside" tabindex="0" style="max-height: none;">
+                            <div id="mCSB_2_container" class="mCSB_container mCS_x_hidden mCS_no_scrollbar_x" style="position: relative; top: 0px; left: 0px; width: 1051px; min-width: 100%; overflow-x: inherit;" dir="ltr">
+                                <table class="main__table">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Subject</th>
+
+                                            <th>ACTIONS</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody id="eduTbody">
+                                        @foreach (var message in Model)
+                                        {
+
+                                            <tr id="tr_@message.Id">
+
+                                                <td>
+                                                    <div class="main__table-text">@message.Id</div>
+                                                </td>
+                                                <td>
+                                                    <div class="main__table-text">@message.Subject</div>
+                                                </td>
+                                                <td>
+                                                    <div class="main__table-btns">
+                                                        <a href="#modal-delete" id="@message.Id" class="main__table-btn main__table-btn--delete opening_modal_delete open-modal">
+                                                            <i class="icon ion-ios-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div><div id="mCSB_2_scrollbar_horizontal" class="mCSB_scrollTools mCSB_2_scrollbar mCS-custom-bar2 mCSB_scrollTools_horizontal" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_2_dragger_horizontal" class="mCSB_dragger" style="position: absolute; min-width: 30px; width: 0px; left: 0px;"><div class="mCSB_dragger_bar"></div><div class="mCSB_draggerRail"></div></div></div></div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+    <!-- end form -->
+    <!-- modal delete -->
+    <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
+        <h6 class="modal__title">Portfolio delete</h6>
+        <div id="delete-exp-error">
+        </div>
+        <p class="modal__text">Are you sure to permanently delete this message?</p>
+
+        <div class="modal__btns">
+            <button id="messageDelete" class="modal__btn modal__btn--apply" type="button">Delete</button>
+            <button class="modal__btn modal__btn--dismiss skillDissmisClick" type="button">Dismiss</button>
+        </div>
+    </div>
+    <!-- end modal delete -->
+
+</div>
+
+@section Scripts{
+    <script src="~/js/Contact/index.js"></script>
+}
+
+

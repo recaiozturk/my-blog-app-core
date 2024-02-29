@@ -21,7 +21,18 @@ builder.Services.AddScoped<IEducationDal, EfEducationDal>();
 builder.Services.AddScoped<IExperienceDal, EfExperienceDal>();
 builder.Services.AddScoped<IPortfolioDal, EfPortfolioDal>();
 builder.Services.AddScoped<IProjectImageDal, EfProjectImageDal>();
+builder.Services.AddScoped<IContactDal, EfContactDal>();
 builder.Services.AddScoped<IMethods, Methods>();
+
+//mail settings
+builder.Services.AddScoped<IEmailSender, SmtpEmailSender>(i =>
+new SmtpEmailSender(
+    builder.Configuration["EmailSender:Host"],
+    builder.Configuration.GetValue<int>("EmailSender:Port"),
+    builder.Configuration.GetValue<bool>("EmailSender:EnableSSL"),
+    builder.Configuration["EmailSender:UserName"],
+    builder.Configuration["EmailSender:Password"])
+);
 
 
 var app = builder.Build();

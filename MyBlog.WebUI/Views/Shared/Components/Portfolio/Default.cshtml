@@ -34,7 +34,7 @@
                 <div class="portfolio-wrap">
                     <img src="~/img/portfoliopicture/@coverImageUrl" class="img-fluid" alt="">
                     <div class="portfolio-info">
-                        <h4>@portfolio.Title</h4>
+                        <h4><a class="text-white" asp-controller="Portfolio" asp-action="Detail" asp-route-id="@portfolio.Id">@portfolio.Title</a></h4>
                         <p>@portfolioType</p>
                         <div class="portfolio-links">
                             <a asp-controller="Portfolio" asp-action="Detail" asp-route-id="@portfolio.Id" data-gallery="portfolioDetailsGallery"
@@ -45,46 +45,6 @@
                 </div>
             </div>
         }
-
-        @*<div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-                <img src="~/Personal/assets/img/portfolio/dota1.png" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                    <h4>Dota 2 Chat Wheel Sounds</h4>
-                    <p>Mobil-Uygulama</p>
-                    <div class="portfolio-links">
-                        <a href="~/Personal/assets/img/portfolio/portfolio-1.jpg"
-                           data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1">
-                            <i class="bx bx-plus"></i>
-                        </a>
-                        <a asp-controller="Portfolio" asp-action="Detail" data-gallery="portfolioDetailsGallery"
-                           data-glightbox="type: external" class="portfolio-details-lightbox"
-                           title="Portfolio Details"><i class="bx bx-link"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <div class="portfolio-wrap">
-                <img src="~/Personal/assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                    <h4>Web 3</h4>
-                    <p>Web</p>
-                    <div class="portfolio-links">
-                        <a href="~/Personal/assets/img/portfolio/portfolio-2.jpg"
-                           data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3">
-                            <i class="bx bx-plus"></i>
-                        </a>
-                        <a href="portfolio-details.html" data-gallery="portfolioDetailsGallery"
-                           data-glightbox="type: external" class="portfolio-details-lightbox"
-                           title="Portfolio Details"><i class="bx bx-link"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>*@
-
     </div>
 
 </div>
