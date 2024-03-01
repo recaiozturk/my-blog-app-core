@@ -1,0 +1,60 @@
+﻿
+@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-12">
+    <div class="main__title">
+        <h2>Roles</h2>
+    </div>
+</div>
+<div class="col-12">
+    <a class="modal__btn modal__btn--apply" asp-action="Create">Create Role</a>
+
+    @if (Model.Count() == 0)
+    {
+        <div class="main__title">
+            <h2>No Role</h2>
+        </div>
+    }
+    else
+    {
+        <table class="main__table mt-3">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Role Adı</th>
+                    <th style="width: 125px;"></th>
+                </tr>
+            </thead>
+
+            <tbody id="eduTbody">
+                @foreach (var role in Model)
+                {
+
+                    <tr>
+                        <td>
+                            <div class="main__table-text">@role.Id</div>
+                        </td>
+                        <td>
+                            <div class="main__table-text">@role.Name</div>
+                        </td>
+                        <td>
+                            <div class="main__table-btns">
+                                <a asp-action="Edit" asp-route-id="@role.Id" class="main__table-btn main__table-btn--edit ">
+                                    <i class="icon ion-ios-create "></i>
+                                </a>
+                                @*<a href="#modal-delete" class="main__table-btn main__table-btn--delete opening_modal_delete open-modal">
+                                    <i class="icon ion-ios-trash"></i>
+                                </a>*@
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

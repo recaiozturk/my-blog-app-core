@@ -56,22 +56,26 @@
         <div class="row">
             <div id="contact-error"></div>
             <div class="col-md-6 form-group">
+                <label class="form-label">İsim:</label>
                 <input asp-for="@Model.ContactFormViewModel.Name" class="form-control" placeholder="İsminiz">
             </div>
             <div class="col-md-6 form-group mt-3 mt-md-0">
+                <label class="form-label">Email:</label>
                 <input asp-for="@Model.ContactFormViewModel.Email" class="form-control" placeholder="Mail Adresiniz">
             </div>
         </div>
         <div class="form-group mt-3">
+            <label class="form-label">Konu:</label>
             <input asp-for="@Model.ContactFormViewModel.Subject" class="form-control" placeholder="Konu">
         </div>
         <div class="form-group mt-3">
+            <label class="form-label">Mesaj:</label>
             <textarea asp-for="@Model.ContactFormViewModel.Message" class="form-control" rows="5" placeholder="Mesajınız"></textarea>
         </div>
         <div class="my-3">
             <div id="spinner" class="loading">Gönderiliyor</div>
         </div>
-        <div class="text-center"><button onclick="SendMessage()" type="button">Gönder</button></div>
+        <div class="text-center"><button class="btn btn-success" onclick="SendMessage()" type="button">Gönder</button></div>
     </form>
 
 </div>

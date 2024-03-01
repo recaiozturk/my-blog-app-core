@@ -1,0 +1,74 @@
+﻿@model Microsoft.AspNetCore.Identity.IdentityRole
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-12">
+    <div class="main__title">
+        <h2>Create Role</h2>
+    </div>
+</div>
+<div class="col-12">
+    <form asp-action="Edit" method="post" class="form" novalidate>
+        <div asp-validation-summary="ModelOnly" class="model-danger"></div>
+        <div class="row row--form">
+            <div class="col-12 col-md-7 form__content">
+                <div class="row row--form">
+                    <div class="col-12">
+                        <label asp-for="Name" class="form__label"></label>
+                        <input asp-for="Name" class="form__input" placeholder="Role Name">
+                        <span asp-validation-for="Name" class="model-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <button type="submit" class="form__btn">Save</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="col-12">
+
+    @if (ViewBag.Users != null)
+    {
+        @if (ViewBag.Users.Count == 0)
+        {
+            <div class="main__title">
+                <h2>No User withh this role</h2>
+            </div>
+        }
+
+        <table class="main__table mt-3">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in ViewBag.Users)
+                {
+
+                    <tr>
+                        <td>
+                            <div class="main__table-text">@user.Id</div>
+                        </td>
+                        <td>
+                            <div class="main__table-text">@user.Name</div>
+                        </td>
+                        <td>
+                            <div class="main__table-text">@user.Email</div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+   
+</div>
+

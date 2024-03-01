@@ -20,7 +20,7 @@ namespace MyBlog.WebUI.Controllers
             _emailSender = emailSender;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index()//admin contact
         {
             var contacts = await _contactDal.GetAllMessages();
             return View(contacts);
@@ -75,9 +75,15 @@ namespace MyBlog.WebUI.Controllers
                 }
                 catch (Exception)
                 {
-                    //hatayı mail oalrak gönderebiliriz kendimize
+                    //hatayı mail olarak gönderebiliriz kendimize
                     allErrors.Add("Beklenmedik Hata!");
                     valid = false;
+
+                    return Json(new
+                    {
+                        IsValid = valid,
+                        ErrorMessages = allErrors,
+                    });
                 }
             }
 

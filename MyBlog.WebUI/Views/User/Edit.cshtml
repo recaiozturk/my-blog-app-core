@@ -1,0 +1,66 @@
+﻿@model MyBlog.WebUI.Models.User.EditViewModel
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-12">
+    <div class="main__title">
+        <h2>Edit User</h2>
+    </div>
+</div>
+<div class="col-12">
+    <form asp-action="Edit" method="post" class="form" novalidate>
+        <div asp-validation-summary="ModelOnly" class="model-danger"></div>
+        <div class="row row--form">
+            <div class="col-12 col-md-7 form__content">
+                <div class="row row--form">
+                    <div class="col-12">
+                        <label asp-for="UserName" class="form__label"></label>
+                        <input asp-for="UserName" class="form__input" placeholder="Role Name">
+                        <span asp-validation-for="UserName" class="model-danger"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="Email" class="form__label"></label>
+                        <input asp-for="Email" class="form__input">
+                        <span asp-validation-for="Email" class="model-danger"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="Password" class="form__label"></label>
+                        <input asp-for="Password" class="form__input">
+                        <span asp-validation-for="Password" class="model-danger"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="ConfirmPassword" class="form__label"></label>
+                        <input asp-for="ConfirmPassword" class="form__input">
+                        <span asp-validation-for="ConfirmPassword" class="model-danger"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="col-12">
+                            <label class="form__label fw-bold">Role</label>
+
+                            @foreach (var role in ViewBag.Roles)
+                            {
+                                <div class="sign__group sign__group--checkbox">
+                                    <input name="SelectedRoles" value="@role" id="@role" type="checkbox" @(Model.SelectedRoles.Any(m=>m==role) ? "checked" :"")/>
+                                    <label for="@role">@role</label>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-12">
+                <button type="submit" class="form__btn">Save</button>
+            </div>
+        </div>
+    </form>
+</div>
+

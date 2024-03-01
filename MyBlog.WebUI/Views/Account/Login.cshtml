@@ -1,0 +1,45 @@
+﻿@model MyBlog.WebUI.Models.Account.LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="main__title">
+            <h2>Login</h2>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="sign__content">
+            <!-- authorization form -->
+            <form asp-action="Login" class="sign__form">
+
+                <a href="index.html" class="sign__logo">
+                    <img src="~/admin/img/logo.svg" alt="">
+                </a>
+
+                <div asp-validation-summary="All" class="model-danger mb-3"></div>
+
+                <div class="sign__group">
+                    <label asp-for="Email" class="form__title"></label>
+                    <input asp-for="Email" class="sign__input" placeholder="Email">
+                </div>
+
+                <div class="sign__group">
+                    <label asp-for="Password" class="form__title"></label>
+                    <input asp-for="Password" class="sign__input" placeholder="Password">
+                </div>
+
+
+                <button class="sign__btn" type="submit">Sign in</button>
+
+                <span class="sign__delimiter">or</span>
+
+                <span class="sign__text">Don't have an account? <a href="signup.html">Sign up!</a></span>
+            </form>
+            <!-- end authorization form -->
+        </div>
+    </div>
+</div>
+

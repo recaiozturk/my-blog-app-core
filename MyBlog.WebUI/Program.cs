@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MyBlog.WebUI.DataAccess.Abstract;
 using MyBlog.WebUI.DataAccess.Concrate.EfCore;
@@ -15,7 +17,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => {
     options.UseSqlServer(connectionString);
 });
 
-//scoped  score: her http isteðinde 1 nesne
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+
+//scoped  : her http isteðinde 1 nesne
 builder.Services.AddScoped<IAboutDal, EfAboutDal>();
 builder.Services.AddScoped<IEducationDal, EfEducationDal>();
 builder.Services.AddScoped<IExperienceDal, EfExperienceDal>();

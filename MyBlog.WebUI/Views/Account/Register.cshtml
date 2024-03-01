@@ -1,0 +1,48 @@
+﻿
+@model MyBlog.WebUI.Models.Account.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="sign__content">
+            <!-- registration form -->
+            <form asp-controller="Account" asp-action="Register" class="sign__form">
+                <a href="index.html" class="sign__logo">
+                    <img src="~/admin/img/logo.svg" alt="">
+                </a>
+
+                <div asp-validation-summary="All" class="model-danger mb-3"></div>
+
+                <div class="sign__group">
+                    <label class="sign__text" asp-for="UserName"></label>
+                    <input asp-for="UserName" class="sign__input" placeholder="Name">
+                </div>
+
+                <div class="sign__group">
+                    <label class="sign__text" asp-for="Email"></label>
+                    <input asp-for="Email" class="sign__input" placeholder="Email">
+                </div>
+
+                <div class="sign__group">
+                    <label class="sign__text" asp-for="Password"></label>
+                    <input asp-for="Password" class="sign__input" placeholder="Password">
+                </div>
+
+                <div class="sign__group">
+                    <label class="sign__text" asp-for="ConfirmPassword"></label>
+                    <input asp-for="ConfirmPassword" class="sign__input" placeholder="Confirm Password">
+                </div>
+
+                <button class="sign__btn" type="submit">Sign up</button>
+
+                <span class="sign__text">Already have an account? <a href="signin.html">Sign in!</a></span>
+            </form>
+            <!-- registration form -->
+        </div>
+    </div>
+</div>
+

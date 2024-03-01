@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityUser>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-12">
+    <div class="main__title">
+        <h2>Roles</h2>
+    </div>
+</div>
+<div class="col-12">
+
+    <table class="main__table mt-3">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody id="eduTbody">
+            @foreach (var user in Model)
+            {
+
+                <tr>
+                    <td>
+                        <div class="main__table-text">@user.Id</div>
+                    </td>
+                    <td>
+                        <div class="main__table-text">@user.UserName</div>
+                    </td>
+                    <td>
+                        <div class="main__table-text">@user.Email</div>
+                    </td>
+                    <td>
+                        <div class="main__table-btns">
+                            <a asp-action="Edit" asp-route-id="@user.Id" class="main__table-btn main__table-btn--edit ">
+                                <i class="icon ion-ios-create "></i>
+                            </a>
+                            <form asp-action="Delete" method="post" onsubmit="return confirm('emin misin ?')" style="display:inline-block">
+                                <input type="hidden" name="id" value="@user.Id" />
+                                <button type="submit" class="main__table-btn main__table-btn--delete"><i class="icon ion-ios-trash "></i></button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

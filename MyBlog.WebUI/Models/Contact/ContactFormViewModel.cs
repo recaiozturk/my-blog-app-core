@@ -4,17 +4,17 @@ namespace MyBlog.WebUI.Models.Contact
 {
     public class ContactFormViewModel
     {
-        [Required(ErrorMessage = "Subject alanı zorunludur.")]
+        [Required(ErrorMessage = "İsim alanı zorunludur.")]
         public string Name { get; set; } = null!;
 
-        [Required]
+        [Required(ErrorMessage = "Email alanı zorunludur.")]
         [EmailAddress]
         public string Email { get; set; } = null!;
 
-        [Required]
+        [Required(ErrorMessage = "Konu alanı zorunludur.")]
         public string Subject { get; set; } = null!;
 
-        [Required]
+        [Required(ErrorMessage = "Mesaj alanı zorunludur.")]
         public string Message { get; set; } = null!;
     }
 }
