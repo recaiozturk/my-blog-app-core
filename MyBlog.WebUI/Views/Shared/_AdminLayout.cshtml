@@ -74,13 +74,13 @@
                     </div>
 
                     <div class="sidebar__user-title">
-                        <span>Admin</span>
-                        <p>John Doe</p>
+                        <span>@(User.IsInRole("admin") ? "admin" :"user")</span>
+                        <p>@User.Identity.Name</p>
                     </div>
 
-                    <button class="sidebar__user-btn" type="button">
+                    <a href="/" class="sidebar__user-btn" type="button">
                         <i class="icon ion-ios-log-out"></i>
-                    </button>
+                    </a>
                 </div>
                 <!-- end sidebar user -->
                 <!-- sidebar nav -->
@@ -116,13 +116,12 @@
                         </li>
                         <!-- end resume collapse -->
                         @*<li class="sidebar__nav-item">
-            <a href="index.html" class="sidebar__nav-link sidebar__nav-link--active"><i class="icon ion-ios-keypad"></i> <span>Dashboard</span></a>
-        </li>*@
+                                <a href="index.html" class="sidebar__nav-link sidebar__nav-link--active"><i class="icon ion-ios-keypad"></i> <span>Dashboard</span></a>
+                            </li>*@
                     </ul>
                 </div>
                 <!-- end sidebar nav -->
                 <!-- sidebar copyright -->
-                <div class="sidebar__copyright">© HOTFLIX, 2019—2021. <br>Create by <a href="https://themeforest.net/user/dmitryvolkov/portfolio" target="_blank">Dmitry Volkov</a></div>
                 <!-- end sidebar copyright -->
             </div>
             <!-- end sidebar -->
@@ -137,7 +136,7 @@
     </main>
     <!-- end main content -->
     <!-- JS -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="~/admin/js/jquery-3.5.1.min.js"></script>
     <script src="~/admin/js/bootstrap.bundle.min.js"></script>
     <script src="~/admin/js/jquery.magnific-popup.min.js"></script>
     <script src="~/admin/js/jquery.mousewheel.min.js"></script>
@@ -152,6 +151,4 @@
 
     @RenderSection("Scripts", required: false)
 </body>
-
-<!-- Mirrored from hotflix.volkovdesign.com/admin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 30 Jan 2024 11:56:34 GMT -->
 </html>

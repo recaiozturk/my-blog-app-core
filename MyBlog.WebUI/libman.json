@@ -5,6 +5,10 @@
     {
       "library": "sweetalert2@11.10.5",
       "destination": "wwwroot/lib/sweetalert2/"
+    },
+    {
+      "library": "jquery@3.7.1",
+      "destination": "wwwroot/lib/jquery/"
     }
   ]
 }
