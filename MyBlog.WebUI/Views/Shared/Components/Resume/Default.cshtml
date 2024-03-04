@@ -26,8 +26,11 @@
                 </p>
             </div>
 
-            <h3 class="resume-title">Eğitim <a href="/resume/education" target="_blank" class="btn btn-success btn-sm my-3">Düzenle</a></h3>
-
+            @if (User.Identity?.IsAuthenticated == true && User.IsInRole("admin"))
+            {
+                <h3 class="resume-title">Eğitim <a href="/resume/education" target="_blank" class="btn btn-success btn-sm my-3">Düzenle</a></h3>
+            }
+            
             @foreach (var edu in Model.Educations)
             {
                 <div class="resume-item">
@@ -43,8 +46,11 @@
 
         </div>
         <div class="col-lg-6">
-            <h3 class="resume-title">Deneyimler <a href="/resume/experiences" target="_blank" class="btn btn-success btn-sm my-3">Düzenle</a></h3>
-
+            
+            @if (User.Identity?.IsAuthenticated == true && User.IsInRole("admin"))
+            {
+                <h3 class="resume-title">Deneyimler <a href="/resume/experiences" target="_blank" class="btn btn-success btn-sm my-3">Düzenle</a></h3>
+            }
             @foreach (var exp in Model.Experiences)
             {
                 <div class="resume-item">

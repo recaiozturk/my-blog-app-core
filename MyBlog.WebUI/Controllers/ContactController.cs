@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MyBlog.WebUI.DataAccess.Abstract;
 using MyBlog.WebUI.DataAccess.Concrate.EfCore;
 using MyBlog.WebUI.Models.Contact;
@@ -7,6 +8,7 @@ using System.Security.Policy;
 
 namespace MyBlog.WebUI.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class ContactController : Controller
     {
         private readonly IContactDal _contactDal;

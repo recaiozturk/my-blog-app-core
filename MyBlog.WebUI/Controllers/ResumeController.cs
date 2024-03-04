@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MyBlog.WebUI.DataAccess.Abstract;
 using MyBlog.WebUI.Entity;
 using MyBlog.WebUI.Models;
 using MyBlog.WebUI.Models.Resume;
 using MyBlog.WebUI.Util.Abstract;
+using System.Data;
 
 namespace MyBlog.WebUI.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class ResumeController : Controller
     {
         private readonly IEducationDal _educationDal;

@@ -55,69 +55,80 @@
         </div>
     </header>
     <!-- end header -->
-    <!-- sidebar -->
-    <div class="sidebar">
-        <!-- sidebar logo -->
-        <a href="index.html" class="sidebar__logo">
-            <img src="~/admin/img/logo.svg" alt="">
-        </a>
-        <!-- end sidebar logo -->
-        <!-- sidebar user -->
-        <div class="sidebar__user">
-            <div class="sidebar__user-img">
-                <img src="~/admin/img/user.svg" alt="">
-            </div>
 
-            <div class="sidebar__user-title">
-                <span>Admin</span>
-                <p>John Doe</p>
-            </div>
+    @if (User.Identity?.IsAuthenticated == true)
+    {
+        if (User.IsInRole("admin"))
+        {
+            <!-- sidebar -->
+            <div class="sidebar">
+                <!-- sidebar logo -->
+                <a href="index.html" class="sidebar__logo">
+                    <img src="~/admin/img/logo.svg" alt="">
+                </a>
+                <!-- end sidebar logo -->
+                <!-- sidebar user -->
+                <div class="sidebar__user">
+                    <div class="sidebar__user-img">
+                        <img src="~/admin/img/user.svg" alt="">
+                    </div>
 
-            <button class="sidebar__user-btn" type="button">
-                <i class="icon ion-ios-log-out"></i>
-            </button>
-        </div>
-        <!-- end sidebar user -->
-        <!-- sidebar nav -->
-        <div class="sidebar__nav-wrap">
-            <ul class="sidebar__nav">
-                <li class="sidebar__nav-item">
-                    <a href="/about/edit" class="sidebar__nav-link"><i class="icon ion-ios-keypad"></i> <span>About</span></a>
-                </li>
-                <!-- resume collapse -->
-                <li class="sidebar__nav-item">
-                    <a class="sidebar__nav-link" data-toggle="collapse" href="#collapseMenu" role="button" aria-expanded="false" aria-controls="collapseMenu"><i class="icon ion-ios-copy"></i> <span>Resume</span> <i class="icon ion-md-arrow-dropdown"></i></a>
+                    <div class="sidebar__user-title">
+                        <span>Admin</span>
+                        <p>John Doe</p>
+                    </div>
 
-                    <ul class="collapse sidebar__menu" id="collapseMenu">
-                        <li><a href="/resume/education">Education</a></li>
-                        <li><a href="/resume/experiences">Experience</a></li>
-                    </ul>
-                </li>
+                    <button class="sidebar__user-btn" type="button">
+                        <i class="icon ion-ios-log-out"></i>
+                    </button>
+                </div>
+                <!-- end sidebar user -->
+                <!-- sidebar nav -->
+                <div class="sidebar__nav-wrap">
+                    <ul class="sidebar__nav">
+                        <li class="sidebar__nav-item">
+                            <a href="/about/edit" class="sidebar__nav-link"><i class="icon ion-ios-keypad"></i> <span>About</span></a>
+                        </li>
+                        <!-- resume collapse -->
+                        <li class="sidebar__nav-item">
+                            <a class="sidebar__nav-link" data-toggle="collapse" href="#collapseMenu" role="button" aria-expanded="false" aria-controls="collapseMenu"><i class="icon ion-ios-copy"></i> <span>Resume</span> <i class="icon ion-md-arrow-dropdown"></i></a>
 
-                <li class="sidebar__nav-item">
-                    <a href="/portfolio/index" class="sidebar__nav-link"><i class="icon ion-ios-keypad"></i> <span>Portfolio</span></a>
-                </li>
-                <li class="sidebar__nav-item">
-                    <a href="/contact/index" class="sidebar__nav-link"><i class="icon ion-ios-keypad"></i> <span>Messages</span></a>
-                </li>
-                <li class="sidebar__nav-item">
-                    <a href="/user/index" class="sidebar__nav-link"><i class="icon ion-ios-keypad"></i> <span>Users</span></a>
-                </li>
-                <li class="sidebar__nav-item">
-                    <a href="/role/index" class="sidebar__nav-link"><i class="icon ion-ios-keypad"></i> <span>Roles</span></a>
-                </li>
-                <!-- end resume collapse -->
-                @*<li class="sidebar__nav-item">
+                            <ul class="collapse sidebar__menu" id="collapseMenu">
+                                <li><a href="/resume/education">Education</a></li>
+                                <li><a href="/resume/experiences">Experience</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="sidebar__nav-item">
+                            <a href="/portfolio/index" class="sidebar__nav-link"><i class="icon ion-ios-keypad"></i> <span>Portfolio</span></a>
+                        </li>
+                        <li class="sidebar__nav-item">
+                            <a href="/contact/index" class="sidebar__nav-link"><i class="icon ion-ios-keypad"></i> <span>Messages</span></a>
+                        </li>
+                        <li class="sidebar__nav-item">
+                            <a href="/user/index" class="sidebar__nav-link"><i class="icon ion-ios-keypad"></i> <span>Users</span></a>
+                        </li>
+                        <li class="sidebar__nav-item">
+                            <a href="/role/index" class="sidebar__nav-link"><i class="icon ion-ios-keypad"></i> <span>Roles</span></a>
+                        </li>
+                        <li class="sidebar__nav-item">
+                            <a href="/account/logout" class="sidebar__nav-link"><i class="icon ion-ios-keypad"></i> <span>LogOut</span></a>
+                        </li>
+                        <!-- end resume collapse -->
+                        @*<li class="sidebar__nav-item">
             <a href="index.html" class="sidebar__nav-link sidebar__nav-link--active"><i class="icon ion-ios-keypad"></i> <span>Dashboard</span></a>
         </li>*@
-            </ul>
-        </div>
-        <!-- end sidebar nav -->
-        <!-- sidebar copyright -->
-        <div class="sidebar__copyright">© HOTFLIX, 2019—2021. <br>Create by <a href="https://themeforest.net/user/dmitryvolkov/portfolio" target="_blank">Dmitry Volkov</a></div>
-        <!-- end sidebar copyright -->
-    </div>
-    <!-- end sidebar -->
+                    </ul>
+                </div>
+                <!-- end sidebar nav -->
+                <!-- sidebar copyright -->
+                <div class="sidebar__copyright">© HOTFLIX, 2019—2021. <br>Create by <a href="https://themeforest.net/user/dmitryvolkov/portfolio" target="_blank">Dmitry Volkov</a></div>
+                <!-- end sidebar copyright -->
+            </div>
+            <!-- end sidebar -->
+        }
+    }
+
     <!-- main content -->
     <main class="main">
         <div class="container-fluid">

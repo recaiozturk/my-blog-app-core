@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.DotNet.Scaffolding.Shared.CodeModifier.CodeChange;
 using MyBlog.WebUI.DataAccess.Abstract;
@@ -6,9 +7,11 @@ using MyBlog.WebUI.Entity;
 using MyBlog.WebUI.Models;
 using MyBlog.WebUI.Util;
 using MyBlog.WebUI.Util.Abstract;
+using System.Data;
 
 namespace MyBlog.WebUI.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class AboutController : Controller
     {
         private readonly IAboutDal _aboutRepository;

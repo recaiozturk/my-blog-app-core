@@ -5,7 +5,10 @@
     <div class="section-title">
         <h2>Hakkımda</h2>
     </div>
-    <a href="/about/edit" target="_blank" class="btn btn-success btn-sm my-3">Düzenle</a>
+    @if (User.Identity?.IsAuthenticated == true && User.IsInRole("admin"))
+    {
+        <a href="/about/edit" target="_blank" class="btn btn-success btn-sm my-3">Düzenle</a>
+    }
     <div class="row">
         <div class="col-lg-4" data-aos="fade-right">
             <img src="~/img/profilepicture/@Model.Image" style="width:300px" class="img-fluid" alt="">

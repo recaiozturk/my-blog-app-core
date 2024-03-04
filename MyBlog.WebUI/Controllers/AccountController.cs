@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MyBlog.WebUI.Models.Account;
 using MyBlog.WebUI.Util.Abstract;
+using System.Data;
 
 namespace MyBlog.WebUI.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class AccountController : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;
@@ -21,6 +24,7 @@ namespace MyBlog.WebUI.Controllers
         {
             return View();
         }
+
 
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
@@ -44,11 +48,13 @@ namespace MyBlog.WebUI.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Login()
         {
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
@@ -67,7 +73,7 @@ namespace MyBlog.WebUI.Controllers
                         await _userManager.ResetAccessFailedCountAsync(user);
                         await _userManager.SetLockoutEndDateAsync(user, null);
 
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Edit", "About");
                     }
                     else if (result.IsLockedOut)
                     {
@@ -88,10 +94,16 @@ namespace MyBlog.WebUI.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Login");
+        }
+
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
 
     }

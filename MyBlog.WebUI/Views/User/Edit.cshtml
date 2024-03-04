@@ -32,12 +32,12 @@
                         <input asp-for="Password" class="form__input">
                         <span asp-validation-for="Password" class="model-danger"></span>
                     </div>
-
-                    <div class="col-12">
-                        <label asp-for="ConfirmPassword" class="form__label"></label>
-                        <input asp-for="ConfirmPassword" class="form__input">
-                        <span asp-validation-for="ConfirmPassword" class="model-danger"></span>
-                    </div>
+                    @*
+                        <div class="col-12">
+                            <label asp-for="ConfirmPassword" class="form__label"></label>
+                            <input asp-for="ConfirmPassword" class="form__input">
+                            <span asp-validation-for="ConfirmPassword" class="model-danger"></span>
+                        </div>*@
 
                     <div class="col-12">
                         <div class="col-12">
@@ -46,7 +46,7 @@
                             @foreach (var role in ViewBag.Roles)
                             {
                                 <div class="sign__group sign__group--checkbox">
-                                    <input name="SelectedRoles" value="@role" id="@role" type="checkbox" @(Model.SelectedRoles.Any(m=>m==role) ? "checked" :"")/>
+                                    <input name="SelectedRoles" value="@role" id="@role" type="checkbox" @(Model.SelectedRoles.Any(m => m == role) ? "checked" : "") />
                                     <label for="@role">@role</label>
                                 </div>
                             }
