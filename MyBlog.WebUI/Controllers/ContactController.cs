@@ -54,6 +54,7 @@ namespace MyBlog.WebUI.Controllers
             });
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<JsonResult> SendMessage(ContactFormViewModel model)
         {

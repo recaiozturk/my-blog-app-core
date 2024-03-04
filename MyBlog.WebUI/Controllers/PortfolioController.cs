@@ -260,7 +260,7 @@ namespace MyBlog.WebUI.Controllers
 
         }
 
-
+        [AllowAnonymous]
         public async Task<IActionResult> Detail(int id)
         {
             var portfolio = await _portfolioDal.GetPortfolioById(id);

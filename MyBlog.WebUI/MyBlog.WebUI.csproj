@@ -32,6 +32,8 @@
     <Folder Include="wwwroot\img\portfoliopicture\" />
     <Folder Include="wwwroot\img\profilepicture\" />
     <Folder Include="wwwroot\lib\froala_editor_4.1.4\html\styling\fonts\" />
+    <Folder Include="wwwroot\Personal\assets\img\portfolio\" />
+    <Folder Include="wwwroot\Personal\assets\img\testimonials\" />
   </ItemGroup>
 
 </Project>
