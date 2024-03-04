@@ -5,7 +5,7 @@ namespace MyBlog.WebUI.Models
 {
     public class AboutViewModel
     {
-        public int AboutId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public string? Title { get; set; }

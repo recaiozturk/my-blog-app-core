@@ -39,6 +39,8 @@ new SmtpEmailSender(
     builder.Configuration["EmailSender:Password"])
 );
 
+// auto mapper
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
@@ -60,6 +62,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
 
 //alýnan hatalarý gösterir(sunucuda)
 app.UseDeveloperExceptionPage();

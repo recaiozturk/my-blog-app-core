@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.DotNet.Scaffolding.Shared.CodeModifier.CodeChange;
@@ -16,35 +17,41 @@ namespace MyBlog.WebUI.Controllers
     {
         private readonly IAboutDal _aboutRepository;
         private readonly IMethods _methods;
-        public AboutController(IAboutDal aboutRepository, IMethods methods)
+        private readonly IMapper _mapper;
+        public AboutController(IAboutDal aboutRepository, IMethods methods, IMapper mapper)
         {
             _aboutRepository = aboutRepository;
             _methods = methods;
+            _mapper = mapper;
         }
 
         public async Task<IActionResult>Edit()
         {
             
-            var model  = await _aboutRepository.GetAboutAsync();
-            return View(new AboutViewModel
-            {
-                AboutId = model.Id,
-                Summary = model.Summary,
-                Adress = model.Adress,
-                Age = model.Age,
-                Birthday = model.Birthday,
-                Email = model.Email,
-                PhoneNumber = model.PhoneNumber,
-                Title = model.Title,
-                Website = model.Website,
-                Skills=model.Skills,
-                FavoriteSerie=model.FavoriteSerie,
-                FavoriteBook=model.FavoriteBook,
-                FavoriteMovie=model.FavoriteMovie,
-                FavoriteMusic=model.FavoriteMusic,
-                Image=model.Image,
-                
-            });
+            var about  = await _aboutRepository.GetAboutAsync();
+            var viewModel= _mapper.Map<AboutViewModel>(about);
+
+            return View(viewModel);
+
+            //return View(new AboutViewModel
+            //{
+            //    AboutId = model.Id,
+            //    Summary = model.Summary,
+            //    Adress = model.Adress,
+            //    Age = model.Age,
+            //    Birthday = model.Birthday,
+            //    Email = model.Email,
+            //    PhoneNumber = model.PhoneNumber,
+            //    Title = model.Title,
+            //    Website = model.Website,
+            //    Skills=model.Skills,
+            //    FavoriteSerie=model.FavoriteSerie,
+            //    FavoriteBook=model.FavoriteBook,
+            //    FavoriteMovie=model.FavoriteMovie,
+            //    FavoriteMusic=model.FavoriteMusic,
+            //    Image=model.Image,
+
+            //});
         }
 
         [HttpPost]
@@ -61,13 +68,13 @@ namespace MyBlog.WebUI.Controllers
 
             if (ModelState.IsValid)
             {
-                if (model.AboutId == null)
+                if (model.Id == null)
                     return NotFound();
 
 
                 var aboutToUpdate = new About
                 {
-                    Id = model.AboutId,
+                    Id = model.Id,
                     Title = model.Title,
                     Adress=model.Adress,
                     Age=model.Age,
@@ -87,25 +94,29 @@ namespace MyBlog.WebUI.Controllers
                 aboutToUpdate.Skills = testModel.Skills;
                 await _aboutRepository.UpdateAboutAsync(aboutToUpdate);
 
-                return View(new AboutViewModel
-                {
-                    AboutId = aboutToUpdate.Id,
-                    Summary = aboutToUpdate.Summary,
-                    Adress = aboutToUpdate.Adress,
-                    Age = aboutToUpdate.Age,
-                    Birthday = aboutToUpdate.Birthday,
-                    Email = aboutToUpdate.Email,
-                    PhoneNumber = aboutToUpdate.PhoneNumber,
-                    Title = aboutToUpdate.Title,
-                    Website = aboutToUpdate.Website,
-                    Skills = aboutToUpdate.Skills,
-                    FavoriteSerie = aboutToUpdate.FavoriteSerie,
-                    FavoriteBook = aboutToUpdate.FavoriteBook,
-                    FavoriteMovie = aboutToUpdate.FavoriteMovie,
-                    FavoriteMusic = aboutToUpdate.FavoriteMusic,
-                    Image=aboutToUpdate.Image
+                var viewModel = _mapper.Map<AboutViewModel>(aboutToUpdate);
 
-                });
+                return View(viewModel);
+
+                //return View(new AboutViewModel
+                //{
+                //    Id = aboutToUpdate.Id,
+                //    Summary = aboutToUpdate.Summary,
+                //    Adress = aboutToUpdate.Adress,
+                //    Age = aboutToUpdate.Age,
+                //    Birthday = aboutToUpdate.Birthday,
+                //    Email = aboutToUpdate.Email,
+                //    PhoneNumber = aboutToUpdate.PhoneNumber,
+                //    Title = aboutToUpdate.Title,
+                //    Website = aboutToUpdate.Website,
+                //    Skills = aboutToUpdate.Skills,
+                //    FavoriteSerie = aboutToUpdate.FavoriteSerie,
+                //    FavoriteBook = aboutToUpdate.FavoriteBook,
+                //    FavoriteMovie = aboutToUpdate.FavoriteMovie,
+                //    FavoriteMusic = aboutToUpdate.FavoriteMusic,
+                //    Image=aboutToUpdate.Image
+
+                //});
             }
             else
             {

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyBlog.WebUI.DataAccess.Abstract;
 using MyBlog.WebUI.DataAccess.Concrate.EfCore;
@@ -19,12 +20,14 @@ namespace MyBlog.WebUI.Controllers
         private readonly IPortfolioDal _portfolioDal;
         private readonly IMethods _methods;
         private readonly IProjectImageDal _projectImageDal;
+        private readonly IMapper _mapper;
 
-        public PortfolioController(IPortfolioDal portfolioDal, IMethods methods, IProjectImageDal projectImageDal)
+        public PortfolioController(IPortfolioDal portfolioDal, IMethods methods, IProjectImageDal projectImageDal, IMapper mapper)
         {
             _portfolioDal = portfolioDal;
             _methods = methods;
             _projectImageDal = projectImageDal;
+            _mapper = mapper;
         }
 
         public async Task<IActionResult> Index()//admin Index
@@ -50,7 +53,6 @@ namespace MyBlog.WebUI.Controllers
             //List<int> enumValuesList = Enum.GetValues(typeof(Enums.AppType))
             //                           .Cast<int>()
             //                           .ToList();
-
 
             if (ModelState.IsValid)
             {
@@ -182,20 +184,22 @@ namespace MyBlog.WebUI.Controllers
 
             var portfolio = await _portfolioDal.GetPortfolioById(id);
 
-            return View(new PortfolioViewModel
-            {
+            var viewModel = _mapper.Map<PortfolioViewModel>(portfolio);
 
-                Id = portfolio.Id,
-                Title = portfolio.Title,
-                ProjectDate = portfolio.ProjectDate,
-                Description = portfolio.Description,
-                ProjectUrl = portfolio.ProjectUrl,
-                PortfolioType = portfolio.PortfolioType,
-                UsedTechnologies = portfolio.UsedTechnologies,
-                ProjectImages = portfolio.ProjectImages,
+            return View(viewModel);
 
+            //return View(new PortfolioViewModel
+            //{
 
-            });
+            //    Id = portfolio.Id,
+            //    Title = portfolio.Title,
+            //    ProjectDate = portfolio.ProjectDate,
+            //    Description = portfolio.Description,
+            //    ProjectUrl = portfolio.ProjectUrl,
+            //    PortfolioType = portfolio.PortfolioType,
+            //    UsedTechnologies = portfolio.UsedTechnologies,
+            //    ProjectImages = portfolio.ProjectImages,
+            //});
         }
 
         [HttpPost]
