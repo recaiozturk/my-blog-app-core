@@ -12,6 +12,7 @@ My purpose in doing the project was to present to people my experiences and the 
 - C#
 - ASP.NET Core 
 - .NET -v7
+- .NET Core Identity -v7
 -  Entity Framework Core -v7
 - AutoMapper 13.0.1 for object mapping
 - Clean Architecture
@@ -26,7 +27,16 @@ My purpose in doing the project was to present to people my experiences and the 
 - sweetalert2 -v11.10.5
 - HTML -v5
 - CSS -v3
-- 
+
 ### Database
 - MSSQL 2019
 - Database built via Entity framework migrations (code-first approach)
+
+---
+  Home Page 
+  
+  ![GitHub Octocat Gif](images/myblog_gif1.gif)
+
+  Admin Panel
+
+  ![GitHub Octocat Gif](images/gif2.gif)
