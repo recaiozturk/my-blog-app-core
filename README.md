@@ -15,6 +15,7 @@ My purpose in doing the project was to present to people my experiences and the 
 - .NET Core Identity -v7
 -  Entity Framework Core -v7
 - AutoMapper 13.0.1 for object mapping
+- Brevo for email service
 - Clean Architecture
 -  Generic Repository Service Pattern
 -  Unit of Work Pattern
