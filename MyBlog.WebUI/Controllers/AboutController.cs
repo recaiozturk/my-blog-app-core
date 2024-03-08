@@ -94,29 +94,29 @@ namespace MyBlog.WebUI.Controllers
                 aboutToUpdate.Skills = testModel.Skills;
                 await _aboutRepository.UpdateAboutAsync(aboutToUpdate);
 
-                var viewModel = _mapper.Map<AboutViewModel>(aboutToUpdate);
+                //var viewModel = _mapper.Map<AboutViewModel>(aboutToUpdate);
 
-                return View(viewModel);
+                //return View(viewModel);
 
-                //return View(new AboutViewModel
-                //{
-                //    Id = aboutToUpdate.Id,
-                //    Summary = aboutToUpdate.Summary,
-                //    Adress = aboutToUpdate.Adress,
-                //    Age = aboutToUpdate.Age,
-                //    Birthday = aboutToUpdate.Birthday,
-                //    Email = aboutToUpdate.Email,
-                //    PhoneNumber = aboutToUpdate.PhoneNumber,
-                //    Title = aboutToUpdate.Title,
-                //    Website = aboutToUpdate.Website,
-                //    Skills = aboutToUpdate.Skills,
-                //    FavoriteSerie = aboutToUpdate.FavoriteSerie,
-                //    FavoriteBook = aboutToUpdate.FavoriteBook,
-                //    FavoriteMovie = aboutToUpdate.FavoriteMovie,
-                //    FavoriteMusic = aboutToUpdate.FavoriteMusic,
-                //    Image=aboutToUpdate.Image
+                return View(new AboutViewModel
+                {
+                    Id = aboutToUpdate.Id,
+                    Summary = aboutToUpdate.Summary,
+                    Adress = aboutToUpdate.Adress,
+                    Age = aboutToUpdate.Age,
+                    Birthday = aboutToUpdate.Birthday,
+                    Email = aboutToUpdate.Email,
+                    PhoneNumber = aboutToUpdate.PhoneNumber,
+                    Title = aboutToUpdate.Title,
+                    Website = aboutToUpdate.Website,
+                    Skills = aboutToUpdate.Skills,
+                    FavoriteSerie = aboutToUpdate.FavoriteSerie,
+                    FavoriteBook = aboutToUpdate.FavoriteBook,
+                    FavoriteMovie = aboutToUpdate.FavoriteMovie,
+                    FavoriteMusic = aboutToUpdate.FavoriteMusic,
+                    Image = aboutToUpdate.Image
 
-                //});
+                });
             }
             else
             {
