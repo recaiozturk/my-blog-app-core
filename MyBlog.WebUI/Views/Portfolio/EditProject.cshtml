@@ -51,6 +51,12 @@
                             <span asp-validation-for="Description" class="model-danger"></span>
                         </div>
 
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <label asp-for="DisplayOrder" class="form__label"></label>
+                            <input asp-for="DisplayOrder" type="number" min="1" class="form__input" placeholder="DisplayOrder">
+                            <span asp-validation-for="DisplayOrder" class="model-danger"></span>
+                        </div>
+
                         <div class="col-12">
                             @if (Model.Id > 0)
                             {
@@ -104,17 +110,17 @@
                         @*checkbox ile kullanım*@
 
                         @*<div class="col-12">
-                                <label class="form__label fw-bold">App Type</label>
+            <label class="form__label fw-bold">App Type</label>
 
-                                @foreach (var appType in Model.enumAppTypeList)
-                                {
-                                    <div class="sign__group sign__group--checkbox">
-                                        <input name="appTypeIds" value="@appType" id="appType_@appType" type="checkbox">
-                                        <label for="appType_@appType">@Enum.GetName(typeof(Enums.AppType), appType)</label>
-                                    </div>
-                                }
+            @foreach (var appType in Model.enumAppTypeList)
+            {
+                <div class="sign__group sign__group--checkbox">
+                    <input name="appTypeIds" value="@appType" id="appType_@appType" type="checkbox">
+                    <label for="appType_@appType">@Enum.GetName(typeof(Enums.AppType), appType)</label>
+                </div>
+            }
 
-                            </div>*@
+        </div>*@
 
                     </div>
                 </div>

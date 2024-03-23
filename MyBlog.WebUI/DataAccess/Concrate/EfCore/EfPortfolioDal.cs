@@ -32,7 +32,7 @@ namespace MyBlog.WebUI.DataAccess.Concrate.EfCore
 
         public async Task<List<Portfolio>> GetPortfolios()
         {
-            return await _context.Portfolios.Include(x => x.ProjectImages).ToListAsync();
+            return await _context.Portfolios.Include(x => x.ProjectImages).OrderBy(x=>x.DisplayOrder).ToListAsync();
         }
 
         public async Task ResetPortfolioImagesIsCover(int id)

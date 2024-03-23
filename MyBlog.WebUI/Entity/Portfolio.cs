@@ -9,6 +9,9 @@
         public string? ProjectUrl { get; set; } 
         public string UsedTechnologies { get; set; } = null!;
         public string? Description { get; set; }
+
+        public DateTime AddedDate { get; set; }
+        public int DisplayOrder { get; set; }
         public List<ProjectImage> ProjectImages { get; set; } = new List<ProjectImage>();
     }
 }

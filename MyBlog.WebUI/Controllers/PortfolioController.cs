@@ -218,6 +218,7 @@ namespace MyBlog.WebUI.Controllers
                 portfolio.Description= model.Description;
                 portfolio.UsedTechnologies= model.UsedTechnologies;
                 portfolio.PortfolioType=model.PortfolioType;
+                portfolio.DisplayOrder=model.DisplayOrder;
 
                 await _portfolioDal.UpdateAsync(portfolio);
 
