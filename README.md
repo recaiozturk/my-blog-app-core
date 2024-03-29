@@ -4,7 +4,7 @@ A dynamic and responsive portfolio website with admin panel. The backend is buil
 
 My purpose in doing the project was to present to people my experiences and the projects I have done during my job search process.
 
-[Live Demo](http://tesl54-001-site1.ftempurl.com)
+[Live Demo](http://recaiozturk.com)
 
 ## Tech Stack 
 
