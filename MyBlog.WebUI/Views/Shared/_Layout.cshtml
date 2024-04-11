@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -42,81 +43,89 @@
     ======================================================== -->
 </head>
 
+
+
 <body>
+    <div id="mainBody">
+        <!-- ======= Header ======= -->
+        <header id="header">
+            <div class="container">
 
-    <!-- ======= Header ======= -->
-    <header id="header">
-        <div class="container">
+                <h1>
+                    <a href="/">Recai Öztürk</a>
+                    @if (User.Identity?.IsAuthenticated == true && User.IsInRole("admin"))
+                    {
+                        <a href="/portfolio/index" target="_blank" class="btn btn-success btn-sm my-3 ml-3">Düzenle</a>
+                    }
+                </h1>
+                <!-- Uncomment below if you prefer to use an image logo -->
+                <!-- <a href="index.html" class="mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a> -->
+                @* <h2>I'm a passionate <span>graphic designer</span> from New York</h2> *@
 
-            <h1>
-                <a href="/">Recai Öztürk</a>
-                @if (User.Identity?.IsAuthenticated == true && User.IsInRole("admin"))
-                {
-                    <a href="/portfolio/index" target="_blank" class="btn btn-success btn-sm my-3 ml-3">Düzenle</a>
-                }
-            </h1>
-            <!-- Uncomment below if you prefer to use an image logo -->
-            <!-- <a href="index.html" class="mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a> -->
-            @* <h2>I'm a passionate <span>graphic designer</span> from New York</h2> *@
-            <h2>Web Developer | Game Developer | .Net Developer</h2>
+                <h2 id="writer">Web Developer | Game Developer | .Net Developer</h2>
 
-            <nav id="navbar" class="navbar">
-                <ul>
-                    <li><a class="nav-link active" href="#header">Ana Sayfa</a></li>
-                    <li><a class="nav-link" href="#about">Hakkımda</a></li>
-                    <li><a class="nav-link" href="#resume">Resume</a></li>
-                    <li><a class="nav-link" href="#portfolio">Portfolio</a></li>
-                    <li><a class="nav-link" href="#services">Blog(Yakında)</a></li>
-                    <li><a class="nav-link" href="#contact">İletişim</a></li>
-                </ul>
-                <i class="bi bi-list mobile-nav-toggle"></i>
-            </nav><!-- .navbar -->
+                <nav id="navbar" class="navbar">
+                    <ul>
+                        <li><a class="nav-link active" href="#header">Ana Sayfa</a></li>
+                        <li><a class="nav-link" href="#about">Hakkımda</a></li>
+                        <li><a class="nav-link" href="#resume">Resume</a></li>
+                        <li><a class="nav-link" href="#portfolio">Portfolio</a></li>
+                        <li><a class="nav-link" href="#services">Blog(Yakında)</a></li>
+                        <li><a class="nav-link" href="#contact">İletişim</a></li>
+                    </ul>
+                    <i class="bi bi-list mobile-nav-toggle"></i>
+                </nav><!-- .navbar -->
 
-            <div class="social-links">
-                <a href="https://github.com/recaiozturk" target="_blank" class="twitter">
-                    <i class="bi bi-github"></i>
-                </a>
+                <div class="social-links">
+                    <a href="https://github.com/recaiozturk" target="_blank" class="twitter">
+                        <i class="bi bi-github"></i>
+                    </a>
 
-                <a href="https://www.linkedin.com/in/recaiozturk54/" target="_blank" class="linkedin">
-                    <i class="bi bi-linkedin"></i>
-                </a>
-                <a href="https://medium.com/@@recaiozturk54" target="_blank" class="medium">
-                    <i class="bi bi-medium"></i>
-                </a>
-                <a href="https://www.instagram.com/recaiozturk54/" target="_blank" class="instagram">
-                    <i class="bi bi-instagram"></i>
-                </a>
+                    <a href="https://www.linkedin.com/in/recaiozturk54/" target="_blank" class="linkedin">
+                        <i class="bi bi-linkedin"></i>
+                    </a>
+                    <a href="https://medium.com/@@recaiozturk54" target="_blank" class="medium">
+                        <i class="bi bi-medium"></i>
+                    </a>
+                    <a href="https://www.instagram.com/recaiozturk54/" target="_blank" class="instagram">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                </div>
+
             </div>
+        </header><!-- End Header -->
+        <div>
+            <!-- @RenderBody() -->
+            <!-- ======= About Section ======= -->
+            <section id="about" class="about">
+                @await Component.InvokeAsync("About")
+            </section>
+            <!-- End About Section -->
+            <!-- ======= Resume Section ======= -->
+            <section id="resume" class="resume">
+                @await Component.InvokeAsync("Resume")
+            </section>
+            <!-- End Resume Section -->
+            <!-- ======= Portfolio Section ======= -->
+            <section id="portfolio" class="portfolio">
+                @await Component.InvokeAsync("Portfolio")
+            </section>
 
+
+            <!-- ======= Contact Section ======= -->
+            <section id="contact" class="contact">
+                @await Component.InvokeAsync("Contact")
+            </section>
         </div>
-    </header><!-- End Header -->
-    <!-- @RenderBody() -->
-    <!-- ======= About Section ======= -->
-    <section id="about" class="about">
-        @await Component.InvokeAsync("About")
-    </section>
-    <!-- End About Section -->
-    <!-- ======= Resume Section ======= -->
-    <section id="resume" class="resume">
-        @await Component.InvokeAsync("Resume")
-    </section>
-    <!-- End Resume Section -->
-    <!-- ======= Portfolio Section ======= -->
-    <section id="portfolio" class="portfolio">
-        @await Component.InvokeAsync("Portfolio")
-    </section>
 
 
-    <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
-        @await Component.InvokeAsync("Contact")
-    </section>
+        <!-- End Contact Section -->
 
-    <!-- End Contact Section -->
-
-    <div class="credits">
-        Created by <a href="/account/login">Recai Öztürk</a>
+        <div class="credits">
+            Created by <a href="/account/login">Recai Öztürk</a>
+        </div>
     </div>
+
 
     <!-- Vendor JS Files -->
     <script src="~/lib/jquery/jquery.min.js"></script>
@@ -130,6 +139,20 @@
     <script src="~/js/sweetAlertCustom.js"></script>
     <!-- Template Main JS File -->
     <script src="~/Personal/assets/js/main.js"></script>
+    <script src="~/js/snowstorm.js"></script>
+    <script src="~/js/olum-writer.js"></script>
+    <script>
+        snowStorm.excludeMobile = false;
+
+        new OlumWriter({
+            container: document.getElementById("writer"),
+            sentences: [".Net Developer", "Game Developer", "Web Developer"],
+            interval: 2000,
+            speed: 1000,
+            reverse: true,
+        });
+
+    </script>
     @RenderSection("Scripts", required: false)
 
 </body>

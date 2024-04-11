@@ -161,7 +161,7 @@ h6 {
 
 #header.header-top .social-links,
 #header.header-top h2 {
-  display: none;
+  display: none !important;
 }
 
 #header.header-top h1 {

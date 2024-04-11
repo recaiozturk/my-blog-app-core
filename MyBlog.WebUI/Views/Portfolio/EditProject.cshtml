@@ -110,17 +110,17 @@
                         @*checkbox ile kullanım*@
 
                         @*<div class="col-12">
-            <label class="form__label fw-bold">App Type</label>
+                                <label class="form__label fw-bold">App Type</label>
 
-            @foreach (var appType in Model.enumAppTypeList)
-            {
-                <div class="sign__group sign__group--checkbox">
-                    <input name="appTypeIds" value="@appType" id="appType_@appType" type="checkbox">
-                    <label for="appType_@appType">@Enum.GetName(typeof(Enums.AppType), appType)</label>
-                </div>
-            }
+                                @foreach (var appType in Model.enumAppTypeList)
+                                {
+                                    <div class="sign__group sign__group--checkbox">
+                                        <input name="appTypeIds" value="@appType" id="appType_@appType" type="checkbox">
+                                        <label for="appType_@appType">@Enum.GetName(typeof(Enums.AppType), appType)</label>
+                                    </div>
+                                }
 
-        </div>*@
+                            </div>*@
 
                     </div>
                 </div>
