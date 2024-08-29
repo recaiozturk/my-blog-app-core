@@ -9,6 +9,7 @@ using MyBlog.WebUI.Models;
 using MyBlog.WebUI.Util;
 using MyBlog.WebUI.Util.Abstract;
 using System.Data;
+using System.Runtime.InteropServices;
 
 namespace MyBlog.WebUI.Controllers
 {
@@ -38,23 +39,28 @@ namespace MyBlog.WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(AboutViewModel model, IFormFile imageFile)
         {
-            var imageFileModel=_methods.CreateImageFileAsync(imageFile,(int)Enums.ImageType.Profile);
-            if(!imageFileModel.Result.IsValid)
-                ModelState.AddModelError("", imageFileModel.Result.ErrorString);
+            var oldData = await _aboutRepository.GetAboutAsync();
+            model.Skills= oldData.Skills;
+            ModelState.Remove("imageFile");
+
+            if (imageFile == null)
+            {
+
+                model.Image = oldData.Image;
+            }
             else
             {
+                var imageFileModel = _methods.CreateImageFileAsync(imageFile, (int)Enums.ImageType.Profile);
                 model.Image = imageFileModel.Result.ImageCreatedName;
             }
-
+            
             if (ModelState.IsValid)
             {
                 if (model.Id == null)
                     return NotFound();
 
                 var aboutToUpdate = _mapper.Map<About>(model);
-
-                var testModel = await _aboutRepository.GetAboutAsync();
-                aboutToUpdate.Skills = testModel.Skills;
+                aboutToUpdate.Skills = oldData.Skills;
                 await _aboutRepository.UpdateAboutAsync(aboutToUpdate);
 
                 var viewModel = _mapper.Map<AboutViewModel>(aboutToUpdate);
@@ -63,8 +69,7 @@ namespace MyBlog.WebUI.Controllers
             }
             else
             {
-                var entity = await _aboutRepository.GetAboutAsync();
-                model.Skills = entity.Skills;
+                model.Skills = oldData.Skills;
                 return View(model);
             }
         }
