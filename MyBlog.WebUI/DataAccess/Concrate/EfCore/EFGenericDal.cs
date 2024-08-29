@@ -23,7 +23,8 @@ namespace MyBlog.WebUI.DataAccess.Concrate.EfCore
 
         public async Task UpdateAsync(TEntity entity)
         {
-            _context.Entry(entity).State = EntityState.Modified;
+            //_context.Entry(entity).State = EntityState.Modified;
+            _context.Set<TEntity>().Update(entity);
             await _context.SaveChangesAsync(true);
         }
 

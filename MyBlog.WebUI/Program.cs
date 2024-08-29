@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MyBlog.WebUI.DataAccess.Abstract;
@@ -20,7 +20,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => {
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 
-//scoped  : her http isteðinde 1 nesne
 builder.Services.AddScoped<IAboutDal, EfAboutDal>();
 builder.Services.AddScoped<IEducationDal, EfEducationDal>();
 builder.Services.AddScoped<IExperienceDal, EfExperienceDal>();

@@ -50,21 +50,19 @@ namespace MyBlog.WebUI.Controllers
         {
             List<ProjectImage> images = new List<ProjectImage>();
 
-            //List<int> enumValuesList = Enum.GetValues(typeof(Enums.AppType))
-            //                           .Cast<int>()
-            //                           .ToList();
-
             if (ModelState.IsValid)
             {
-                Portfolio portfolio = new Portfolio
-                {
-                    Title = model.Title,
-                    ProjectDate = model.ProjectDate,
-                    PortfolioType = model.PortfolioType,
-                    Description = model.Description,
-                    ProjectUrl = model.ProjectUrl,
-                    UsedTechnologies = model.UsedTechnologies,
-                };
+                //Portfolio portfolio = new Portfolio
+                //{
+                //    Title = model.Title,
+                //    ProjectDate = model.ProjectDate,
+                //    PortfolioType = model.PortfolioType,
+                //    Description = model.Description,
+                //    ProjectUrl = model.ProjectUrl,
+                //    UsedTechnologies = model.UsedTechnologies,
+                //};
+
+                var portfolio=_mapper.Map<Portfolio>(model);
 
                 await _portfolioDal.CreateAsync(portfolio);
 
@@ -187,19 +185,6 @@ namespace MyBlog.WebUI.Controllers
             var viewModel = _mapper.Map<PortfolioViewModel>(portfolio);
 
             return View(viewModel);
-
-            //return View(new PortfolioViewModel
-            //{
-
-            //    Id = portfolio.Id,
-            //    Title = portfolio.Title,
-            //    ProjectDate = portfolio.ProjectDate,
-            //    Description = portfolio.Description,
-            //    ProjectUrl = portfolio.ProjectUrl,
-            //    PortfolioType = portfolio.PortfolioType,
-            //    UsedTechnologies = portfolio.UsedTechnologies,
-            //    ProjectImages = portfolio.ProjectImages,
-            //});
         }
 
         [HttpPost]
@@ -211,16 +196,18 @@ namespace MyBlog.WebUI.Controllers
 
                 if (portfolio == null) return NotFound();
 
-                portfolio.Title= model.Title;
-                portfolio.ProjectUrl= model.ProjectUrl;
-                portfolio.ProjectDate= model.ProjectDate;
-                portfolio.PortfolioType= model.PortfolioType;
-                portfolio.Description= model.Description;
-                portfolio.UsedTechnologies= model.UsedTechnologies;
-                portfolio.PortfolioType=model.PortfolioType;
-                portfolio.DisplayOrder=model.DisplayOrder;
+                //portfolio.Title= model.Title;
+                //portfolio.ProjectUrl= model.ProjectUrl;
+                //portfolio.ProjectDate= model.ProjectDate;
+                //portfolio.PortfolioType= model.PortfolioType;
+                //portfolio.Description= model.Description;
+                //portfolio.UsedTechnologies= model.UsedTechnologies;
+                //portfolio.PortfolioType=model.PortfolioType;
+                //portfolio.DisplayOrder=model.DisplayOrder;
 
-                await _portfolioDal.UpdateAsync(portfolio);
+                var updatedPort = _mapper.Map<Portfolio>(model);
+
+                await _portfolioDal.UpdateAsync(updatedPort);
 
             }
             return RedirectToAction("Index");

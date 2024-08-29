@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyBlog.WebUI.DataAccess.Abstract;
 using MyBlog.WebUI.DataAccess.Concrate.EfCore;
+using MyBlog.WebUI.Entity;
 using MyBlog.WebUI.Models.Contact;
 using MyBlog.WebUI.Util.Abstract;
 using System.Security.Policy;
@@ -14,12 +16,14 @@ namespace MyBlog.WebUI.Controllers
         private readonly IContactDal _contactDal;
         private readonly IMethods _methods;
         private readonly IEmailSender _emailSender;
+        private readonly IMapper _mapper;
 
-        public ContactController(IContactDal contactDal, IMethods methods, IEmailSender emailSender)
+        public ContactController(IContactDal contactDal, IMethods methods, IEmailSender emailSender, IMapper mapper)
         {
             _contactDal = contactDal;
             _methods = methods;
             _emailSender = emailSender;
+            _mapper = mapper;
         }
 
         public async Task<IActionResult> Index()//admin contact
@@ -65,20 +69,13 @@ namespace MyBlog.WebUI.Controllers
             {
                 try
                 {
-                    await _contactDal.CreateAsync(new Entity.Contact
-                    {
-                        Name = model.Name,
-                        Email = model.Email,
-                        Subject = model.Subject,
-                        Message = model.Message,
-                    });
+                    await _contactDal.CreateAsync(_mapper.Map<Contact>(model));
 
                     await _emailSender.SendEmailAsync("recaiozturk54@gmail.com", model.Name, model.Email, model.Subject, model.Message);
                     valid = true;
                 }
                 catch (Exception)
                 {
-                    //hatayı mail olarak gönderebiliriz kendimize
                     allErrors.Add("Beklenmedik Hata!");
                     valid = false;
 
