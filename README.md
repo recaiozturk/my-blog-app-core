@@ -18,7 +18,6 @@ My purpose in doing the project was to present to people my experiences and the 
 - Brevo for email service
 - Clean Architecture
 -  Generic Repository Service Pattern
--  Unit of Work Pattern
 
 ### Front End
 - Bootstrap -v5 
