@@ -15,7 +15,7 @@ namespace MyBlog.WebUI.Controllers
     [Authorize(Roles = "admin")]
     public class AboutController : Controller
     {
-        //test code  2
+        //test code  2 3
         private readonly IAboutDal _aboutRepository;
         private readonly IMethods _methods;
         private readonly IMapper _mapper;
