@@ -27,6 +27,7 @@ namespace MyBlog.WebUI.DataAccess.Concrate.EfCore
 
         public async  Task<Portfolio> GetPortfolioById(int id)
         {
+            var test = await _context.Portfolios.Include(x => x.ProjectImages).FirstOrDefaultAsync(x => x.Id == id);
             return await _context.Portfolios.Include(x => x.ProjectImages).FirstOrDefaultAsync(x => x.Id==id);
         }
 

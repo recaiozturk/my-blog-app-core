@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyBlog.WebUI.DataAccess.Abstract;
 using MyBlog.WebUI.Entity;
@@ -15,11 +16,13 @@ namespace MyBlog.WebUI.Controllers
         private readonly IEducationDal _educationDal;
         private readonly IMethods _methods;
         private readonly IExperienceDal _experienceDal;
-        public ResumeController(IEducationDal educationDal, IMethods methods, IExperienceDal experienceDal)
+        private readonly IMapper _mapper;
+        public ResumeController(IEducationDal educationDal, IMethods methods, IExperienceDal experienceDal, IMapper mapper)
         {
             _educationDal = educationDal;
             _methods = methods;
             _experienceDal = experienceDal;
+            _mapper = mapper;
         }
 
         public async Task<IActionResult> Education()
@@ -41,12 +44,7 @@ namespace MyBlog.WebUI.Controllers
             }
             else
             {
-                educationToAdd.Title = model.Title;
-                educationToAdd.UniversityName = model.UniversityName;
-                educationToAdd.Description = model.Description;
-                educationToAdd.Adress = model.Adress;
-                educationToAdd.DateBetween = model.DateBetween;
-
+                educationToAdd=_mapper.Map<Education>(model);
                 educationToAdd = await _educationDal.CreateAsync(educationToAdd);
                 valid = true;
             }
@@ -73,11 +71,7 @@ namespace MyBlog.WebUI.Controllers
             {
                 var skillToUpdateR = await _educationDal.GetById(model.EducationId);
 
-                skillToUpdateR.Title = model.Title;
-                skillToUpdateR.Adress = model.Adress;
-                skillToUpdateR.DateBetween = model.DateBetween;
-                skillToUpdateR.UniversityName = model.UniversityName;
-                skillToUpdateR.Description = model.Description;
+                _mapper.Map(model, skillToUpdateR);
 
                 eduCallback = await _educationDal.ReturnUpdateAsync(skillToUpdateR);
                 valid = true;
@@ -147,15 +141,7 @@ namespace MyBlog.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                Experience experience = new Experience
-                {
-                    Title = model.Title,
-                    DateBetween = model.DateBetween,
-                    CompanyName = model.CompanyName,
-                    Adress = model.Adress,
-                    ExperienceSteps = model.ExperienceSteps,
-                    DisplayOrder=model.DisplayOrder
-                };
+                var experience =_mapper.Map<Experience>(model);
                 await _experienceDal.CreateAsync(experience);
 
                 return RedirectToAction("Experiences");
@@ -176,17 +162,8 @@ namespace MyBlog.WebUI.Controllers
                 ModelState.AddModelError("", "Error ! Try Again");
             else
             {
-                return View(new ExperienceViewModel
-                {
-                    Id = experience.Id,
-                    Title = experience.Title,
-                    DateBetween = experience.DateBetween,
-                    CompanyName = experience.CompanyName,
-                    Adress = experience.Adress,
-                    ExperienceSteps=experience.ExperienceSteps,
-                    DisplayOrder= experience.DisplayOrder
-                    
-                });
+                var experienceModel = _mapper.Map<ExperienceViewModel>(experience);
+                return View(experienceModel);
             }
 
             return View();
@@ -206,14 +183,7 @@ namespace MyBlog.WebUI.Controllers
                 }
                 else
                 {
-                    experience.Title = model.Title;
-                    experience.DateBetween = model.DateBetween;
-                    experience.Adress = model.Adress;
-                    experience.CompanyName = model.CompanyName;
-                    experience.Description = model.Description;
-                    experience.ExperienceSteps=model.ExperienceSteps;
-                    experience.DisplayOrder= model.DisplayOrder;
-
+                    _mapper.Map(model,experience);
                     await _experienceDal.UpdateAsync(experience);
 
                     return RedirectToAction("Experiences");

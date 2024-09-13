@@ -3,6 +3,7 @@ using MyBlog.WebUI.Entity;
 using MyBlog.WebUI.Models;
 using MyBlog.WebUI.Models.Contact;
 using MyBlog.WebUI.Models.Portfolio;
+using MyBlog.WebUI.Models.Resume;
 
 namespace MyBlog.WebUI.Mapping
 {
@@ -13,6 +14,9 @@ namespace MyBlog.WebUI.Mapping
             CreateMap<About, AboutViewModel>().ReverseMap();
             CreateMap<Portfolio, PortfolioViewModel>().ReverseMap();
             CreateMap<Contact, ContactFormViewModel>().ReverseMap();
+
+            CreateMap<Education, EditEducationViewModel>().ReverseMap();
+            CreateMap<Experience, ExperienceViewModel>().ReverseMap();
         }
     }
 }

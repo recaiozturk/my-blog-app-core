@@ -52,16 +52,6 @@ namespace MyBlog.WebUI.Controllers
 
             if (ModelState.IsValid)
             {
-                //Portfolio portfolio = new Portfolio
-                //{
-                //    Title = model.Title,
-                //    ProjectDate = model.ProjectDate,
-                //    PortfolioType = model.PortfolioType,
-                //    Description = model.Description,
-                //    ProjectUrl = model.ProjectUrl,
-                //    UsedTechnologies = model.UsedTechnologies,
-                //};
-
                 var portfolio=_mapper.Map<Portfolio>(model);
 
                 await _portfolioDal.CreateAsync(portfolio);
@@ -193,21 +183,16 @@ namespace MyBlog.WebUI.Controllers
             if (ModelState.IsValid)
             {
                 var portfolio = await _portfolioDal.GetPortfolioById(model.Id);
+                var oldImages = portfolio.ProjectImages;
+
+
 
                 if (portfolio == null) return NotFound();
 
-                //portfolio.Title= model.Title;
-                //portfolio.ProjectUrl= model.ProjectUrl;
-                //portfolio.ProjectDate= model.ProjectDate;
-                //portfolio.PortfolioType= model.PortfolioType;
-                //portfolio.Description= model.Description;
-                //portfolio.UsedTechnologies= model.UsedTechnologies;
-                //portfolio.PortfolioType=model.PortfolioType;
-                //portfolio.DisplayOrder=model.DisplayOrder;
-
-                var updatedPort = _mapper.Map<Portfolio>(model);
-
-                await _portfolioDal.UpdateAsync(updatedPort);
+                //_mapper.Map<Portfolio>(model);
+                _mapper.Map(model, portfolio);
+                portfolio.ProjectImages = oldImages;
+                await _portfolioDal.UpdateAsync(portfolio);
 
             }
             return RedirectToAction("Index");

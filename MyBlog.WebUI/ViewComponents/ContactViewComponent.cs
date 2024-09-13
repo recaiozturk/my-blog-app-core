@@ -10,11 +10,6 @@ namespace MyBlog.WebUI.ViewComponents
             ContactViewModel viewModel = new ContactViewModel();
             viewModel.ContactFormViewModel = new ContactFormViewModel();
 
-            //aboutdaki bilgiler gidecek
-            //socials gidecek
-
-            //Contact FormModel null gidecek
-
             return View(viewModel);
         }
     }
