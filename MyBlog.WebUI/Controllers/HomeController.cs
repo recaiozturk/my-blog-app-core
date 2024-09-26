@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MyBlog.WebUI.Models;
-using System.Diagnostics;
 
 namespace MyBlog.WebUI.Controllers
 {

@@ -7,14 +7,11 @@
 }
 
 <div class="row">
-    <!-- main title -->
     <div class="col-12">
         <div class="main__title">
             <h2>Create Exp (Edit)</h2>
         </div>
     </div>
-    <!-- end main title -->
-    <!-- form -->
     <div class="col-12">
         <form asp-controller="Portfolio" asp-action="CreateProject" method="post" class="form" novalidate>
             <div asp-validation-summary="ModelOnly" class="model-danger"></div>
@@ -57,7 +54,6 @@
                                 <a href="#modal-add-image" class="main__title-link opening_modal_add open-modal ml-0 mb-3">Add Image</a>
 
                                 <div class="profile__content">
-                                    <!-- profile user -->
                                     <div class="profile__user">
                                         <div class="profile__avatar">
                                             <img src="img/user.svg" alt="">
@@ -109,21 +105,6 @@
 
                             </select>
                         </div>
-
-                        @*checkbox*@
-                        @*<div class="col-12">
-                                <label class="form__label fw-bold">App Type</label>
-
-                                @foreach (var appType in Model.enumAppTypeList)
-                                {
-                                    <div class="sign__group sign__group--checkbox">
-                                        <input name="appTypeIds" value="@appType" id="appType_@appType" type="checkbox">
-                                        <label for="appType_@appType">@Enum.GetName(typeof(Enums.AppType), appType)</label>
-                                    </div>
-                                }
-
-                            </div>*@
-
                     </div>
                 </div>
 

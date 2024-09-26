@@ -1,5 +1,4 @@
-﻿using Azure;
-using MyBlog.WebUI.Util;
+﻿using MyBlog.WebUI.Util;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MyBlog.WebUI.Entity

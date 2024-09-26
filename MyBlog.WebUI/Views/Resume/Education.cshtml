@@ -7,14 +7,12 @@
 }
 
 <div class="row">
-    <!-- main title -->
     <div class="col-12">
         <div class="main__title">
             <h2>Education (Edit)</h2>
         </div>
     </div>
-    <!-- end main title -->
-    <!-- form -->
+
     <div class="col-12">
         <form action="edit" method="post" class="form" enctype="multipart/form-data" novalidate>
             <div asp-validation-summary="ModelOnly" class="model-danger"></div>
@@ -78,14 +76,11 @@
                         </div><div id="mCSB_2_scrollbar_horizontal" class="mCSB_scrollTools mCSB_2_scrollbar mCS-custom-bar2 mCSB_scrollTools_horizontal" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_2_dragger_horizontal" class="mCSB_dragger" style="position: absolute; min-width: 30px; width: 0px; left: 0px;"><div class="mCSB_dragger_bar"></div><div class="mCSB_draggerRail"></div></div></div></div>
                     </div>
                 </div>
-                @*<div class="col-12">
-                        <button type="submit" class="form__btn">Save</button>
-                    </div>*@
+
             </div>
         </form>
     </div>
-    <!-- end form -->
-    <!-- end modal view -->
+
     <!-- modal add -->
     <div id="modal-add-education" class="zoom-anim-dialog mfp-hide modal">
         <h6 class="modal__title">Add Education</h6>
@@ -116,6 +111,7 @@
         </div>
     </div>
     <!-- end modal add -->
+
     <!-- modal edit -->
     <div id="modal-edit-education" class="zoom-anim-dialog mfp-hide modal">
         <h6 class="modal__title">Edit Skill</h6>
@@ -146,6 +142,7 @@
         </div>
     </div>
     <!-- end modal edit -->
+
     <!-- modal delete -->
     <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
         <h6 class="modal__title">Education delete</h6>

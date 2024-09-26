@@ -2,8 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MyBlog.WebUI.Models.Account;
-using MyBlog.WebUI.Util.Abstract;
-using System.Data;
 
 namespace MyBlog.WebUI.Controllers
 {

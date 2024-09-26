@@ -34,6 +34,7 @@
     <Folder Include="wwwroot\lib\froala_editor_4.1.4\html\styling\fonts\" />
     <Folder Include="wwwroot\Personal\assets\img\portfolio\" />
     <Folder Include="wwwroot\Personal\assets\img\testimonials\" />
+    <Folder Include="wwwroot\Personal\forms\" />
   </ItemGroup>
 
 </Project>

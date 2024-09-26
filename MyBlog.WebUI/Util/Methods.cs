@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.Extensions.Hosting;
 using MyBlog.WebUI.Models.UtilModels;
 using MyBlog.WebUI.Util.Abstract;
-using NuGet.Packaging.Signing;
 
 namespace MyBlog.WebUI.Util
 {

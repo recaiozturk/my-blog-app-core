@@ -7,14 +7,12 @@
 }
 
 <div class="row">
-    <!-- main title -->
     <div class="col-12">
         <div class="main__title">
             <h2>Experiences (Edit)</h2>
         </div>
     </div>
-    <!-- end main title -->
-    <!-- form -->
+
     <div class="col-12">
         <form action="edit" method="post" class="form" enctype="multipart/form-data" novalidate>
             <div asp-validation-summary="ModelOnly" class="model-danger"></div>
@@ -47,10 +45,10 @@
                                                     <div class="main__table-text">@exp.Id</div>
                                                 </td>
                                                 <td>
-                                                    <div @*id="edu_title_@edu.Id"*@ class="main__table-text">@exp.Title</div>
+                                                    <div class="main__table-text">@exp.Title</div>
                                                 </td>
                                                 <td>
-                                                    <div @*id="edu_uniName_@edu.Id"*@ class="main__table-text">@exp.DateBetween</div>
+                                                    <div class="main__table-text">@exp.DateBetween</div>
                                                 </td>
                                                 <td>
                                                     <div class="main__table-text">@exp.DisplayOrder</div>
@@ -80,7 +78,7 @@
             </div>
         </form>
     </div>
-    <!-- end form -->
+
     <!-- modal delete -->
     <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
         <h6 class="modal__title">Experience delete</h6>

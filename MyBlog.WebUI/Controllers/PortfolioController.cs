@@ -2,15 +2,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyBlog.WebUI.DataAccess.Abstract;
-using MyBlog.WebUI.DataAccess.Concrate.EfCore;
 using MyBlog.WebUI.Entity;
-using MyBlog.WebUI.Models;
 using MyBlog.WebUI.Models.Portfolio;
 using MyBlog.WebUI.Util;
 using MyBlog.WebUI.Util.Abstract;
-using System;
 using System.Data;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace MyBlog.WebUI.Controllers
 {

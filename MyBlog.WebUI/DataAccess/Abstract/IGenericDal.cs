@@ -1,6 +1,4 @@
-﻿using MyBlog.WebUI.Entity;
-
-namespace MyBlog.WebUI.DataAccess.Abstract
+﻿namespace MyBlog.WebUI.DataAccess.Abstract
 {
     public interface IGenericDal<TEntity> where TEntity : class
     {

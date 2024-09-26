@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using MyBlog.WebUI.DataAccess.Abstract;
 using MyBlog.WebUI.Models.Resume;
-using MyBlog.WebUI.Util;
 
 namespace MyBlog.WebUI.ViewComponents
 {
@@ -38,7 +37,6 @@ namespace MyBlog.WebUI.ViewComponents
             }
             catch (Exception ex)
             {
-                //temp ile hata gösterilebilir
                 return View(model);
             }
         }

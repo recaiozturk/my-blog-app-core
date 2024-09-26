@@ -1,6 +1,4 @@
-﻿using Microsoft.DotNet.Scaffolding.Shared.CodeModifier.CodeChange;
-using MyBlog.WebUI.Util;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MyBlog.WebUI.Models.Resume
 {

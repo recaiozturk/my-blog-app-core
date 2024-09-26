@@ -5,14 +5,12 @@
 }
 
 <div class="row">
-    <!-- main title -->
+
     <div class="col-12">
         <div class="main__title">
             <h2>About (Edit)</h2>
         </div>
     </div>
-    <!-- end main title -->
-    <!-- form -->
     <div class="col-12">
         <form action="edit" method="post" class="form" enctype="multipart/form-data" novalidate>
             <div asp-validation-summary="ModelOnly" class="model-danger"></div>
@@ -171,9 +169,6 @@
             </div>
         </form>
     </div>
-    <!-- end form -->
-    <!-- end modal view -->
-    <!-- modal add -->
     <div id="modal-add-skill" class="zoom-anim-dialog mfp-hide modal">
         <h6 class="modal__title">Add Skill</h6>
 
@@ -192,8 +187,6 @@
             <button id="skillAddDismiss" class="modal__btn modal__btn--dismiss skillDissmisClick" type="button">Dismiss</button>
         </div>
     </div>
-    <!-- end modal add -->
-    <!-- modal edit -->
     <div id="modal-edit-skill" class="zoom-anim-dialog mfp-hide modal">
         <h6 class="modal__title">Edit Skill</h6>
 
@@ -212,8 +205,6 @@
             <button id="skillAddDismiss" class="modal__btn modal__btn--dismiss skillDissmisClick" type="button">Dismiss</button>
         </div>
     </div>
-    <!-- end modal edit -->
-    <!-- modal delete -->
     <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
         <h6 class="modal__title">Skill delete</h6>
 
@@ -224,7 +215,6 @@
             <button class="modal__btn modal__btn--dismiss" type="button">Dismiss</button>
         </div>
     </div>
-    <!-- end modal delete -->
 </div>
 
 @section Scripts {

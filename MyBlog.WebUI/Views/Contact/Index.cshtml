@@ -13,14 +13,11 @@
 }
 
 <div class="row">
-    <!-- main title -->
     <div class="col-12">
         <div class="main__title">
             <h2>Messages (Edit)</h2>
         </div>
     </div>
-    <!-- end main title -->
-    <!-- form -->
     <div class="col-12">
         <form action="edit" method="post" class="form" enctype="multipart/form-data" novalidate>
             <div asp-validation-summary="ModelOnly" class="model-danger"></div>
@@ -72,8 +69,6 @@
             </div>
         </form>
     </div>
-    <!-- end form -->
-    <!-- modal delete -->
     <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
         <h6 class="modal__title">Portfolio delete</h6>
         <div id="delete-exp-error">
@@ -85,8 +80,6 @@
             <button class="modal__btn modal__btn--dismiss skillDissmisClick" type="button">Dismiss</button>
         </div>
     </div>
-    <!-- end modal delete -->
-
 </div>
 
 @section Scripts{

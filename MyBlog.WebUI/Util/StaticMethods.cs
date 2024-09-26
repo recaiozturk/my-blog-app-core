@@ -2,7 +2,6 @@
 {
     public static class StaticMethods
     {
-        //gelen texti noktaları baz alarak cümlelere ayırır
         public static List<string> SplitSentences(string text)
         {
             string[] sentenceArray = text.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries);

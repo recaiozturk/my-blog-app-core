@@ -2,11 +2,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyBlog.WebUI.DataAccess.Abstract;
-using MyBlog.WebUI.DataAccess.Concrate.EfCore;
 using MyBlog.WebUI.Entity;
 using MyBlog.WebUI.Models.Contact;
 using MyBlog.WebUI.Util.Abstract;
-using System.Security.Policy;
 
 namespace MyBlog.WebUI.Controllers
 {
