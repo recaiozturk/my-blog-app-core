@@ -52,7 +52,8 @@
                                                 </td>
                                                 <td>
                                                     <div class="main__table-text">@project.DisplayOrder</div>
-                                                </td>                                                <td>
+                                                </td>
+                                                <td>
                                                     <div class="main__table-btns">
                                                         <a asp-controller="Portfolio" asp-action="EditProject" asp-route-id="@project.Id" class="main__table-btn main__table-btn--edit ">
                                                             <i class="icon ion-ios-create "></i>
@@ -84,7 +85,7 @@
         <p class="modal__text">Are you sure to permanently delete this portfolio?</p>
 
         <div class="modal__btns">
-            <button id="portfolioDelete"class="modal__btn modal__btn--apply" type="button">Delete</button>
+            <button id="portfolioDelete" class="modal__btn modal__btn--apply" type="button">Delete</button>
             <button class="modal__btn modal__btn--dismiss skillDissmisClick" type="button">Dismiss</button>
         </div>
     </div>
@@ -92,7 +93,14 @@
 
 </div>
 
-@section Scripts{ 
-    <script src="~/js/Portfolio/Index/index.js"></script>
+@section Scripts{
+    <environment names="Development">
+        <script src="portfolio-index" debug="true"></script>
+    </environment>
+
+    <environment names="Production">
+        <script src="portfolio-index"></script>
+    </environment>
+
 }
 

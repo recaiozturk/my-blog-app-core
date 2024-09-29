@@ -82,4 +82,11 @@
 
 </div>
 
-<script src="~/js/Contact/Contact.js"></script>
+<environment names="Development">
+    <script src="contact-contact" debug="true"></script>
+</environment>
+
+<environment names="Production">
+    <script src="contact-contact"></script>
+</environment>
+

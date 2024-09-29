@@ -83,7 +83,14 @@
 </div>
 
 @section Scripts{
-    <script src="~/js/Contact/index.js"></script>
+    <environment names="Development">
+        <script src="contact-index" debug="true"></script>
+    </environment>
+
+    <environment names="Production">
+        <script src="contact-index"></script>
+    </environment>
+
 }
 
 

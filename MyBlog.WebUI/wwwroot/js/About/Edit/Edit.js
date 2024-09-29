@@ -37,7 +37,6 @@ function AddSkillProcess() {
 
     $.ajax({
         type: 'POST',
-        /*url: '@Url.Action("AddSkillToAbout")',*/
         url: '/About/AddSkillToAbout',
         dataType: 'json',
         data: {
@@ -123,7 +122,6 @@ function EditSkillProcess(skillID) {
 
     $.ajax({
         type: 'POST',
-        /*url: '@Url.Action("EditSkillForAbout")',*/
         url: '/About/EditSkillForAbout',
         dataType: 'json',
         data: {

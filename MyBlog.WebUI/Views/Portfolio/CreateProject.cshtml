@@ -117,5 +117,12 @@
 </div>
 
 @section Scripts{
-    <script src="~/js/Portfolio/Create/CreatePortfolio.js"></script>
+
+    <environment names="Development">
+        <script src="portfolio-create" debug="true"></script>
+    </environment>
+
+    <environment names="Production">
+        <script src="portfolio-create"></script>
+    </environment>
 }

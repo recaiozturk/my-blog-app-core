@@ -1,8 +1,10 @@
-@{
-    Layout = null;
-}
 
 @model MyBlog.WebUI.Entity.Portfolio
+
+@{
+    ViewData["Title"] = "Detail";
+    Layout = null;
+}
 
 
 <style>
@@ -30,14 +32,14 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
           rel="stylesheet">
 
-    <link href="~/Personal/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="~/Personal/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="~/Personal/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="~/Personal/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="~/Personal/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="~/Personal/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- smidge bundle start -->
+    <environment names="Development">
+        <link rel="stylesheet" href="my-css-bundle" debug="true" />
+    </environment>
 
-    <link href="~/Personal/assets/css/style.css" rel="stylesheet">
+    <environment names="Production">
+        <link rel="stylesheet" href="my-css-bundle" />
+    </environment>
 
 </head>
 
@@ -100,17 +102,14 @@
         </div>
 
     </main>
-    <!-- Vendor JS Files -->
-    <script src="~/Personal/assets/vendor/purecounter/purecounter_vanilla.js"></script>
-    <script src="~/Personal/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="~/Personal/assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="~/Personal/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="~/Personal/assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="~/Personal/assets/vendor/waypoints/noframework.waypoints.js"></script>
-    <script src="~/Personal/assets/vendor/php-email-form/validate.js"></script>
 
-    <!-- Template Main JS File -->
-    <script src="~/Personal/assets/js/main.js"></script>
+    <environment names="Development">
+        <script src="my-js-bundle" debug="true"></script>
+    </environment>
+
+    <environment names="Production">
+        <script src="my-js-bundle"></script>
+    </environment>
 
 </body>
 

@@ -97,7 +97,13 @@
 
 
 @section Scripts {
-    <script src="~/js/Resume/Experience/Experiences.js"></script>
+    <environment names="Development">
+        <script src="resume-experience" debug="true"></script>
+    </environment>
+
+    <environment names="Production">
+        <script src="resume-experience"></script>
+    </environment>
 }
 
 

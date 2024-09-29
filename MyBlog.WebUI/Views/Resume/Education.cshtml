@@ -111,7 +111,6 @@
         </div>
     </div>
     <!-- end modal add -->
-
     <!-- modal edit -->
     <div id="modal-edit-education" class="zoom-anim-dialog mfp-hide modal">
         <h6 class="modal__title">Edit Skill</h6>
@@ -142,7 +141,6 @@
         </div>
     </div>
     <!-- end modal edit -->
-
     <!-- modal delete -->
     <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
         <h6 class="modal__title">Education delete</h6>
@@ -159,7 +157,14 @@
 </div>
 
 @section Scripts {
-  <script src="~/js/Resume/Education/Education.js"></script>
+    <environment names="Development">
+        <script src="resume-education" debug="true"></script>
+    </environment>
+
+    <environment names="Production">
+        <script src="resume-education"></script>
+    </environment>
+
 }
 
 

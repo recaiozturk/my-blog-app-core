@@ -218,7 +218,14 @@
 </div>
 
 @section Scripts {
-    <script src="~/js/About/Edit/Edit.js"></script>
-}
 
+    <environment names="Development">
+        <script src="about-edit" debug="true"></script>
+    </environment>
+
+    <environment names="Production">
+        <script src="about-edit"></script>
+    </environment>
+
+}
 
