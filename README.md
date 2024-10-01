@@ -16,8 +16,7 @@ My purpose in doing the project was to present to people my experiences and the 
 -  Entity Framework Core -v7
 - AutoMapper 13.0.1 for object mapping
 - Brevo for email service
-- Clean Architecture
--  Generic Repository Service Pattern
+- Generic Repository Service Pattern
 
 ### Front End
 - Bootstrap -v5 
