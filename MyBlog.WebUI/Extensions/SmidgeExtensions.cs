@@ -40,7 +40,7 @@ namespace MyBlog.WebUI.Extensions
                     "~/js/sweetAlertCustom.js",
 
                     "~/Personal/assets/js/main.js",
-                    "~/js/snowstorm.js",
+                    //"~/js/snowstorm.js",
                     "~/js/olum-writer.js"
                     );
 

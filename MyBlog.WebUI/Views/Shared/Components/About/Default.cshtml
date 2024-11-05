@@ -63,7 +63,7 @@
 </div>
 <!-- End About Me -->
 <!-- ======= Skills  ======= -->
-<div class="skills container">
+@*<div class="skills container">
 
     <div class="section-title">
         <h2>Yetenekler</h2>
@@ -100,5 +100,27 @@
             }
         }
     </div>
+
+
+</div>*@
+<div class="interests container">
+
+    <div class="section-title">
+        <h2>Yetenekler</h2>
+    </div>
+
+    <div class="row">
+
+        @for (int i = 0; i < Model.Skills.Count; i ++)
+        {
+            <div class="col-lg-3 col-md-4 mt-4">
+                <div class="icon-box">
+                    
+                    <h3>@Model.Skills[i].SkillName</h3>
+                </div>
+            </div>
+        }
+    </div>
+
 </div>
 <!-- End Skills -->

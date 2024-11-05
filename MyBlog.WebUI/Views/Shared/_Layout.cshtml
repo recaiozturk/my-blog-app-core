@@ -15,10 +15,6 @@
     <link href="~/Personal/assets/img/favicon.png" rel="icon">
     <link href="~/Personal/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-          rel="stylesheet">
-
     <!-- smidge bundle start -->
     <environment names="Development">
         <link rel="stylesheet" href="my-css-bundle" debug="true" />
@@ -51,11 +47,11 @@
                 <nav id="navbar" class="navbar">
                     <ul>
                         <li><a class="nav-link active" href="#header">Ana Sayfa</a></li>
-                        <li><a class="nav-link" href="#about">Hakkımda</a></li>
-                        <li><a class="nav-link" href="#resume">Resume</a></li>
-                        <li><a class="nav-link" href="#portfolio">Portfolio</a></li>
-                        <li><a class="nav-link" href="#services">Blog(Yakında)</a></li>
-                        <li><a class="nav-link" href="#contact">İletişim</a></li>
+                        <li><a class="nav-link" id="aboutLink" href="#aboutSection">Hakkımda</a></li>
+                        <li><a class="nav-link" id="resumeLink" href="#resume22">Resume</a></li>
+                        <li><a class="nav-link" id="portfolioLink" href="#portfolioSection">Portfolio</a></li>
+                        <li><a class="nav-link" id="" href="#services">Blog(Yakında)</a></li>
+                        <li><a class="nav-link" id="contactLink" href="#contactSection">İletişim</a></li>
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
                 </nav><!-- .navbar -->
@@ -80,25 +76,13 @@
         </header><!-- End Header -->
         <div>
             <!-- @RenderBody() -->
-            <!-- ======= About Section ======= -->
-            <section id="about" class="about">
-                @await Component.InvokeAsync("About")
+            <section id="aboutSection" class="about">
             </section>
-            <!-- End About Section -->
-            <!-- ======= Resume Section ======= -->
-            <section id="resume" class="resume">
-                @await Component.InvokeAsync("Resume")
+            <section id="resume22" class="resume">
             </section>
-            <!-- End Resume Section -->
-            <!-- ======= Portfolio Section ======= -->
-            <section id="portfolio" class="portfolio">
-                @await Component.InvokeAsync("Portfolio")
+            <section id="portfolioSection" class="portfolio">
             </section>
-
-
-            <!-- ======= Contact Section ======= -->
-            <section id="contact" class="contact">
-                @await Component.InvokeAsync("Contact")
+            <section id="contactSection" class="contact">
             </section>
         </div>
 
@@ -120,7 +104,73 @@
     </environment>
 
     <script>
-        snowStorm.excludeMobile = false;
+        //
+        $('#aboutLink').on('click', function (e) {
+            e.preventDefault();
+            loadResumeComponent("LoadAboutComponent", "aboutSection");
+        });
+
+        $('#resumeLink').on('click', function (e) {
+            e.preventDefault();
+            loadResumeComponent("LoadResumeComponent", "resume22");
+        });
+
+        $('#portfolioLink').on('click', function (e) {
+            e.preventDefault();
+            loadResumeComponent("LoadPortfolioComponent", "portfolioSection");
+        });
+
+        $('#contactLink').on('click', function (e) {
+            e.preventDefault();
+            loadResumeComponent("LoadContactComponent", "contactSection");
+        });
+
+        function loadResumeComponent(controlleraction, sectionElement) {
+            $.ajax({
+                url: '/Home/' + controlleraction,
+                method: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    if (data.html) {
+                        $('#' + sectionElement).html(data.html);
+
+                        let $portfolioContainer = $('.portfolio-container');
+
+                        if ($portfolioContainer.length) {
+                            let portfolioIsotope = new Isotope($portfolioContainer[0], {
+                                itemSelector: '.portfolio-item',
+                                layoutMode: 'fitRows'
+                            });
+
+                            let $portfolioFilters = $('#portfolio-flters li');
+
+                            $portfolioFilters.on('click', function (e) {
+                                e.preventDefault();
+                                $portfolioFilters.removeClass('filter-active');
+                                $(this).addClass('filter-active');
+
+                                portfolioIsotope.arrange({
+                                    filter: $(this).data('filter')
+                                });
+                            });
+                        }
+
+                    } else {
+                        console.error("HTML içeriği boş.");
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.error("Bir hata oluştu:", textStatus, errorThrown);
+                }
+            });
+        }
+
+        $(document).ready(function () {
+
+
+
+        });
+
 
         new OlumWriter({
             container: document.getElementById("writer"),
