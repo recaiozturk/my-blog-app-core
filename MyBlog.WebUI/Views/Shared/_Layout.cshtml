@@ -104,28 +104,27 @@
     </environment>
 
     <script>
-        //
+
         $('#aboutLink').on('click', function (e) {
-            e.preventDefault();
             loadResumeComponent("LoadAboutComponent", "aboutSection");
         });
 
         $('#resumeLink').on('click', function (e) {
-            e.preventDefault();
             loadResumeComponent("LoadResumeComponent", "resume22");
         });
 
         $('#portfolioLink').on('click', function (e) {
-            e.preventDefault();
+            
             loadResumeComponent("LoadPortfolioComponent", "portfolioSection");
         });
 
         $('#contactLink').on('click', function (e) {
-            e.preventDefault();
+            
             loadResumeComponent("LoadContactComponent", "contactSection");
         });
 
         function loadResumeComponent(controlleraction, sectionElement) {
+
             $.ajax({
                 url: '/Home/' + controlleraction,
                 method: 'GET',
@@ -133,28 +132,7 @@
                 success: function (data) {
                     if (data.html) {
                         $('#' + sectionElement).html(data.html);
-
-                        let $portfolioContainer = $('.portfolio-container');
-
-                        if ($portfolioContainer.length) {
-                            let portfolioIsotope = new Isotope($portfolioContainer[0], {
-                                itemSelector: '.portfolio-item',
-                                layoutMode: 'fitRows'
-                            });
-
-                            let $portfolioFilters = $('#portfolio-flters li');
-
-                            $portfolioFilters.on('click', function (e) {
-                                e.preventDefault();
-                                $portfolioFilters.removeClass('filter-active');
-                                $(this).addClass('filter-active');
-
-                                portfolioIsotope.arrange({
-                                    filter: $(this).data('filter')
-                                });
-                            });
-                        }
-
+                     
                     } else {
                         console.error("HTML içeriği boş.");
                     }
@@ -164,13 +142,6 @@
                 }
             });
         }
-
-        $(document).ready(function () {
-
-
-
-        });
-
 
         new OlumWriter({
             container: document.getElementById("writer"),

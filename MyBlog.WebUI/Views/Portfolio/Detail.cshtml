@@ -1,116 +1,115 @@
 
 @model MyBlog.WebUI.Entity.Portfolio
 
+ 
+
 @{
-    ViewData["Title"] = "Detail";
-    Layout = null;
-}
-
-
-<style>
-
-    .img-center {
-        text-align: -webkit-center;
+        ViewData["Title"] = "Detail";
+        Layout = null;
     }
-</style>
 
 
-<!DOCTYPE html>
-<html lang="en">
+    <style>
 
-<head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        .img-center {
+            text-align: -webkit-center;
+        }
+    </style>
 
-    <title>Portfolio Details - Personal Bootstrap Template</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
 
-    <link href="~/Personal/assets/img/favicon.png" rel="icon">
-    <link href="~/Personal/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <!DOCTYPE html>
+    <html lang="en">
 
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-          rel="stylesheet">
+    <head>
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <!-- smidge bundle start -->
-    <environment names="Development">
-        <link rel="stylesheet" href="my-css-bundle" debug="true" />
-    </environment>
+        <title>Portfolio Details - Personal Bootstrap Template</title>
+        <meta content="" name="description">
+        <meta content="" name="keywords">
 
-    <environment names="Production">
-        <link rel="stylesheet" href="my-css-bundle" />
-    </environment>
+        <link href="~/Personal/assets/img/favicon.png" rel="icon">
+        <link href="~/Personal/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-</head>
 
-<body>
+        <environment names="Development">
+            <link rel="stylesheet" href="my-css-bundle" debug="true" />
+        </environment>
 
-    <main id="main">
-        <div id="portfolio-details" style="z-index:999" class="portfolio-details">
-            <div class="container">
+        <environment names="Production">
+            <link rel="stylesheet" href="my-css-bundle" />
+        </environment>
 
-                <div class="row text-center">
+    </head>
 
-                    <h2 class="portfolio-title">@Model.Title</h2>
+    <body>
 
-                    <div class="col-lg-12 portfolio-info mb-3">
-                        <h3>Proje Bilgileri</h3>
-                        <ul>
-                            <li><strong>Category</strong>: @Enum.GetName(typeof(Enums.AppType), Model.PortfolioType)</li>
-                            <li><strong>Proje Tarihi</strong>: @Model.ProjectDate</li>
-                            <li><strong>Project URL</strong>: <a target="_blank" href="@Model.ProjectUrl">@Model.ProjectUrl</a></li>
-                            <li><strong>Kullanılan Teknolojiler</strong>: <a href="#">@Model.UsedTechnologies</a></li>
-                        </ul>
+        <main id="main">
+            <div id="portfolio-details" style="z-index:999" class="portfolio-details">
+                <div class="container">
 
-                        <p>
-                            @Html.Raw(Model.Description)
-                        </p>
-                    </div>
+                    <div class="row text-center">
 
-                    <div class="col-lg-12">
-                        <div id="carouselExampleIndicators" class="carousel slide">
-                            <div class="carousel-indicators">
-                                @for (int i = 0; i < Model.ProjectImages.Count; i++)
-                                {
-                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")" aria-current="@(i == 0 ? "true" : "false")" aria-label="Slide @(i+1)"></button>
-                                }
+                        <h2 class="portfolio-title">@Model.Title</h2>
 
-                            </div>
-                            <div class="carousel-inner">
-                                @for (int i = 0; i < Model.ProjectImages.Count; i++)
-                                {
-                                    <div class="carousel-item img-center @(i == 0 ? "active" : "")">
-                                        <img src="~/img/portfoliopicture/@Model.ProjectImages[i].ImageUrl" class="d-block" style="max-width:1200px;" alt="...">
-                                    </div>
-                                }
+                        <div class="col-lg-12 portfolio-info mb-3">
+                            <h3>Proje Bilgileri</h3>
+                            <ul>
+                                <li><strong>Category</strong>: @Enum.GetName(typeof(Enums.AppType), Model.PortfolioType)</li>
+                                <li><strong>Proje Tarihi</strong>: @Model.ProjectDate</li>
+                                <li><strong>Project URL</strong>: <a target="_blank" href="@Model.ProjectUrl">@Model.ProjectUrl</a></li>
+                                <li><strong>Kullanılan Teknolojiler</strong>: <a href="#">@Model.UsedTechnologies</a></li>
+                            </ul>
 
-                            </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
+                            <p>
+                                @Html.Raw(Model.Description)
+                            </p>
                         </div>
+
+                        <div class="col-lg-12">
+                            <div id="carouselExampleIndicators" class="carousel slide">
+                                <div class="carousel-indicators">
+                                    @for (int i = 0; i < Model.ProjectImages.Count; i++)
+                                    {
+                                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")" aria-current="@(i == 0 ? "true" : "false")" aria-label="Slide @(i+1)"></button>
+                                    }
+
+                                </div>
+                                <div class="carousel-inner">
+                                    @for (int i = 0; i < Model.ProjectImages.Count; i++)
+                                    {
+                                        <div class="carousel-item img-center @(i == 0 ? "active" : "")">
+                                            <img src="~/img/portfoliopicture/@Model.ProjectImages[i].ImageUrl" class="d-block" style="max-width:1200px;" alt="...">
+                                        </div>
+                                    }
+
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>
-
             </div>
-        </div>
 
-    </main>
+        </main>
 
-    <environment names="Development">
-        <script src="my-js-bundle" debug="true"></script>
-    </environment>
+        <environment names="Development">
+            <script src="my-js-bundle" debug="true"></script>
+        </environment>
 
-    <environment names="Production">
-        <script src="my-js-bundle"></script>
-    </environment>
+        <environment names="Production">
+            <script src="my-js-bundle"></script>
+        </environment>
 
-</body>
+    </body>
 
-</html>
+    </html>

@@ -10,7 +10,7 @@
 
     </div>
 
-    <div class="row">
+    @*<div class="row">
         <div class="col-lg-12 d-flex justify-content-center">
             <ul id="portfolio-flters">
                 <li data-filter="*" class="filter-active">Hepsi</li>
@@ -21,7 +21,7 @@
 
             </ul>
         </div>
-    </div>
+    </div>*@
 
     <div class="row portfolio-container">
 
@@ -38,7 +38,6 @@
                     <img src="~/img/portfoliopicture/@coverImageUrl" class="img-fluid" alt="">
                     <div class="portfolio-info">
                         <h4><a class="text-white" asp-controller="Portfolio" asp-action="Detail" asp-route-id="@portfolio.Id">@portfolio.Title</a></h4>
-                        <p>@portfolioType</p>
                         <div class="portfolio-links">
                             <a asp-controller="Portfolio" asp-action="Detail" asp-route-id="@portfolio.Id" data-gallery="portfolioDetailsGallery"
                                data-glightbox="type: external" class="portfolio-details-lightbox"
