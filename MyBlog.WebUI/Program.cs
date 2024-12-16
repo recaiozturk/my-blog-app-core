@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSmidgeExt(builder.Configuration);
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddRepServiceExt(builder.Configuration);
 builder.Services.AddEmailExt(builder.Configuration);
 
