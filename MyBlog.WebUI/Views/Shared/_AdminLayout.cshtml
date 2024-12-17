@@ -51,13 +51,13 @@
         if (User.IsInRole("admin"))
         {
             <div class="sidebar">
-                <a href="index.html" class="sidebar__logo">
+                @*<a href="index.html" class="sidebar__logo">
                     <img src="~/admin/img/logo.svg" alt="">
-                </a>
+                </a>*@
                 <div class="sidebar__user">
-                    <div class="sidebar__user-img">
+                    @*<div class="sidebar__user-img">
                         <img src="~/admin/img/user.svg" alt="">
-                    </div>
+                    </div>*@
 
                     <div class="sidebar__user-title">
                         <span>@(User.IsInRole("admin") ? "admin" :"user")</span>

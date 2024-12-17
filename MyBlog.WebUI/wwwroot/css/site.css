@@ -55,3 +55,8 @@
     z-index: 1050;
 }
 
+.about-picture {
+    width: 230px;
+    border-radius: 5px;
+}
+
